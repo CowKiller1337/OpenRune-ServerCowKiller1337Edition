@@ -62,7 +62,13 @@ constructor(
         completeInstanceEntry(result)
     }
 
-    private fun buildBrutusSpec() = buildSpec().copy(graceTicks = POST_KILL_GRACE_TICKS)
+    private fun buildBrutusSpec() =
+        buildSpec()
+            .copy(
+                graceTicks = POST_KILL_GRACE_TICKS,
+                graceWarningThresholds = listOf(POST_KILL_WARNING_TICKS),
+                graceExpiryMessage = "You are teleported out of the instance.",
+            )
 
     private suspend fun ProtectedAccess.leaveBrutus() {
         defaultLeaveFlow()
@@ -88,6 +94,7 @@ constructor(
         private const val BRUTUS_NPC = "npc.cowboss"
 
         private const val POST_KILL_GRACE_TICKS = (INSTANCE_TICKS_PER_MINUTE * 20 + 59) / 60
+        private const val POST_KILL_WARNING_TICKS = (INSTANCE_TICKS_PER_MINUTE * 10 + 59) / 60
 
         private val COWBELL_AMULETS = setOf("obj.cowbell_amulet", "obj.cowbell_amulet_empty")
 

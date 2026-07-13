@@ -14,7 +14,7 @@ constructor(
 ) : NpcDeathKillHook {
 
     override fun onKill(context: NpcDeathKillContext) {
-        if (!context.npc.isType(BRUTUS_NPC) && !context.npc.isVisType(BRUTUS_NPC)) {
+        if (BRUTUS_NPCS.none { context.npc.isType(it) || context.npc.isVisType(it) }) {
             return
         }
 
@@ -26,12 +26,12 @@ constructor(
         manager.beginGrace(
             session = session,
             currentTick = worldClock.cycle,
-            message = "Brutus has been defeated. You have about 20 seconds to collect your loot.",
+            message = null,
         )
     }
 
     private companion object {
         private const val INSTANCE_KEY = "cowboss"
-        private const val BRUTUS_NPC = "npc.cowboss"
+        private val BRUTUS_NPCS = setOf("npc.cowboss", "npc.cowboss_hardmode")
     }
 }

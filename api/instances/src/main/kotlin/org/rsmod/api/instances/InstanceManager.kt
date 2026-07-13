@@ -544,6 +544,9 @@ constructor(
                 totalTicks = session.spec.graceTicks,
                 sent = session.graceWarningsSent,
                 players = InstanceTiming.playersIn(session, playerList),
+                thresholds =
+                    session.spec.graceWarningThresholds
+                        ?: InstanceTiming.warningThresholds(session.spec.graceTicks),
             ) { duration ->
                 "You will be removed from the instance in $duration."
             }
@@ -557,7 +560,7 @@ constructor(
     public fun beginGrace(
         session: InstanceSession,
         currentTick: Int,
-        message: String = "The instance timer has ended. You have " +
+        message: String? = "The instance timer has ended. You have " +
             "${InstanceTiming.formatRemaining(session.spec.graceTicks)} to collect loot before being removed.",
     ) {
         if (session.state is SessionState.Grace) {
@@ -565,7 +568,9 @@ constructor(
         }
         despawnSessionNpcs(session)
         session.enterGrace(currentTick)
-        messageOccupants(session, message)
+        if (!message.isNullOrBlank()) {
+            messageOccupants(session, message)
+        }
     }
 
     private fun expireGrace(session: InstanceSession, currentTick: Int) {
@@ -574,6 +579,9 @@ constructor(
             val player = playerList.firstOrNull { it.uuid == occupant } ?: continue
             removeOccupant(player, session, currentTick)
             player.coords = exit
+            session.spec.graceExpiryMessage?.let { message ->
+                player.mes(message, ChatType.Engine)
+            }
         }
         if (session.isServerOwned) {
             if (session.state is SessionState.Grace) {
