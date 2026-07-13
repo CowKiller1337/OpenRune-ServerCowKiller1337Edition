@@ -26,7 +26,7 @@ constructor(
 
     override fun settingsRow(): String = "dbrow.instance_cowboss"
 
-    override fun area(): InstanceArea = PRIVATE_AREA
+    override fun area(): InstanceArea = brutusArea(BRUTUS_NPC)
 
     override fun destroyWhenEmpty(): Boolean = true
 
@@ -51,7 +51,23 @@ constructor(
             return
         }
 
-        val spec = buildBrutusSpec()
+        val pick = choice3(
+            "Brutus.",
+            1,
+            "Demonic Brutus.",
+            2,
+            "Cancel.",
+            3,
+            title = "Which Brutus will you release?",
+        )
+        val npcType =
+            when (pick) {
+                1 -> BRUTUS_NPC
+                2 -> DEMONIC_BRUTUS_NPC
+                else -> return
+            }
+
+        val spec = buildBrutusSpec(npcType)
         val result = manager.create(
             owner = player,
             key = key,
@@ -62,8 +78,8 @@ constructor(
         completeInstanceEntry(result)
     }
 
-    private fun buildBrutusSpec() =
-        buildSpec()
+    private fun buildBrutusSpec(npcType: String) =
+        buildSpec(brutusArea(npcType))
             .copy(
                 graceTicks = POST_KILL_GRACE_TICKS,
                 graceWarningThresholds = listOf(POST_KILL_WARNING_TICKS),
@@ -76,7 +92,7 @@ constructor(
 
     private fun InstancePlayerJoinEvent.engageBrutus() {
         val brutus = manager.npcsForInstance(instanceId)
-            .firstOrNull { npc -> npc.isType(BRUTUS_NPC) || npc.isVisType(BRUTUS_NPC) }
+            .firstOrNull { npc -> ENTRY_BOSS_NPCS.any { npc.isType(it) || npc.isVisType(it) } }
             ?: return
         brutus.opPlayer2(player, aiPlayerInteractions)
     }
@@ -92,20 +108,33 @@ constructor(
          * npc.cowboss, currently ID 15626.
          */
         private const val BRUTUS_NPC = "npc.cowboss"
+        private const val DEMONIC_BRUTUS_NPC = "npc.cowboss_hardmode"
 
         private const val POST_KILL_GRACE_TICKS = (INSTANCE_TICKS_PER_MINUTE * 20 + 59) / 60
         private const val POST_KILL_WARNING_TICKS = (INSTANCE_TICKS_PER_MINUTE * 10 + 59) / 60
 
         private val COWBELL_AMULETS = setOf("obj.cowbell_amulet", "obj.cowbell_amulet_empty")
 
-        private val PRIVATE_AREA = InstanceArea.copyRegions(
-            regionIds = listOf(12851),
-            npcSpawns = listOf(
-                InstanceNpc(
-                    npcType = BRUTUS_NPC,
-                    coord = RegionLocal(level = 0, regionZoneX = 50, regionZoneZ = 51, localX = 55, localZ = 31),
+        private val ENTRY_BOSS_NPCS = setOf(BRUTUS_NPC, DEMONIC_BRUTUS_NPC)
+
+        private fun brutusArea(npcType: String) =
+            InstanceArea.copyRegions(
+                regionIds = listOf(12851),
+                npcSpawns = listOf(
+                    InstanceNpc(
+                        npcType = npcType,
+                        coord = if (npcType == DEMONIC_BRUTUS_NPC) DEMONIC_BRUTUS_SPAWN else BRUTUS_SPAWN,
+                    )
                 )
-            ),
-        )
+            ).copy(enterCoord = PLAYER_ENTRY)
+
+        private val PLAYER_ENTRY =
+            RegionLocal(level = 0, regionZoneX = 50, regionZoneZ = 51, localX = 58, localZ = 22)
+
+        private val BRUTUS_SPAWN =
+            RegionLocal(level = 0, regionZoneX = 50, regionZoneZ = 51, localX = 53, localZ = 22)
+
+        private val DEMONIC_BRUTUS_SPAWN =
+            RegionLocal(level = 0, regionZoneX = 50, regionZoneZ = 51, localX = 53, localZ = 22)
     }
 }

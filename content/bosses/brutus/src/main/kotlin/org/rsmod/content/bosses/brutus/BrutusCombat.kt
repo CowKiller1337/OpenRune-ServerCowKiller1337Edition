@@ -15,7 +15,6 @@ import org.rsmod.api.bosses.runtime.BossPluginScript
 import org.rsmod.api.death.NpcDeath
 import org.rsmod.api.npc.access.StandardNpcAccess
 import org.rsmod.api.npc.interact.AiPlayerInteractions
-import org.rsmod.api.player.hit.modifier.NoopPlayerHitModifier
 import org.rsmod.api.player.hit.queueHit
 import org.rsmod.api.player.isValidTarget
 import org.rsmod.api.route.RayCastValidator
@@ -70,7 +69,7 @@ constructor(
     }
 
     override val spec =
-        boss("npc.cowboss", "npc.cowboss_routefind", "npc.cowboss_hardmode") {
+        boss("npc.cowboss", "npc.cowboss_routefind") {
             stats(attackRate = ATTACK_SPEED, aggressionRadius = INSTANCE_AGGRO_RANGE)
 
             val combatCycle = ability("brutus_combat_cycle") { include(external(COMBAT_CYCLE_HANDLER)) }
@@ -156,7 +155,6 @@ constructor(
             delay = 1,
             type = HitType.Typeless,
             damage = damage,
-            modifier = NoopPlayerHitModifier,
         )
     }
 
@@ -171,19 +169,21 @@ constructor(
         say("*Growl*")
 
         val origin = npc.coords
-        val direction = directionFrom(origin, target.coords)
+        val markedTile = target.coords
+        val size = npc.type.size.coerceAtLeast(1)
+        val direction = directionFromBounds(origin, size, markedTile)
         val distance = deps.random.of(CHARGE_MIN_DISTANCE, CHARGE_MAX_DISTANCE)
-        val path = forwardLine(origin, direction, distance)
+        val path = chargePath(origin, size, direction, distance, markedTile)
 
         npc.lockFacing(target.coords)
         npc.anim(CHARGE_ANIM)
         spotanim(CHARGE_LAUNCH_SPOTANIM)
         delay(TELEGRAPH_TICKS)
 
-        val victims = playersOnPath(path)
+        val victims = playersOnPath(path.dangerTiles)
         playChargePath(path)
-        telejump(path.last(), deps.collision)
-        playMapSpotanim(CHARGE_IMPACT_SPOTANIM, path.last())
+        telejump(path.destination, deps.collision)
+        playMapSpotanim(CHARGE_IMPACT_SPOTANIM, path.destination)
         engageMelee(target)
 
         for (victim in victims) {
@@ -194,15 +194,14 @@ constructor(
                 delay = 1,
                 type = HitType.Typeless,
                 damage = damage,
-                modifier = NoopPlayerHitModifier,
             )
             victim.actionDelay = maxOf(victim.actionDelay, victim.currentMapClock + STUN_TICKS)
         }
     }
 
-    private fun playChargePath(path: List<CoordGrid>) {
-        for ((index, tile) in path.withIndex()) {
-            playMapSpotanim(CHARGE_PATH_SPOTANIM, tile, delay = index)
+    private fun playChargePath(path: ChargePath) {
+        for ((tile, delay) in path.effects) {
+            playMapSpotanim(CHARGE_PATH_SPOTANIM, tile, delay = delay)
         }
     }
 
@@ -222,8 +221,7 @@ constructor(
         opPlayer2(target, aiPlayerInteractions)
     }
 
-    private fun playersOnPath(path: List<CoordGrid>): List<Player> {
-        val dangerousTiles = path.toSet()
+    private fun playersOnPath(dangerousTiles: Set<CoordGrid>): List<Player> {
         return deps.playerList.filter { player ->
             player.isValidTarget() && player.coords in dangerousTiles
         }
@@ -290,8 +288,7 @@ constructor(
                 "spotanim.vfx_cowboss_stomp_impact03",
             )
 
-        private val BRUTUS_NPCS =
-            setOf("npc.cowboss", "npc.cowboss_routefind", "npc.cowboss_hardmode")
+        private val BRUTUS_NPCS = setOf("npc.cowboss", "npc.cowboss_routefind")
     }
 
     private data class BrutusState(
@@ -302,6 +299,17 @@ constructor(
 }
 
 private data class Step(val dx: Int, val dz: Int)
+
+private data class ChargePath(
+    val destination: CoordGrid,
+    val effects: List<ChargeEffectTile>,
+    val dangerTiles: Set<CoordGrid>,
+)
+
+private data class ChargeEffectTile(
+    val tile: CoordGrid,
+    val delay: Int,
+)
 
 private fun directionFrom(source: CoordGrid, target: CoordGrid): Step {
     val dx = target.x - source.x
@@ -320,9 +328,76 @@ private fun slamDangerTiles(markedTile: CoordGrid, direction: Step): List<CoordG
         markedTile.translate(-direction.dx, -direction.dz),
     )
 
-private fun forwardLine(origin: CoordGrid, direction: Step, distance: Int): List<CoordGrid> =
-    (1..distance).map { step ->
-        origin.translate(direction.dx * step, direction.dz * step)
+private fun directionFromBounds(origin: CoordGrid, size: Int, target: CoordGrid): Step {
+    val east = target.x - (origin.x + size - 1)
+    val west = origin.x - target.x
+    val north = target.z - (origin.z + size - 1)
+    val south = origin.z - target.z
+    val horizontal = maxOf(east, west, 0)
+    val vertical = maxOf(north, south, 0)
+    val dx =
+        when {
+            east > 0 -> 1
+            west > 0 -> -1
+            else -> 0
+        }
+    val dz =
+        when {
+            north > 0 -> 1
+            south > 0 -> -1
+            else -> 0
+        }
+    return when {
+        horizontal > vertical -> Step(dx, 0)
+        vertical > horizontal -> Step(0, dz)
+        dx != 0 -> Step(dx, 0)
+        dz != 0 -> Step(0, dz)
+        else -> directionFrom(origin, target)
+    }
+}
+
+private fun chargePath(
+    origin: CoordGrid,
+    size: Int,
+    direction: Step,
+    distance: Int,
+    markedTile: CoordGrid,
+): ChargePath {
+    val destination = origin.translate(direction.dx * distance, direction.dz * distance)
+    val effects = chargeLane(origin, size, direction, distance).distinctBy { it.tile }
+    val dangerTiles = effects.mapTo(mutableSetOf()) { it.tile }
+    dangerTiles += markedTile
+    return ChargePath(destination, effects, dangerTiles)
+}
+
+private fun chargeLane(
+    origin: CoordGrid,
+    size: Int,
+    direction: Step,
+    distance: Int,
+): List<ChargeEffectTile> =
+    buildList {
+        for (step in 1..distance) {
+            val delay = step - 1
+            when {
+                direction.dx > 0 ->
+                    repeat(size) { offset ->
+                        add(ChargeEffectTile(origin.translate(size + step - 1, offset), delay))
+                    }
+                direction.dx < 0 ->
+                    repeat(size) { offset ->
+                        add(ChargeEffectTile(origin.translate(-step, offset), delay))
+                    }
+                direction.dz > 0 ->
+                    repeat(size) { offset ->
+                        add(ChargeEffectTile(origin.translate(offset, size + step - 1), delay))
+                    }
+                direction.dz < 0 ->
+                    repeat(size) { offset ->
+                        add(ChargeEffectTile(origin.translate(offset, -step), delay))
+                    }
+            }
+        }
     }
 
 private fun Int.signStep(): Int =
