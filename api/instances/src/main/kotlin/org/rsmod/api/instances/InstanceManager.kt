@@ -554,17 +554,18 @@ constructor(
         }
     }
 
-    private fun beginGrace(session: InstanceSession, currentTick: Int) {
+    public fun beginGrace(
+        session: InstanceSession,
+        currentTick: Int,
+        message: String = "The instance timer has ended. You have " +
+            "${InstanceTiming.formatRemaining(session.spec.graceTicks)} to collect loot before being removed.",
+    ) {
         if (session.state is SessionState.Grace) {
             return
         }
         despawnSessionNpcs(session)
         session.enterGrace(currentTick)
-        val graceLabel = InstanceTiming.formatRemaining(session.spec.graceTicks)
-        messageOccupants(
-            session,
-            "The instance timer has ended. You have $graceLabel to collect loot before being removed.",
-        )
+        messageOccupants(session, message)
     }
 
     private fun expireGrace(session: InstanceSession, currentTick: Int) {

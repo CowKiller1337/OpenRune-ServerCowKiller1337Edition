@@ -83,6 +83,15 @@ class GameValTool private constructor(
 
     fun totalMappingEntries(): Int = entries.size
 
+    fun allEntries(table: String? = null): List<GameValEntry> {
+        val normalizedTable = table?.trim()?.lowercase().orEmpty()
+        return if (normalizedTable.isBlank()) {
+            entries
+        } else {
+            entries.filter { it.table.equals(normalizedTable, ignoreCase = true) }
+        }
+    }
+
     fun reverseLookupNpc(id: Int): List<String> = reverseLookup("npc", id)
 
     fun reverseLookupObj(id: Int): List<String> = objIdIndex[id].orEmpty()
