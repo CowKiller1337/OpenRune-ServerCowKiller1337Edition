@@ -6,9 +6,11 @@ import dev.openrune.rscm.RSCM
 import dev.openrune.rscm.RSCM.asRSCM
 import dev.openrune.rscm.RSCMType
 import dev.openrune.types.NpcMode
+import dev.openrune.types.aconverted.interf.IfSubType
 import jakarta.inject.Inject
 import kotlin.math.max
 import kotlin.math.min
+import net.rsprot.protocol.game.outgoing.interfaces.IfOpenSub
 import org.rsmod.annotations.InternalApi
 import org.rsmod.api.area.checker.AreaChecker
 import org.rsmod.api.death.prepareAdminDieTest
@@ -18,6 +20,7 @@ import org.rsmod.api.mechanics.toxins.impl.PlayerDisease
 import org.rsmod.api.mechanics.toxins.impl.PlayerPoison
 import org.rsmod.api.mechanics.toxins.impl.PlayerVenom
 import org.rsmod.api.invtx.invClear
+import org.rsmod.api.player.output.ClientScripts.topLevelMainModalOpen
 import org.rsmod.api.player.output.MiscOutput
 import org.rsmod.api.player.output.mes
 import org.rsmod.api.player.cheat.adminGodMode
@@ -28,6 +31,7 @@ import org.rsmod.api.player.stat.PlayerSkillXP
 import org.rsmod.api.player.stat.stat
 import org.rsmod.api.player.stat.statAdvance
 import org.rsmod.api.player.stat.statSub
+import org.rsmod.api.player.ui.closeSubs
 import org.rsmod.api.player.ui.PlayerInterfaceUpdates
 import org.rsmod.api.player.vars.VarPlayerIntMapSetter
 import org.rsmod.api.player.vars.boolVarBit
@@ -47,6 +51,9 @@ import org.rsmod.game.loc.LocEntity
 import org.rsmod.game.loc.LocInfo
 import org.rsmod.game.loc.LocShape
 import org.rsmod.game.stat.PlayerSkillXPTable
+import org.rsmod.game.ui.Component
+import org.rsmod.game.ui.UserInterface
+import org.rsmod.events.EventBus
 import org.rsmod.map.CoordGrid
 import org.rsmod.map.square.MapSquareGrid
 import org.rsmod.map.square.MapSquareKey
@@ -68,6 +75,7 @@ constructor(
     private val update: GameUpdate,
     private val areaChecker: AreaChecker,
     private val regions: RegionRegistry,
+    private val eventBus: EventBus,
 ) : PluginScript() {
     private val logger = InlineLogger()
 
@@ -140,6 +148,12 @@ constructor(
         onCommand("god", "Toggle god mode (invincibility)", ::god)
         onCommand("maxhit", "Toggle always max hit", ::maxhit)
         onCommand("openbank", "Open the bank", ::bank)
+        onCommand("iface", "Open a raw interface id", ::rawInterface) {
+            invalidArgs = "Use as ::iface id [main|side|overlay|full|chat]"
+        }
+        onCommand("interface", "Open a raw interface id", ::rawInterface) {
+            invalidArgs = "Use as ::interface id [main|side|overlay|full|chat]"
+        }
         onCommand("transmog", "Transmog player to NPC appearance (no args to reset)", ::transmog) {
             invalidArgs = "Use as ::transmog npcNameOrId (ex: goblin or 126) or ::transmog to reset"
         }
@@ -493,6 +507,60 @@ constructor(
         protectedAccess.launch(player) {
             ifOpenMainSidePair(main = "interface.bankmain", side = "interface.bankside")
         }
+    }
+
+    private fun rawInterface(cheat: Cheat) = with(cheat) {
+        val id = args.getOrNull(0)?.toIntOrNull()
+        if (id == null) {
+            player.mes("Usage: ::iface id [main|side|overlay|full|chat]")
+            return@with
+        }
+        if (ServerCacheManager.getInterface(id) == null) {
+            player.mes("Interface $id does not exist in this cache.")
+            return@with
+        }
+
+        val mode = args.getOrNull(1)?.lowercase() ?: "main"
+        val target =
+            when (mode) {
+                "main", "modal" -> "component.toplevel_osrs_stretch:mainmodal"
+                "side", "sidemodal" -> "component.toplevel_osrs_stretch:sidemodal"
+                "overlay", "float", "floater" -> "component.toplevel_osrs_stretch:floater"
+                "full", "fullscreen" -> "component.toplevel_osrs_stretch:overlay_atmosphere"
+                "chat", "chatbox" -> "component.chatbox:chatmodal"
+                else -> {
+                    player.mes("Use mode: main, side, overlay, full, or chat.")
+                    return@with
+                }
+            }
+        val type =
+            when (mode) {
+                "overlay", "float", "floater", "full", "fullscreen" -> IfSubType.Overlay
+                else -> IfSubType.Modal
+            }
+
+        if (mode == "main" || mode == "modal") {
+            topLevelMainModalOpen(player)
+        }
+        player.openRawInterface(id, target, type)
+        player.mes("Opened interface $id as $mode.")
+    }
+
+    @OptIn(InternalApi::class)
+    private fun Player.openRawInterface(interfaceId: Int, target: String, type: IfSubType) {
+        val targetType = ServerCacheManager.fromComponent(target.asRSCM(RSCMType.COMPONENT))
+        val targetComponent = Component(targetType.packed)
+        val openedInterface = UserInterface(interfaceId)
+        closeSubs(targetComponent, eventBus)
+        ui.removeQueuedCloseSub(targetType)
+        if (type == IfSubType.Modal) {
+            ui.modals[targetComponent] = openedInterface
+        } else {
+            ui.overlays[targetComponent] = openedInterface
+        }
+
+        val translated = ui.getGameframeOrNull(targetType) ?: targetComponent
+        client.write(IfOpenSub(translated.parent, translated.child, interfaceId, type.id))
     }
 
     private fun transmog(cheat: Cheat) = with(cheat) {

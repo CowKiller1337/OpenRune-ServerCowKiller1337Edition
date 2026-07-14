@@ -122,10 +122,35 @@ constructor(
     private fun Player.sendVars() {
         client.write(VarpReset)
         chatboxUnlocked = displayName.isNotBlank()
+        applyLeagueWorldVars()
         for (varp in transmitVars) {
             if (varp in vars) {
                 resyncVar(varp)
             }
+        }
+        resyncLeagueGeneralVar()
+    }
+
+    private fun Player.applyLeagueWorldVars() {
+        ServerCacheManager.getVarbit(LEAGUE_ACCOUNT_VARBIT)?.let {
+            VarPlayerIntMapSetter.set(this, it, 1)
+        }
+        ServerCacheManager.getVarbit(LEAGUE_TYPE_VARBIT)?.let {
+            VarPlayerIntMapSetter.set(this, it, LEAGUE_6_TYPE)
+        }
+        ServerCacheManager.getVarbit(LEAGUE_TUTORIAL_COMPLETED_VARBIT)?.let {
+            VarPlayerIntMapSetter.set(this, it, LEAGUE_TUTORIAL_COMPLETE_STAGE)
+        }
+        ServerCacheManager.getVarp(MAP_FLAGS_CACHED_VARP)?.let { varp ->
+            val leagueWorldFlags =
+                (vars[varp] or LEAGUE_WORLD_MAP_FLAG) and DEADMAN_WORLD_MAP_FLAG.inv()
+            VarPlayerIntMapSetter.set(this, varp, leagueWorldFlags)
+        }
+    }
+
+    private fun Player.resyncLeagueGeneralVar() {
+        ServerCacheManager.getVarp(LEAGUE_GENERAL_VARP)?.let {
+            resyncVar(it)
         }
     }
 
@@ -184,4 +209,16 @@ constructor(
 
     private fun transmitVars(): List<VarpServerType> =
         ServerCacheManager.getVarps().values.filter { !it.transmit.never }.sortedBy { it.id }
+
+    private companion object {
+        private const val LEAGUE_ACCOUNT_VARBIT = 10031
+        private const val LEAGUE_TYPE_VARBIT = 10032
+        private const val LEAGUE_TUTORIAL_COMPLETED_VARBIT = 10037
+        private const val LEAGUE_GENERAL_VARP = 2606
+        private const val MAP_FLAGS_CACHED_VARP = 3717
+        private const val LEAGUE_6_TYPE = 6
+        private const val LEAGUE_TUTORIAL_COMPLETE_STAGE = 3
+        private const val LEAGUE_WORLD_MAP_FLAG = 1 shl 30
+        private const val DEADMAN_WORLD_MAP_FLAG = 1 shl 29
+    }
 }
