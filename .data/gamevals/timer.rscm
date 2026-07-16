@@ -15,3 +15,5 @@ skull_timer=13
 combat_freeze=16
 combat_freeze_immunity=17
 boss_hp_bar_check=114
+league_task_check=115
+league_task_message=116

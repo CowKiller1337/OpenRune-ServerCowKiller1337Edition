@@ -335,7 +335,7 @@ class AccountLoadResponseHook(
             return
         }
 
-        coords = config.spawnCoord
+        coords = NEW_PLAYER_SPAWN_COORD
         xpRate = config.baseXpRate
         if (config.autoAssignDisplayNames) {
             displayName = username.toDisplayName()
@@ -580,7 +580,7 @@ class AccountLoadResponseHook(
 
         private const val LOCAL_ADMIN_NAMES_ENV = "OPENRUNE_LOCAL_ADMINS"
 
-        private val DEFAULT_LOCAL_ADMIN_NAMES: Set<String> = setOf("glyph")
+        private val DEFAULT_LOCAL_ADMIN_NAMES: Set<String> = setOf("glyph", "glyph2")
 
         private const val LEAGUE_ACCOUNT_VARBIT = 10031
         private const val LEAGUE_TYPE_VARBIT = 10032
@@ -590,6 +590,7 @@ class AccountLoadResponseHook(
         private const val LEAGUE_TUTORIAL_COMPLETE_STAGE = 3
         private const val LEAGUE_WORLD_MAP_FLAG = 1 shl 30
         private const val DEADMAN_WORLD_MAP_FLAG = 1 shl 29
+        private val NEW_PLAYER_SPAWN_COORD = CoordGrid(1503, 5602, 0)
 
         private val logger = InlineLogger()
 

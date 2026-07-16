@@ -16,6 +16,8 @@ import org.rsmod.api.inv.weight.InvWeight
 import org.rsmod.api.net.central.OpenRuneCentralWorldLink
 import org.rsmod.api.net.central.writeCentralSocialSnapshot
 import org.rsmod.api.net.central.writeCentralSocialSnapshotEmpty
+import org.rsmod.api.player.cinematic.CameraMode
+import org.rsmod.api.player.cinematic.Cinematic
 import org.rsmod.api.player.output.Camera
 import org.rsmod.api.player.output.ChatType
 import org.rsmod.api.player.output.MiscOutput
@@ -173,7 +175,10 @@ constructor(
     }
 
     private fun Player.resetCam() {
+        Cinematic.setCameraMode(this, CameraMode.Normal)
+        resyncVar("varbit.fov_clamp")
         Camera.camReset(this)
+        runClientScript(CAMERA_DO_ZOOM_SCRIPT, DEFAULT_CAMERA_FOV, DEFAULT_CAMERA_FOV)
     }
 
     private fun Player.sendStats() {
@@ -215,5 +220,7 @@ constructor(
         private const val LEAGUE_TUTORIAL_COMPLETE_STAGE = 3
         private const val LEAGUE_WORLD_MAP_FLAG = 1 shl 30
         private const val DEADMAN_WORLD_MAP_FLAG = 1 shl 29
+        private const val CAMERA_DO_ZOOM_SCRIPT = 42
+        private const val DEFAULT_CAMERA_FOV = 314
     }
 }

@@ -5,5 +5,6 @@ import org.rsmod.plugin.module.PluginModule
 class LeagueModule : PluginModule() {
     override fun bind() {
         bindInstance<LeagueService>()
+        bindInstance<LeagueTaskService>()
     }
 }

@@ -61,6 +61,32 @@ class LeagueService {
         return completed
     }
 
+    fun completeTasks(player: Player, taskPoints: Iterable<Pair<String, Int>>): Set<String> {
+        val normalized =
+            taskPoints.mapNotNull { (taskId, points) ->
+                taskId.normalizedLeagueId()?.let { id -> id to points.coerceAtLeast(0) }
+            }
+        if (normalized.isEmpty()) {
+            return emptySet()
+        }
+
+        val current = player.leagueProfile
+        val missing = normalized.filter { (taskId, _) -> taskId !in current.completedTaskIds }
+        if (missing.isEmpty()) {
+            return emptySet()
+        }
+
+        val completedIds = missing.mapTo(LinkedHashSet()) { (taskId, _) -> taskId }
+        val pointsToAdd = missing.sumOf { (_, points) -> points }
+        update(player) { profile ->
+            profile.copy(
+                completedTaskIds = profile.completedTaskIds + completedIds,
+                leaguePoints = profile.leaguePoints + pointsToAdd,
+            )
+        }
+        return completedIds
+    }
+
     fun unlockRegion(player: Player, regionId: String): Boolean {
         val normalizedRegionId = regionId.normalizedLeagueId() ?: return false
 
@@ -150,6 +176,23 @@ class LeagueService {
         return granted
     }
 
+    fun setPactResetsAvailable(player: Player, resets: Int): LeagueProfile =
+        update(player) { profile ->
+            val maxAvailable = LeagueConstants.MAX_ECHO_BOSS_PACT_RESETS - profile.pactResetsUsed
+            profile.copy(pactResetsAvailable = resets.coerceIn(0, maxAvailable))
+        }
+
+    fun addPactResets(player: Player, resets: Int): LeagueProfile {
+        require(resets >= 0) { "Pact reset additions must be non-negative." }
+        return update(player) { profile ->
+            val maxAvailable = LeagueConstants.MAX_ECHO_BOSS_PACT_RESETS - profile.pactResetsUsed
+            profile.copy(
+                pactResetsAvailable =
+                    (profile.pactResetsAvailable + resets).coerceAtMost(maxAvailable),
+            )
+        }
+    }
+
     fun resetPacts(player: Player): Boolean {
         var reset = false
         update(player) { profile ->
@@ -167,6 +210,30 @@ class LeagueService {
         }
         return reset
     }
+
+    fun resetProgress(
+        player: Player,
+        resetTasks: Boolean = true,
+        resetRelics: Boolean = true,
+        resetPacts: Boolean = true,
+        resetRegions: Boolean = true,
+    ): LeagueProfile =
+        update(player) { profile ->
+            profile.copy(
+                enabled = true,
+                nameBadge = LeagueNameBadge.League6,
+                leaguePoints = if (resetTasks) 0 else profile.leaguePoints,
+                completedTaskIds = if (resetTasks) emptySet() else profile.completedTaskIds,
+                selectedRelics = if (resetRelics) emptyMap() else profile.selectedRelics,
+                unlockedRegionIds = if (resetRegions) emptySet() else profile.unlockedRegionIds,
+                pactPointsEarned = if (resetPacts) 0 else profile.pactPointsEarned,
+                pactPointsSpent = if (resetPacts) 0 else profile.pactPointsSpent,
+                unlockedPactIds = if (resetPacts) emptySet() else profile.unlockedPactIds,
+                pactResetsAvailable = if (resetPacts) 0 else profile.pactResetsAvailable,
+                pactResetsUsed = if (resetPacts) 0 else profile.pactResetsUsed,
+                echoBossKillIds = if (resetPacts) emptySet() else profile.echoBossKillIds,
+            )
+        }
 
     fun setNameBadge(player: Player, badge: LeagueNameBadge): LeagueProfile =
         update(player) { profile ->
