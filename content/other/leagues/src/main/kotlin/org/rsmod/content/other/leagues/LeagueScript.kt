@@ -100,11 +100,13 @@ constructor(
         }
 
         onIfOpen("interface.league_tasks") {
+            LeagueClientState.sync(player)
             player.enableLeagueModalEvents(
                 menuFrame = "component.league_tasks:league_menu_frame",
                 closeButton = "component.league_tasks:close_button",
             )
             player.enableLeagueTaskEvents()
+            player.redrawLeagueTasks()
         }
 
         onIfOpen("interface.trailblazer_areas") {

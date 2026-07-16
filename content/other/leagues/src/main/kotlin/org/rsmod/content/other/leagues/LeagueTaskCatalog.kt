@@ -26,6 +26,9 @@ object LeagueTaskCatalog {
 
     fun byIndex(index: Int): LeagueTask? = tasks.getOrNull(index)
 
+    fun byName(name: String): LeagueTask? =
+        tasks.firstOrNull { task -> task.name.equals(name, ignoreCase = true) }
+
     fun find(query: String, limit: Int = 10): List<LeagueTask> {
         val terms = query.trim().lowercase().split(Regex("\\s+")).filter { it.isNotBlank() }
         if (terms.isEmpty()) {

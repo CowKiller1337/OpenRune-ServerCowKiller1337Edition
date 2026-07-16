@@ -58,6 +58,11 @@ constructor(
         return complete(player, task, pointsOverride)
     }
 
+    fun completeByName(player: Player, name: String, pointsOverride: Int? = null): Boolean {
+        val task = LeagueTaskCatalog.byName(name) ?: return false
+        return complete(player, task, pointsOverride)
+    }
+
     fun complete(player: Player, task: LeagueTask, pointsOverride: Int? = null): Boolean {
         if (!player.leagueProfile.enabled) {
             return false
@@ -103,7 +108,7 @@ constructor(
     }
 
     private fun Player.enqueueTaskCompletedMessage(taskName: String, points: Int) {
-        val message = rainbowMessage("League task completed: $taskName (+$points points).")
+        val message = taskCompletedMessage(taskName, points)
         if (!leagueTaskMessageActive) {
             leagueTaskMessageActive = true
             mes(message)
@@ -116,20 +121,8 @@ constructor(
         leagueTaskMessageQueue = queue
     }
 
-    private fun rainbowMessage(text: String): String = buildString {
-        var colorIndex = 0
-        for (char in text) {
-            if (char.isWhitespace()) {
-                append(char)
-                continue
-            }
-            append("<col=")
-            append(RAINBOW_MESSAGE_COLORS[colorIndex % RAINBOW_MESSAGE_COLORS.size])
-            append(">")
-            append(char)
-            colorIndex++
-        }
-    }
+    private fun taskCompletedMessage(taskName: String, points: Int): String =
+        "<col=ff66cc>League task completed: $taskName (+$points points)."
 
     companion object {
         const val STARTER_TASK_TIMER = "timer.league_task_check"
@@ -138,8 +131,6 @@ constructor(
         const val TASK_MESSAGE_DELAY_CYCLES = 1
 
         private const val DEFAULT_TASK_POINTS = 10
-        private val RAINBOW_MESSAGE_COLORS =
-            arrayOf("ff3333", "ff8c00", "ffff33", "33cc33", "33ccff", "6666ff", "ff66cc")
 
         private val STARTER_LEVEL_STATS =
             listOf(
