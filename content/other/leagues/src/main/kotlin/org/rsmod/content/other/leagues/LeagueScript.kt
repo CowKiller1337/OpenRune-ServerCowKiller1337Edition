@@ -9,6 +9,7 @@ import dev.or2.central.account.Rights
 import org.rsmod.api.attr.AttributeKey
 import jakarta.inject.Inject
 import org.rsmod.api.cheat.CheatHandlerBuilder
+import org.rsmod.api.player.protect.ProtectedAccess
 import org.rsmod.api.player.output.mes
 import org.rsmod.api.player.output.runClientScript
 import org.rsmod.api.player.ui.IfScriptArgs
@@ -27,6 +28,7 @@ import org.rsmod.api.script.onPlayerSoftTimer
 import org.rsmod.events.EventBus
 import org.rsmod.game.cheat.Cheat
 import org.rsmod.game.entity.Player
+import org.rsmod.game.ui.Component
 import org.rsmod.plugin.scripts.PluginScript
 import org.rsmod.plugin.scripts.ScriptContext
 
@@ -37,6 +39,7 @@ class PactResetArgs : IfScriptArgs
 data class RelicToggleArgs(val dbrow: Int) : IfScriptArgs
 
 private val PENDING_LEAGUE_RELIC_ATTR = AttributeKey<LeagueRelicChoice>(temp = true)
+private val PENDING_LEAGUE_AREA_ATTR = AttributeKey<LeagueAreaChoice>(temp = true)
 
 private var Player.pendingLeagueRelic: LeagueRelicChoice?
     get() = attr[PENDING_LEAGUE_RELIC_ATTR]
@@ -45,6 +48,16 @@ private var Player.pendingLeagueRelic: LeagueRelicChoice?
             attr.remove(PENDING_LEAGUE_RELIC_ATTR)
         } else {
             attr[PENDING_LEAGUE_RELIC_ATTR] = value
+        }
+    }
+
+private var Player.pendingLeagueArea: LeagueAreaChoice?
+    get() = attr[PENDING_LEAGUE_AREA_ATTR]
+    set(value) {
+        if (value == null) {
+            attr.remove(PENDING_LEAGUE_AREA_ATTR)
+        } else {
+            attr[PENDING_LEAGUE_AREA_ATTR] = value
         }
     }
 
@@ -63,6 +76,13 @@ private data class LeagueRelicChoice(
     val name: String,
     val description: String,
     val requiredPoints: Int,
+)
+
+private data class LeagueAreaChoice(
+    val areaId: Int,
+    val regionId: String,
+    val name: String,
+    val requiredTasks: Int = 0,
 )
 
 class LeagueScript
@@ -110,10 +130,12 @@ constructor(
         }
 
         onIfOpen("interface.trailblazer_areas") {
+            LeagueClientState.sync(player)
             player.enableLeagueModalEvents(
                 menuFrame = "component.trailblazer_areas:league_menu_frame",
                 closeButton = "component.trailblazer_areas:close_button",
             )
+            player.enableLeagueAreaEvents()
         }
 
         onIfOpen("interface.league_relics") {
@@ -174,8 +196,10 @@ constructor(
             player.ifOpenMainModal("interface.league_info", eventBus)
         }
 
-        onIfOverlayButton("component.league_side_panel:rank") {
-            player.showLocalLeagueRank()
+        LEAGUE_SIDE_PANEL_RANK_BUTTONS.forEach { component ->
+            onIfOverlayButton(component) {
+                player.showLocalLeagueRank()
+            }
         }
 
         onIfOverlayButton("component.league_side_panel:summary") {
@@ -234,6 +258,20 @@ constructor(
 
         onIfModalButton("component.league_relics:confirm_button") {
             player.confirmPendingLeagueRelic()
+        }
+
+        LEAGUE_AREA_COMPONENT_CHOICES.forEach { (component, choice) ->
+            onIfModalButton(component) {
+                player.openLeagueAreaDetails(choice)
+            }
+        }
+
+        onIfModalButton(LEAGUE_AREA_SELECT_BUTTON_COMPONENT) {
+            confirmPendingLeagueArea()
+        }
+
+        onIfModalButton(LEAGUE_AREA_SELECT_BACK_COMPONENT) {
+            player.closeLeagueAreaDetails()
         }
 
         onAdminCommand("leagueon", "Enable Leagues VI for yourself.", ::leagueOn)
@@ -471,6 +509,16 @@ constructor(
         )
     }
 
+    private fun Player.enableLeagueAreaEvents() {
+        LEAGUE_AREA_MAP_COMPONENTS.forEach { component ->
+            ifSetEvents(component, -1..-1, IfEvent.Op1)
+            ifSetEvents(component, 0..0, IfEvent.Op1)
+        }
+        LEAGUE_AREA_RAW_BUTTON_COMPONENTS.forEach { component ->
+            ifSetEvents(component, -1..LEAGUE_AREA_BUTTON_MAX_SUB, IfEvent.Op1)
+        }
+    }
+
     private fun Player.enableTalentTreeEvents() {
         ifSetEvents(
             "component.talent_tree:tree_node_draw_layer",
@@ -604,6 +652,94 @@ constructor(
         runClientScript(LEAGUE_RELICS_INIT_SCRIPT, LEAGUE_RELICS_INIT_ARGS)
     }
 
+    private fun Player.openLeagueAreaDetails(choice: LeagueAreaChoice) {
+        pendingLeagueArea = choice
+        LeagueClientState.setViewedArea(this, choice.areaId)
+        runClientScript(
+            LEAGUE_AREAS_SHOW_DETAILED_SCRIPT,
+            leagueAreaDetailedViewArgs(choice, choice.statusFor(leagueProfile)),
+        )
+    }
+
+    private fun Player.closeLeagueAreaDetails() {
+        pendingLeagueArea = null
+        reopenLeagueAreaMap()
+    }
+
+    private suspend fun ProtectedAccess.confirmPendingLeagueArea() {
+        val choice = player.pendingLeagueArea ?: return
+        when (choice.statusFor(player.leagueProfile)) {
+            LEAGUE_AREA_STATUS_UNLOCKABLE -> {
+                val confirmed =
+                    choice2(
+                        "Yes, unlock ${choice.name}.",
+                        true,
+                        "No, keep choosing.",
+                        false,
+                        title = "Unlock ${choice.name}?",
+                    )
+                if (!confirmed || player.pendingLeagueArea != choice) {
+                    return
+                }
+                player.unlockPendingLeagueArea(choice)
+            }
+            LEAGUE_AREA_STATUS_UNLOCKED -> player.mes("Area teleporting is not available yet.")
+            LEAGUE_AREA_STATUS_MAXED -> player.mes("<col=ff0000>You cannot unlock any more areas.")
+            else -> player.mes(choice.lockedMessage(player.leagueProfile))
+        }
+    }
+
+    private fun Player.unlockPendingLeagueArea(choice: LeagueAreaChoice) {
+        if (leagues.unlockRegion(this, choice.regionId)) {
+            mes("You have unlocked the ${choice.name} area.")
+        }
+        pendingLeagueArea = null
+        LeagueClientState.sync(this)
+        reopenLeagueAreaMap()
+    }
+
+    private fun Player.reopenLeagueAreaMap() {
+        ifCloseModals(eventBus)
+        ifOpenMainModal("interface.trailblazer_areas", eventBus)
+    }
+
+    private fun LeagueAreaChoice.statusFor(profile: LeagueProfile): Int {
+        if (!profile.enabled) {
+            return LEAGUE_AREA_STATUS_LOCKED
+        }
+        if (regionId in profile.unlockedRegionIds) {
+            return LEAGUE_AREA_STATUS_UNLOCKED
+        }
+        if (profile.unlockedRegionIds.size >= LEAGUE_AREA_MAX_UNLOCKS) {
+            return LEAGUE_AREA_STATUS_MAXED
+        }
+        return if (areaId == nextForcedLeagueArea(profile)?.areaId &&
+            profile.completedTaskIds.size >= requiredTasks
+        ) {
+            LEAGUE_AREA_STATUS_UNLOCKABLE
+        } else {
+            LEAGUE_AREA_STATUS_LOCKED
+        }
+    }
+
+    private fun LeagueAreaChoice.lockedMessage(profile: LeagueProfile): String {
+        val nextArea = nextForcedLeagueArea(profile)
+        if (this == nextArea && profile.completedTaskIds.size < requiredTasks) {
+            return "You need to complete $requiredTasks League tasks to unlock $name."
+        }
+        return "<col=ff0000>You cannot unlock this area yet."
+    }
+
+    private fun nextForcedLeagueArea(profile: LeagueProfile): LeagueAreaChoice? =
+        LEAGUE_6_FORCED_AREA_ORDER.firstOrNull { it.regionId !in profile.unlockedRegionIds }
+
+    private fun leagueAreaDetailedViewArgs(choice: LeagueAreaChoice, status: Int): List<Any> =
+        listOf(choice.areaId) +
+            LEAGUE_AREAS_SHOW_DETAILED_PRIMARY_COMPONENTS +
+            listOf(status) +
+            LEAGUE_AREAS_SHOW_DETAILED_CONFIRM_COMPONENTS +
+            listOf("")
+
     private fun LeagueRelicChoice.statusFor(profile: LeagueProfile): Int {
         if (!profile.enabled) {
             return RELIC_STATUS_LOCKED
@@ -709,8 +845,8 @@ constructor(
         val profile = leagueProfile
         mes("Local Leagues ranking is not live yet.")
         mes(
-            "Your progress: ${profile.leaguePoints} points, " +
-                "${profile.completedTaskIds.size} tasks, ${profile.pactPointsEarned} pacts earned.",
+            "Server-only progress: ${profile.leaguePoints} points, " +
+                "${profile.completedTaskIds.size} tasks, ${profile.unlockedRegionIds.size} areas.",
         )
     }
 
@@ -726,6 +862,7 @@ constructor(
         const val LEAGUE_RELIC_CLICKZONE_MAX_SUB = 64
         const val LEAGUE_RELIC_BUTTON_MAX_SUB = 8
         const val LEAGUE_RELIC_TOGGLE_MAX_SUB = 128
+        const val LEAGUE_AREA_BUTTON_MAX_SUB = 128
         const val LEAGUE_TYPE_ENUM_ID = 2670
         const val PARAM_LEAGUE_RELIC_TIERS_ENUM = 870
         const val PARAM_RELIC_TIER_POINTS = 877
@@ -741,9 +878,107 @@ constructor(
         const val RELIC_STATUS_PREVIOUS_REQUIRED = 3
         const val RELIC_STATUS_TIER_SELECTED = 4
         const val RELIC_STATUS_REPICK_SELECTABLE = 5
+        const val LEAGUE_AREAS_SHOW_DETAILED_SCRIPT = 3668
+        const val LEAGUE_AREA_STATUS_LOCKED = 0
+        const val LEAGUE_AREA_STATUS_UNLOCKED = 1
+        const val LEAGUE_AREA_STATUS_UNLOCKABLE = 2
+        const val LEAGUE_AREA_STATUS_MAXED = 4
+        const val LEAGUE_AREA_MAX_UNLOCKS = 5
+        const val LEAGUE_AREA_SELECT_BUTTON_ID = 84
+        const val LEAGUE_AREA_SELECT_BACK_ID = 85
+
+        val MISHTHALIN_AREA = LeagueAreaChoice(1, "misthalin", "Misthalin")
+        val KARAMJA_AREA = LeagueAreaChoice(2, "karamja", "Karamja", requiredTasks = 80)
+        val ASGARNIA_AREA = LeagueAreaChoice(3, "asgarnia", "Asgarnia")
+        val KANDARIN_AREA = LeagueAreaChoice(4, "kandarin", "Kandarin")
+        val MORYTANIA_AREA = LeagueAreaChoice(5, "morytania", "Morytania")
+        val DESERT_AREA = LeagueAreaChoice(6, "desert", "Desert")
+        val TIRANNWN_AREA = LeagueAreaChoice(7, "tirannwn", "Tirannwn")
+        val FREMENNIK_AREA = LeagueAreaChoice(8, "fremennik", "Fremennik")
+        val WILDERNESS_AREA = LeagueAreaChoice(11, "wilderness", "Wilderness")
+        val KOUREND_AREA = LeagueAreaChoice(20, "kebos_kourend", "Kebos & Kourend")
+        val VARLAMORE_AREA = LeagueAreaChoice(21, "varlamore", "Varlamore")
+
+        val LEAGUE_6_FORCED_AREA_ORDER =
+            listOf(
+                VARLAMORE_AREA,
+                KARAMJA_AREA,
+            )
+
+        val LEAGUE_AREA_COMPONENT_CHOICES =
+            linkedMapOf(
+                "component.trailblazer_areas:league_shield_misthalin" to MISHTHALIN_AREA,
+                "component.trailblazer_areas:league_name_misthalin" to MISHTHALIN_AREA,
+                "component.trailblazer_areas:league_shield_karamja" to KARAMJA_AREA,
+                "component.trailblazer_areas:league_name_karamja" to KARAMJA_AREA,
+                "component.trailblazer_areas:league_shield_desert" to DESERT_AREA,
+                "component.trailblazer_areas:league_name_desert" to DESERT_AREA,
+                "component.trailblazer_areas:league_shield_morytania" to MORYTANIA_AREA,
+                "component.trailblazer_areas:league_name_morytania" to MORYTANIA_AREA,
+                "component.trailblazer_areas:league_shield_asgarnia" to ASGARNIA_AREA,
+                "component.trailblazer_areas:league_name_asgarnia" to ASGARNIA_AREA,
+                "component.trailblazer_areas:league_shield_kandarin" to KANDARIN_AREA,
+                "component.trailblazer_areas:league_name_kandarin" to KANDARIN_AREA,
+                "component.trailblazer_areas:league_shield_fremennik" to FREMENNIK_AREA,
+                "component.trailblazer_areas:league_name_fremennik" to FREMENNIK_AREA,
+                "component.trailblazer_areas:league_shield_tirannwn" to TIRANNWN_AREA,
+                "component.trailblazer_areas:league_name_tirannwn" to TIRANNWN_AREA,
+                "component.trailblazer_areas:league_shield_wilderness" to WILDERNESS_AREA,
+                "component.trailblazer_areas:league_name_wilderness" to WILDERNESS_AREA,
+                "component.trailblazer_areas:league_shield_kebos_kourend" to KOUREND_AREA,
+                "component.trailblazer_areas:league_name_kebos_kourend" to KOUREND_AREA,
+                "component.trailblazer_areas:league_shield_varlamore" to VARLAMORE_AREA,
+                "component.trailblazer_areas:league_name_varlamore" to VARLAMORE_AREA,
+            )
+
+        val LEAGUE_AREA_MAP_COMPONENTS = LEAGUE_AREA_COMPONENT_CHOICES.keys.toList()
+
+        val LEAGUE_AREA_SELECT_BUTTON_COMPONENT =
+            trailblazerAreaComponent(LEAGUE_AREA_SELECT_BUTTON_ID)
+
+        val LEAGUE_AREA_SELECT_BACK_COMPONENT =
+            trailblazerAreaComponent(LEAGUE_AREA_SELECT_BACK_ID)
+
+        val LEAGUE_AREA_RAW_BUTTON_COMPONENTS =
+            listOf(
+                LEAGUE_AREA_SELECT_BUTTON_COMPONENT,
+                LEAGUE_AREA_SELECT_BACK_COMPONENT,
+            )
+
+        val LEAGUE_AREAS_SHOW_DETAILED_PRIMARY_COMPONENTS =
+            listOf(
+                "component.trailblazer_areas:league_maps".asRSCM(RSCMType.COMPONENT),
+                "component.trailblazer_areas:league_shields".asRSCM(RSCMType.COMPONENT),
+                "component.trailblazer_areas:league_names".asRSCM(RSCMType.COMPONENT),
+                "component.trailblazer_areas:league_area_details".asRSCM(RSCMType.COMPONENT),
+                "component.trailblazer_areas:name_shield".asRSCM(RSCMType.COMPONENT),
+                "component.trailblazer_areas:name_header".asRSCM(RSCMType.COMPONENT),
+                "component.trailblazer_areas:description".asRSCM(RSCMType.COMPONENT),
+                LEAGUE_AREA_SELECT_BUTTON_COMPONENT.packed,
+                LEAGUE_AREA_SELECT_BACK_COMPONENT.packed,
+                "component.trailblazer_areas:league_area_icon_content".asRSCM(RSCMType.COMPONENT),
+            )
+
+        val LEAGUE_AREAS_SHOW_DETAILED_CONFIRM_COMPONENTS =
+            listOf(
+                "component.trailblazer_areas:league_tab_layer".asRSCM(RSCMType.COMPONENT),
+                "component.trailblazer_areas:league_tab_infolayer".asRSCM(RSCMType.COMPONENT),
+                "component.trailblazer_areas:confirm_overlay".asRSCM(RSCMType.COMPONENT),
+                "component.trailblazer_areas:confirm_universe".asRSCM(RSCMType.COMPONENT),
+                "component.trailblazer_areas:confirm".asRSCM(RSCMType.COMPONENT),
+                "component.trailblazer_areas:confirm_frame".asRSCM(RSCMType.COMPONENT),
+                "component.trailblazer_areas:confirm_text".asRSCM(RSCMType.COMPONENT),
+                "component.trailblazer_areas:confirm_button".asRSCM(RSCMType.COMPONENT),
+                "component.trailblazer_areas:confirm_cancel".asRSCM(RSCMType.COMPONENT),
+                "component.trailblazer_areas:loading_overlay".asRSCM(RSCMType.COMPONENT),
+                "component.trailblazer_areas:league_area_icon".asRSCM(RSCMType.COMPONENT),
+            )
 
         val LEAGUE_RELIC_LOADING_COMPONENT =
             "component.league_relics:loading".asRSCM(RSCMType.COMPONENT)
+
+        private fun trailblazerAreaComponent(child: Int) =
+            ServerCacheManager.fromComponent(Component(LeagueInterfaces.TRAILBLAZER_AREAS, child).packed)
 
         val LEAGUE_RELICS_INIT_ARGS =
             listOf(
@@ -872,6 +1107,12 @@ constructor(
                 "component.league_side_panel:mastery_button_outer",
                 "component.league_side_panel:mastery_button_text",
                 "component.league_side_panel:mastery_highlight",
+            )
+
+        val LEAGUE_SIDE_PANEL_RANK_BUTTONS =
+            listOf(
+                "component.league_side_panel:rank",
+                "component.league_side_panel:rank_backing",
             )
 
         val LEAGUE_SIDE_PANEL_CLICK_COMPONENTS =

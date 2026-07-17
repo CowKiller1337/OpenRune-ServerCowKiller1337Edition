@@ -23,6 +23,7 @@ object LeagueClientState {
         setVarp(player, LeagueVarps.LEAGUE_POINTS_CLAIMED, leaguePoints)
         setVarp(player, LeagueVarps.LEAGUE_6_POINTS, leaguePoints)
         setTaskCompletionVars(player, profile)
+        setAreaSelectionVars(player, profile)
         setStarterRelicDisplay(player, profile)
         setVarbit(
             player,
@@ -38,6 +39,10 @@ object LeagueClientState {
         setVarp(player, LeagueVarps.TALENT_POINTS_SPENT, profile.pactPointsSpent)
         setVarbit(player, LeagueVarbits.TALENT_RESETS_AVAILABLE, profile.pactResetsAvailable)
         setPactUnlockVars(player, profile)
+    }
+
+    fun setViewedArea(player: Player, areaId: Int) {
+        setVarbit(player, LeagueVarbits.LEAGUE_AREA_LAST_VIEWED, areaId)
     }
 
     private fun setVarp(player: Player, id: Int, value: Int) {
@@ -82,6 +87,35 @@ object LeagueClientState {
         }
         val completedCount = if (profile.enabled) profile.completedTaskIds.size else 0
         setVarbit(player, LeagueVarbits.LEAGUE_TOTAL_TASKS_COMPLETED, completedCount)
+    }
+
+    private fun setAreaSelectionVars(player: Player, profile: LeagueProfile) {
+        val selections = IntArray(LeagueVarbits.LEAGUE_AREA_SELECTION.size)
+        if (profile.enabled) {
+            val ordered =
+                LEAGUE_AREA_SELECTION_ORDER
+                    .filter { it.regionId in profile.unlockedRegionIds }
+                    .map { it.areaId }
+            val remaining =
+                profile.unlockedRegionIds
+                    .asSequence()
+                    .filterNot { regionId ->
+                        LEAGUE_AREA_SELECTION_ORDER.any { it.regionId == regionId }
+                    }
+                    .mapNotNull { it.toLeagueAreaId() }
+                    .sorted()
+                    .toList()
+
+            (ordered + remaining)
+                .asSequence()
+                .take(selections.size)
+                .forEachIndexed { index, areaId ->
+                    selections[index] = areaId
+                }
+        }
+        LeagueVarbits.LEAGUE_AREA_SELECTION.forEachIndexed { index, varbit ->
+            setVarbit(player, varbit, selections[index])
+        }
     }
 
     private fun setStarterRelicDisplay(player: Player, profile: LeagueProfile) {
@@ -135,6 +169,30 @@ object LeagueClientState {
             .removePrefix("choice_")
             .toIntOrNull()
             ?.takeIf { it > 0 }
+
+    private fun String.toLeagueAreaId(): Int? =
+        when (this) {
+            "misthalin" -> 1
+            "karamja" -> 2
+            "asgarnia" -> 3
+            "kandarin" -> 4
+            "morytania" -> 5
+            "desert" -> 6
+            "tirannwn" -> 7
+            "fremennik" -> 8
+            "wilderness" -> 11
+            "kebos_kourend", "kourend" -> 20
+            "varlamore" -> 21
+            else -> null
+        }
+
+    private data class LeagueAreaSelection(val regionId: String, val areaId: Int)
+
+    private val LEAGUE_AREA_SELECTION_ORDER =
+        listOf(
+            LeagueAreaSelection("varlamore", 21),
+            LeagueAreaSelection("karamja", 2),
+        )
 
     private val PACT_UNLOCK_VARPS =
         intArrayOf(

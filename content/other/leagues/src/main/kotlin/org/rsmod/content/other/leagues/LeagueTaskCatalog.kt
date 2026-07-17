@@ -1,6 +1,6 @@
 package org.rsmod.content.other.leagues
 
-import org.rsmod.api.enums.UnnamedEnums10.enum_5950
+import dev.openrune.ServerCacheManager
 import org.rsmod.api.table.ActionRow
 
 data class LeagueTask(
@@ -57,15 +57,17 @@ object LeagueTaskCatalog {
 
     private fun loadCurrentLeagueTasks(): List<LeagueTask> {
         val enumTasks =
-            runCatching {
-                enum_5950
-                    .asSequence()
-                    .sortedBy { it.key }
-                    .mapNotNull { (index, dbrow) ->
-                        dbrow?.id?.let { rowId -> ActionRow.getRow(rowId).toLeagueTask(index) }
-                    }
-                    .toList()
-            }.getOrDefault(emptyList())
+            ServerCacheManager.getEnum(CURRENT_LEAGUE_TASK_ENUM_ID)
+                ?.values
+                ?.entries
+                ?.asSequence()
+                ?.sortedBy { it.key }
+                ?.mapNotNull { (index, rowId) ->
+                    val taskRowId = rowId as? Int ?: return@mapNotNull null
+                    ActionRow.getRow(taskRowId).toLeagueTask(index)
+                }
+                ?.toList()
+                .orEmpty()
         return enumTasks.ifEmpty {
             loadCurrentLeagueTasksFromTable().ifEmpty { fallbackStarterTasks }
         }
@@ -102,6 +104,8 @@ object LeagueTaskCatalog {
     private fun Int?.orEmpty(): String = this?.toString().orEmpty()
 
     private val firstLevelRegex = Regex("""Achieve Your First Level (\d+)""", RegexOption.IGNORE_CASE)
+
+    private const val CURRENT_LEAGUE_TASK_ENUM_ID = 5950
 
     private val fallbackStarterTasks =
         listOf(

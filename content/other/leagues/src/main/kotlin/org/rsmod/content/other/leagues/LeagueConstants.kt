@@ -122,11 +122,22 @@ object LeagueVarbits {
     const val LEAGUE_ACCOUNT = 10031
     const val LEAGUE_TYPE = 10032
     const val LEAGUE_TUTORIAL_COMPLETED = 10037
-    const val LEAGUE_TOTAL_TASKS_COMPLETED = 10038
+    const val LEAGUE_TOTAL_TASKS_COMPLETED = 10046
     const val LEAGUE_COMBAT_MASTERY_POINTS_TO_SPEND = 11583
     const val LEAGUE_COMBAT_MASTERY_POINTS_EARNED = 11584
     const val LEAGUE_COMBAT_MASTERY_TUTORIAL = 17553
+    const val LEAGUE_AREA_LAST_VIEWED = 11693
     const val TALENT_RESETS_AVAILABLE = 20260
+
+    val LEAGUE_AREA_SELECTION =
+        intArrayOf(
+            10662,
+            10663,
+            10664,
+            10665,
+            10666,
+            10667,
+        )
 
     val LEAGUE_RELIC_SELECTION =
         intArrayOf(
