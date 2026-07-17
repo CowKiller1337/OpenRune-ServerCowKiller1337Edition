@@ -1,5 +1,6 @@
 package org.rsmod.content.other.leagues
 
+import org.rsmod.api.enums.UnnamedEnums10.enum_5950
 import org.rsmod.api.table.ActionRow
 
 data class LeagueTask(
@@ -17,6 +18,8 @@ data class LeagueTask(
 object LeagueTaskCatalog {
     val tasks: List<LeagueTask> by lazy { loadCurrentLeagueTasks() }
 
+    private val tasksByIndex: Map<Int, LeagueTask> by lazy { tasks.associateBy { it.index } }
+
     val firstLevelTasks: List<LeagueTask> by lazy {
         tasks.mapNotNull { task ->
             val threshold = task.firstLevelThreshold() ?: return@mapNotNull null
@@ -24,7 +27,7 @@ object LeagueTaskCatalog {
         }.sortedBy { it.second }.map { it.first }
     }
 
-    fun byIndex(index: Int): LeagueTask? = tasks.getOrNull(index)
+    fun byIndex(index: Int): LeagueTask? = tasksByIndex[index]
 
     fun byName(name: String): LeagueTask? =
         tasks.firstOrNull { task -> task.name.equals(name, ignoreCase = true) }
@@ -53,26 +56,38 @@ object LeagueTaskCatalog {
     }
 
     private fun loadCurrentLeagueTasks(): List<LeagueTask> {
-        val cacheTasks =
+        val enumTasks =
             runCatching {
-                ActionRow.all()
+                enum_5950
                     .asSequence()
-                    .filter { it.inCurrentLeague == true }
-                    .sortedBy { it.rowId }
-                    .mapIndexed { index, row ->
-                        LeagueTask(
-                            index = index,
-                            rowId = row.rowId,
-                            name = row.actionName,
-                            description = row.actionDesc,
-                            points = row.actionDifficulty.leaguePoints(),
-                            difficulty = row.actionDifficulty,
-                        )
+                    .sortedBy { it.key }
+                    .mapNotNull { (index, dbrow) ->
+                        dbrow?.id?.let { rowId -> ActionRow.getRow(rowId).toLeagueTask(index) }
                     }
                     .toList()
             }.getOrDefault(emptyList())
-        return cacheTasks.ifEmpty { fallbackStarterTasks }
+        return enumTasks.ifEmpty {
+            loadCurrentLeagueTasksFromTable().ifEmpty { fallbackStarterTasks }
+        }
     }
+
+    private fun loadCurrentLeagueTasksFromTable(): List<LeagueTask> =
+        ActionRow.all()
+            .asSequence()
+            .filter { it.inCurrentLeague == true }
+            .sortedBy { it.rowId }
+            .mapIndexed { index, row -> row.toLeagueTask(index) }
+            .toList()
+
+    private fun ActionRow.toLeagueTask(index: Int): LeagueTask =
+        LeagueTask(
+            index = index,
+            rowId = rowId,
+            name = actionName,
+            description = actionDesc,
+            points = actionDifficulty.leaguePoints(),
+            difficulty = actionDifficulty,
+        )
 
     private fun Int?.leaguePoints(): Int =
         when (this) {

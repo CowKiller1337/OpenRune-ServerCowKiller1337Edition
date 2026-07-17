@@ -25,7 +25,7 @@ constructor(
     }
 
     private companion object {
-        private const val YAMA_LAIR_TEST_CHICKEN = "npc.chicken"
+        private const val YAMA_LAIR_TEST_CHICKEN = "npc.league_dave_chicken"
         private val YAMA_LAIR_TEST_CHICKEN_COORD = CoordGrid(1507, 5602, 0)
     }
 }

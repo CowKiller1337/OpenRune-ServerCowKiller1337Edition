@@ -26,6 +26,7 @@ constructor(
 
         private val CHICKEN_NPCS =
             setOf(
+                "npc.league_dave_chicken",
                 "npc.chicken",
                 "npc.chicken_brown",
                 "npc.farm_chicken_brown",

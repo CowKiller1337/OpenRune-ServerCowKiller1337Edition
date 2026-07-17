@@ -122,7 +122,7 @@ constructor(
     }
 
     private fun taskCompletedMessage(taskName: String, points: Int): String =
-        "<col=ff66cc>League task completed: $taskName (+$points points)."
+        "League task completed: $taskName (+$points points)."
 
     companion object {
         const val STARTER_TASK_TIMER = "timer.league_task_check"
