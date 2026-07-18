@@ -1308,7 +1308,8 @@ constructor(
         }
 
         private fun itemTypeOrNull(internal: String): ItemServerType? {
-            return ServerCacheManager.getItem(internal.asRSCM(RSCMType.OBJ))
+            val id = runCatching { internal.asRSCM(RSCMType.OBJ) }.getOrNull() ?: return null
+            return ServerCacheManager.getItem(id)
         }
 
         private fun itemTypes(vararg internals: String): List<ItemServerType> {
