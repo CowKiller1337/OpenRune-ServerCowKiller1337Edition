@@ -115,8 +115,8 @@ constructor(
 
         if (actionDelay < mapClock) {
             player.setWoodcuttingFocus(tree.coords, type.allowsGroupBoost(player.coords))
-            actionDelay = mapClock + 3
-            skillAnimDelay = mapClock + 4
+            actionDelay = mapClock + WOODCUTTING_ROLL_DELAY
+            skillAnimDelay = mapClock + WOODCUTTING_ANIM_DELAY
             swingAxe(axe, message = true)
             opLoc1(tree)
             return
@@ -146,8 +146,8 @@ constructor(
 
         if (actionDelay < mapClock) {
             player.setWoodcuttingFocus(tree.coords, groupBoostAllowed = false)
-            actionDelay = mapClock + 3
-            skillAnimDelay = mapClock + 4
+            actionDelay = mapClock + WOODCUTTING_ROLL_DELAY
+            skillAnimDelay = mapClock + WOODCUTTING_ANIM_DELAY
             swingAxe(axe, message = true)
             opLoc1(tree)
             return
@@ -178,7 +178,7 @@ constructor(
 
         if (skillAnimDelay <= mapClock) {
             player.setWoodcuttingFocus(tree.coords, type.allowsGroupBoost(player.coords))
-            skillAnimDelay = mapClock + 4
+            skillAnimDelay = mapClock + WOODCUTTING_ANIM_DELAY
             swingAxe(axe)
         }
 
@@ -186,7 +186,7 @@ constructor(
         val despawn: Boolean
 
         if (actionDelay < mapClock) {
-            actionDelay = mapClock + 3
+            actionDelay = mapClock + WOODCUTTING_ROLL_DELAY
         } else if (actionDelay == mapClock) {
             val (low, high) = cutSuccessRates(type, axe)
             cutLogs = statRandom("stat.woodcutting", low, high, invisibleLvls)
@@ -262,15 +262,15 @@ constructor(
 
         if (skillAnimDelay <= mapClock) {
             player.setWoodcuttingFocus(tree.coords, groupBoostAllowed = false)
-            skillAnimDelay = mapClock + 4
+            skillAnimDelay = mapClock + WOODCUTTING_ANIM_DELAY
             swingAxe(axe)
         }
 
         var cutLogs = false
         if (actionDelay < mapClock) {
-            actionDelay = mapClock + 3
+            actionDelay = mapClock + WOODCUTTING_ROLL_DELAY
         } else if (actionDelay == mapClock) {
-            val (low, high) = type.successRates
+            val (low, high) = type.successRates(axe)
             cutLogs = statRandom("stat.woodcutting", low, high, invisibleLvls)
         }
 
@@ -512,35 +512,24 @@ constructor(
             get() = treeLogs.isType("obj.logs")
 
         fun findAxe(player: Player, type: ObjectServerType): InvObj? {
-            val worn = player.wornAxe()
-            val carried = player.carriedAxe()
-            if (worn != null && carried != null) {
-                val wornSuccess = cutSuccessRates(type, worn)
-                val carriedSuccess = cutSuccessRates(type, carried)
-                if (
-                    (wornSuccess.first + wornSuccess.second) / 2 >=
-                        (carriedSuccess.first + carriedSuccess.second) / 2
-                ) {
-                    return worn
-                }
-                return carried
+            return player.usableAxes().maxByOrNull { axe ->
+                val (low, high) = cutSuccessRates(type, axe)
+                low + high
             }
-            return worn ?: carried
         }
 
         private fun findAxe(player: Player, type: SpecialTree): InvObj? {
-            val worn = player.wornAxe()
-            val carried = player.carriedAxe()
-            if (worn != null && carried != null) {
-                return if (
-                    getInvObj(worn).axeWoodcuttingReq >= getInvObj(carried).axeWoodcuttingReq
-                ) {
-                    worn
-                } else {
-                    carried
-                }
+            return player.usableAxes().maxByOrNull { axe ->
+                val (low, high) = type.successRates(axe)
+                low + high
             }
-            return worn ?: carried
+        }
+
+        private fun Player.usableAxes(): List<InvObj> {
+            val axes = mutableListOf<InvObj>()
+            wornAxe()?.let(axes::add)
+            axes += carriedAxes()
+            return axes
         }
 
         private fun Player.wornAxe(): InvObj? {
@@ -548,9 +537,8 @@ constructor(
             return righthand.takeIf { getInvObj(it).isUsableAxe(woodcuttingLvl) }
         }
 
-        private fun Player.carriedAxe(): InvObj? {
+        private fun Player.carriedAxes(): List<InvObj> {
             return inv.filterNotNull { getInvObj(it).isUsableAxe(woodcuttingLvl) }
-                .maxByOrNull { getInvObj(it).axeWoodcuttingReq }
         }
 
         private fun ItemServerType.isUsableAxe(woodcuttingLevel: Int): Boolean =
@@ -569,11 +557,46 @@ constructor(
         }
 
         fun cutSuccessRates(treeType: ObjectServerType, axe: InvObj): Pair<Int, Int> {
+            osrsSuccessRateOverride(treeType, axe)?.let {
+                return it
+            }
             val axes = treeType.param(WoodcuttingParams.success_rates)
             val rates = axes.find { it.key.id == axe.id }?.value ?: error("Unable to get axe rates")
             val low = rates shr 16
             val high = rates and 0xFFFF
             return low to high
+        }
+
+        private fun osrsSuccessRateOverride(
+            treeType: ObjectServerType,
+            axe: InvObj,
+        ): Pair<Int, Int>? {
+            val axeType = getInvObj(axe)
+            val product = treeType.treeLogs
+            if (product.isType("obj.arctic_pine_log")) {
+                return axeType.axeSuccessRates(
+                    bronze = 8 to 25,
+                    iron = 12 to 37,
+                    steel = 16 to 50,
+                    black = 18 to 56,
+                    mithril = 20 to 62,
+                    adamant = 24 to 75,
+                    rune = 28 to 87,
+                    dragon = 30 to 93,
+                    crystal = 32 to 100,
+                )
+            }
+            if (axeType.id !in crystalAxeIds) {
+                return null
+            }
+            return when {
+                product.isType("obj.oak_logs") -> 125 to 400
+                product.isType("obj.willow_logs") -> 64 to 195
+                product.isType("obj.maple_logs") -> 32 to 100
+                product.isType("obj.yew_logs") -> 16 to 50
+                product.isType("obj.magic_logs") -> 8 to 23
+                else -> null
+            }
         }
 
         private fun GameRandom.rollRegularNest(wearingRabbitFoot: Boolean): String {
@@ -641,6 +664,30 @@ constructor(
         private data class NestReward(val obj: String, val weight: Int) {
             val type: ItemServerType by lazy { itemType(obj) }
         }
+
+        private fun ItemServerType.axeSuccessRates(
+            bronze: Pair<Int, Int>,
+            iron: Pair<Int, Int>,
+            steel: Pair<Int, Int>,
+            black: Pair<Int, Int>,
+            mithril: Pair<Int, Int>,
+            adamant: Pair<Int, Int>,
+            rune: Pair<Int, Int>,
+            dragon: Pair<Int, Int>,
+            crystal: Pair<Int, Int>,
+        ): Pair<Int, Int>? =
+            when (id) {
+                in bronzeAxeIds -> bronze
+                in ironAxeIds -> iron
+                in steelAxeIds -> steel
+                in blackAxeIds -> black
+                in mithrilAxeIds -> mithril
+                in adamantAxeIds -> adamant
+                in runeAxeIds -> rune
+                in dragonAxeIds -> dragon
+                in crystalAxeIds -> crystal
+                else -> null
+            }
 
         private enum class SearchableNest(
             val obj: String,
@@ -746,21 +793,18 @@ constructor(
             val loc: String,
             val level: Int,
             val xp: Double,
-            val successRates: Pair<Int, Int>,
             val inventoryFullName: String,
         ) {
             Blisterwood(
                 loc = "loc.blisterwood_tree",
                 level = 62,
                 xp = 76.0,
-                successRates = 10 to 256,
                 inventoryFullName = "blisterwood logs",
             ),
             Sulliuscep(
                 loc = "loc.fossil_cep_grown",
                 level = 65,
                 xp = 127.0,
-                successRates = 8 to 256,
                 inventoryFullName = "mushrooms",
             );
 
@@ -776,7 +820,77 @@ constructor(
             }
         }
 
+        private fun SpecialTree.successRates(axe: InvObj): Pair<Int, Int> {
+            val axeType = getInvObj(axe)
+            return when (this) {
+                SpecialTree.Blisterwood ->
+                    axeType.axeSuccessRates(
+                        bronze = 15 to 50,
+                        iron = 24 to 75,
+                        steel = 32 to 100,
+                        black = 36 to 112,
+                        mithril = 40 to 125,
+                        adamant = 48 to 150,
+                        rune = 56 to 175,
+                        dragon = 61 to 186,
+                        crystal = 64 to 195,
+                    )
+                SpecialTree.Sulliuscep ->
+                    axeType.axeSuccessRates(
+                        bronze = 11 to 55,
+                        iron = 17 to 85,
+                        steel = 23 to 115,
+                        black = 26 to 131,
+                        mithril = 29 to 147,
+                        adamant = 35 to 177,
+                        rune = 41 to 208,
+                        dragon = 45 to 228,
+                        crystal = 48 to 240,
+                    )
+            } ?: 15 to 50
+        }
+
         private val firemakingLogRows: List<FiremakingLogsRow> by lazy { FiremakingLogsRow.all() }
+
+        private val bronzeAxeIds: Set<Int> by lazy {
+            itemIds("obj.bronze_axe", "obj.bronze_axe_2h")
+        }
+
+        private val ironAxeIds: Set<Int> by lazy { itemIds("obj.iron_axe", "obj.iron_axe_2h") }
+
+        private val steelAxeIds: Set<Int> by lazy { itemIds("obj.steel_axe", "obj.steel_axe_2h") }
+
+        private val blackAxeIds: Set<Int> by lazy { itemIds("obj.black_axe", "obj.black_axe_2h") }
+
+        private val mithrilAxeIds: Set<Int> by lazy {
+            itemIds("obj.mithril_axe", "obj.mithril_axe_2h")
+        }
+
+        private val adamantAxeIds: Set<Int> by lazy {
+            itemIds("obj.adamant_axe", "obj.adamant_axe_2h")
+        }
+
+        private val runeAxeIds: Set<Int> by lazy {
+            itemIds("obj.rune_axe", "obj.rune_axe_2h", "obj.trail_gilded_axe")
+        }
+
+        private val dragonAxeIds: Set<Int> by lazy {
+            itemIds(
+                "obj.dragon_axe",
+                "obj.dragon_axe_2h",
+                "obj.3a_axe",
+                "obj.3a_axe_2h",
+                "obj.infernal_axe",
+                "obj.trailblazer_axe",
+                "obj.trailblazer_axe_no_infernal",
+                "obj.trailblazer_reloaded_axe",
+                "obj.trailblazer_reloaded_axe_no_infernal",
+            )
+        }
+
+        private val crystalAxeIds: Set<Int> by lazy {
+            itemIds("obj.crystal_axe", "obj.crystal_axe_2h")
+        }
 
         private val infernalAxeIds: Set<Int> by lazy {
             itemIds("obj.infernal_axe", "obj.trailblazer_axe")
@@ -827,6 +941,8 @@ constructor(
 
         private const val CHOP_SOUND: Int = 2053
         private const val LOG_OBTAINED_SOUND: Int = 2734
+        private const val WOODCUTTING_ROLL_DELAY: Int = 4
+        private const val WOODCUTTING_ANIM_DELAY: Int = 4
         private const val INFERNAL_AXE_BURN_CHANCE: Int = 3
         private const val INFERNAL_AXE_FIREMAKING_XP_MULTIPLIER: Double = 0.5
         private const val BIRD_NEST_CHANCE: Int = 256

@@ -2,7 +2,7 @@
 
 ## Woodcutting
 
-Status: 88-92% complete for our Leagues-focused server.
+Status: 92-95% complete for our Leagues-focused server.
 
 Working:
 - Normal trees through redwoods.
@@ -12,6 +12,9 @@ Working:
 - Bird nest drops and nest searching.
 - Woodcutting Guild invisible +7 boost.
 - Basic shared-tree group boost for eligible trees.
+- OSRS-style 4-tick success rolls.
+- Cache-backed success rates for standard trees, with chart-backed fixes for crystal axe rates and arctic pine.
+- Axe-aware Blisterwood and Sulliuscep rates instead of one flat special-tree chance.
 
 Still Needed For 100%:
 - Forestry events and rewards.
@@ -19,7 +22,8 @@ Still Needed For 100%:
 - Axe charge degradation.
 - Confirm niche trees such as achey and arctic pine.
 - Fuller clue-nest/clue-scroll integration.
-- More exact OSRS success-rate tuning.
+- Further rate proofing for any trees where future cache/wiki data disagree.
 
 Current Take:
-Woodcutting is very playable and good enough to move on unless testing finds a weird edge case.
+Woodcutting is very playable and close to OSRS for the core tree loop. Remaining work is mostly niche parity, charge
+systems, and deeper item/reward integration.
