@@ -80,17 +80,19 @@ constructor(
                     statAdvance(extra.stat, extra.xp * xpMods.get(player, extra.stat))
                 }
                 invAdd(inv, catch.obj, random.of(catch.count))
+                method.catchSound?.let { soundSynth(it) }
                 spam(catch.message)
             }
-            actionDelay = mapClock + CATCH_INTERVAL
+            actionDelay = mapClock + method.attemptTicks
         }
 
         continueFishing(spot, op)
     }
 
     private fun ProtectedAccess.startFishing(spot: Npc, op: Int, method: FishingMethod) {
-        actionDelay = mapClock + CATCH_INTERVAL
+        actionDelay = mapClock + method.attemptTicks
         playFishingAnim(method)
+        method.attemptSound?.let { soundSynth(it) }
         spam(method.startMessage)
         continueFishing(spot, op)
     }
@@ -191,7 +193,6 @@ constructor(
     ): Unit = onProtectedEvent<NpcEvents.Op5>(npc, action)
 
     private companion object {
-        private const val CATCH_INTERVAL: Int = 5
         private const val ANIM_INTERVAL: Int = 5
     }
 }

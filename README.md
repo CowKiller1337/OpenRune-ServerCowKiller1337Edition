@@ -86,7 +86,7 @@ Note: RSprox for Private Servers only works currently on Windows and Linux, NOT 
 > And stay away from client's like Devious, as they have been caught adding Account Stealer into their client.
 
 ## Fishing Branch Status
-Estimated completion: about 72% overall, or about 90% of normal overworld spot fishing.
+Estimated completion: about 78% overall, or about 94% of normal overworld spot fishing.
 
 Implemented:
 - Core fishing loop with level, inventory, tool, and bait checks.
@@ -99,11 +99,14 @@ Implemented:
 - Extra spot coverage for newer/common cache NPCs, including the missing 5820/5821 spot pair.
 - Special simple-loop methods: dark crabs, infernal eels, minnows, barbarian leaping fish, and Tempoross harpoonfish spots.
 - Barbarian fishing side XP for Strength and Agility.
+- OSRS-style low/high success rates and 4/5-tick attempt timings for the core fishing catches.
+- Basic fishing sounds for starting attempts, successful catches, lava fishing, net fishing, and inventory-full failure.
+- Big-net junk/rare catches: seaweed, leather boots, leather gloves, oyster, and casket.
 
 Missing or unfinished:
-- Exact OSRS success-rate tuning for every fish and level.
 - Fishing spot movement/migration.
-- Fishing sounds, catch polish, and full message parity.
+- Exact OSRS success-rate verification for newer/special catches that are not in the core rate table.
+- Full catch-message parity for every niche fishing method.
 - Bonus/perk systems: Rada's blessing, fish barrel, spirit flakes, heron pet, clue bottles, infernal harpoon cooking/charges, and future league relic interactions.
 - Full activity/minigame mechanics: Tempoross, aerial fishing, drift net fishing, sacred eels, Camdozaal fishing, and other non-standard region mechanics.
 - Minnow flying-fish movement/event behavior; current version supports catching minnows from the spots.
