@@ -1,8 +1,10 @@
 package org.rsmod.content.generic.npcs.banker
 
+import dev.openrune.ServerCacheManager
 import dev.openrune.rscm.RSCM
 import dev.openrune.rscm.RSCMType
 import dev.openrune.types.ItemServerType
+import dev.openrune.types.NpcServerType
 import jakarta.inject.Inject
 import kotlin.math.min
 import org.rsmod.api.enums.BankEnums.bank_space_purchase_block_cost
@@ -11,11 +13,22 @@ import org.rsmod.api.player.protect.ProtectedAccess
 import org.rsmod.api.script.onApContentNpc1
 import org.rsmod.api.script.onApContentNpc3
 import org.rsmod.api.script.onApContentNpc4
+import org.rsmod.api.script.onApNpc1
+import org.rsmod.api.script.onApNpc2
+import org.rsmod.api.script.onApNpc3
+import org.rsmod.api.script.onApNpc4
+import org.rsmod.api.script.onApNpc5
 import org.rsmod.api.script.onApNpcU
 import org.rsmod.api.script.onOpContentNpc1
 import org.rsmod.api.script.onOpContentNpc3
 import org.rsmod.api.script.onOpContentNpc4
 import org.rsmod.api.script.onOpContentNpcU
+import org.rsmod.api.script.onOpNpc1
+import org.rsmod.api.script.onOpNpc2
+import org.rsmod.api.script.onOpNpc3
+import org.rsmod.api.script.onOpNpc4
+import org.rsmod.api.script.onOpNpc5
+import org.rsmod.api.script.onOpNpcU
 import org.rsmod.api.utils.format.formatAmount
 import org.rsmod.content.interfaces.bank.scripts.BankTutorialScript
 import org.rsmod.game.entity.Npc
@@ -50,7 +63,82 @@ private constructor(
         onApNpcU("content.banker_tutor") { apBanknote(it.npc, it.invSlot, it.objType) }
         onOpContentNpcU("content.banker_tutor") { banknote(it.npc, it.invSlot, it.objType) }
 
+        bindDiscoveredBankers()
         spaceShop.startup()
+    }
+
+    private fun ScriptContext.bindDiscoveredBankers() {
+        for (type in ServerCacheManager.getNpcs().values) {
+            if (!type.hasBankingOption()) {
+                continue
+            }
+            bindBanker(type)
+        }
+    }
+
+    private fun ScriptContext.bindBanker(type: NpcServerType) {
+        for (slot in 1..5) {
+            when (type.bankerAction(slot)) {
+                BankerAction.Bank -> bindBankOp(type, slot)
+                BankerAction.Collect -> bindCollectOp(type, slot)
+                null -> Unit
+            }
+        }
+
+        onApNpcU(type) { apBanknote(it.npc, it.invSlot, it.objType) }
+        onOpNpcU(type) { banknote(it.npc, it.invSlot, it.objType) }
+    }
+
+    private fun ScriptContext.bindBankOp(type: NpcServerType, slot: Int) {
+        val npc = type.safeInternalName() ?: return
+        when (slot) {
+            1 -> {
+                onApNpc1(npc) { apOpenBank(it.npc) }
+                onOpNpc1(npc) { openBank() }
+            }
+            2 -> {
+                onApNpc2(npc) { apOpenBank(it.npc) }
+                onOpNpc2(npc) { openBank() }
+            }
+            3 -> {
+                onApNpc3(npc) { apOpenBank(it.npc) }
+                onOpNpc3(npc) { openBank() }
+            }
+            4 -> {
+                onApNpc4(npc) { apOpenBank(it.npc) }
+                onOpNpc4(npc) { openBank() }
+            }
+            5 -> {
+                onApNpc5(type) { apOpenBank(it.npc) }
+                onOpNpc5(npc) { openBank() }
+            }
+        }
+    }
+
+    private fun ScriptContext.bindCollectOp(type: NpcServerType, slot: Int) {
+        val npc = type.safeInternalName() ?: return
+        when (slot) {
+            1 -> {
+                onApNpc1(npc) { apOpenCollectionBox(it.npc) }
+                onOpNpc1(npc) { openCollectionBox() }
+            }
+            2 -> {
+                onApNpc2(npc) { apOpenCollectionBox(it.npc) }
+                onOpNpc2(npc) { openCollectionBox() }
+            }
+            3 -> {
+                onApNpc3(npc) { apOpenCollectionBox(it.npc) }
+                onOpNpc3(npc) { openCollectionBox() }
+            }
+            4 -> {
+                onApNpc4(npc) { apOpenCollectionBox(it.npc) }
+                onOpNpc4(npc) { openCollectionBox() }
+            }
+            5 -> {
+                onApNpc5(type) { apOpenCollectionBox(it.npc) }
+                onOpNpc5(npc) { openCollectionBox() }
+            }
+        }
     }
 
     private fun ProtectedAccess.apOpenCollectionBox(npc: Npc) {
@@ -629,6 +717,25 @@ private constructor(
 
     private companion object {
         private const val SLOTS_PER_BLOCK = 40
+
+        private enum class BankerAction {
+            Bank,
+            Collect,
+        }
+
+        private fun NpcServerType.hasBankingOption(): Boolean =
+            (1..5).any { bankerAction(it) != null }
+
+        private fun NpcServerType.bankerAction(slot: Int): BankerAction? {
+            return when (actions.getOpOrNull(slot - 1)?.lowercase()) {
+                "bank" -> BankerAction.Bank
+                "collect", "collect-items" -> BankerAction.Collect
+                else -> null
+            }
+        }
+
+        private fun NpcServerType.safeInternalName(): String? =
+            runCatching { internalName }.getOrNull()
     }
 }
 
