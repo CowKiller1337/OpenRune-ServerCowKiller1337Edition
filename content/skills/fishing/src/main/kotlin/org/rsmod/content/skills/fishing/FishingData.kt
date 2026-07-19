@@ -271,18 +271,168 @@ internal object FishingData {
                 ),
         )
 
-    private val freshwaterSpots = listOf(394, 1506, 3417, 12774, 14036, 14521)
-    private val seaNetBaitSpots = listOf(1544, 3913, 7155, 7459, 10513, 15066)
-    private val caveNetBaitSpots = listOf(1497, 10653)
-    private val cageHarpoonSpots = listOf(1510, 1519, 1522, 2146, 3657, 5820, 7199, 7946, 10635)
-    private val bigNetHarpoonSpots = listOf(1511, 1520, 4476, 5233, 9171)
+    private val freshwaterSpots =
+        listOf(
+            394,
+            1506,
+            1507,
+            1508,
+            1509,
+            1512,
+            1513,
+            1515,
+            1516,
+            1526,
+            1527,
+            1529,
+            1531,
+            3417,
+            3418,
+            7463,
+            7464,
+            7468,
+            8524,
+            12774,
+            14036,
+            14521,
+            14522,
+            14525,
+            14526,
+            14527,
+            14528,
+            15072,
+            15073,
+        )
+    private val seaNetBaitSpots =
+        listOf(
+            1514,
+            1517,
+            1518,
+            1521,
+            1523,
+            1524,
+            1525,
+            1528,
+            1530,
+            1532,
+            1544,
+            3913,
+            7155,
+            7459,
+            7462,
+            7467,
+            7469,
+            7947,
+            10513,
+            12778,
+            14038,
+            14040,
+            14041,
+            14524,
+            15066,
+        )
+    private val caveNetBaitSpots = listOf(1497, 1498, 1499, 1500, 10653)
+    private val cageHarpoonSpots =
+        listOf(
+            1510,
+            1519,
+            1522,
+            1533,
+            2146,
+            3657,
+            3914,
+            7199,
+            7460,
+            7465,
+            7470,
+            7946,
+            9173,
+            9174,
+            10515,
+            10635,
+            12777,
+            14039,
+            15070,
+            15071,
+            15075,
+            15076,
+            15079,
+            15084,
+            15086,
+        )
+    private val bigNetHarpoonSpots =
+        listOf(
+            1511,
+            1520,
+            1534,
+            3419,
+            3915,
+            4476,
+            4477,
+            5233,
+            5234,
+            7200,
+            7461,
+            7466,
+            8525,
+            8526,
+            8527,
+            9171,
+            9172,
+            10514,
+            12775,
+            12776,
+            14037,
+            14523,
+            15067,
+            15068,
+            15069,
+            15077,
+            15080,
+            15082,
+            15083,
+            15087,
+        )
     private val monkfishSpots = listOf(4316)
     private val karambwanjiSpots = listOf(4710, 4711)
     private val karambwanSpots = listOf(4712, 4713, 4714)
     private val lavaEelSpots = listOf(4928, 6784, 15384)
-    private val slimyEelSpots = listOf(2653)
+    private val slimyEelSpots = listOf(2653, 2654, 2655)
     private val anglerfishSpots = listOf(6825)
     private val newPlayerNetSpots = listOf(3317, 9478)
+    private val unsupportedStationarySpots =
+        listOf(
+            1542,
+            4079,
+            4080,
+            4081,
+            4082,
+            6488,
+            6731,
+            7323,
+            7676,
+            7730,
+            7731,
+            7732,
+            7733,
+            8523,
+            10565,
+            10568,
+            10569,
+            10571,
+            10686,
+            10687,
+            10688,
+            12267,
+            13329,
+            13912,
+            14035,
+            15074,
+            15078,
+            15081,
+            15085,
+            15383,
+        )
 
     val spotOptions: List<FishingSpotOption> =
         buildList {
@@ -317,4 +467,6 @@ internal object FishingData {
             anglerfishSpots.forEach { add(FishingSpotOption(it, op = 1, anglerfish)) }
             newPlayerNetSpots.forEach { add(FishingSpotOption(it, op = 1, smallNet)) }
         }
+
+    val stationarySpotIds: Set<Int> = (spotOptions.map { it.npc } + unsupportedStationarySpots).toSet()
 }

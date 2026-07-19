@@ -2,14 +2,18 @@ package org.rsmod.content.skills.fishing
 
 import dev.openrune.rscm.RSCM
 import dev.openrune.rscm.RSCMType
+import dev.openrune.types.NpcMode
 import jakarta.inject.Inject
 import org.rsmod.api.player.events.interact.NpcEvents
 import org.rsmod.api.player.protect.ProtectedAccess
 import org.rsmod.api.player.stat.fishingLvl
+import org.rsmod.api.script.onEvent
 import org.rsmod.api.script.onProtectedEvent
 import org.rsmod.api.stats.levelmod.InvisibleLevels
 import org.rsmod.api.stats.xpmod.XpModifiers
+import org.rsmod.game.MapClock
 import org.rsmod.game.entity.Npc
+import org.rsmod.game.entity.npc.NpcStateEvents
 import org.rsmod.plugin.scripts.PluginScript
 import org.rsmod.plugin.scripts.ScriptContext
 
@@ -18,52 +22,88 @@ class Fishing
 constructor(
     private val xpMods: XpModifiers,
     private val invisibleLvls: InvisibleLevels,
+    private val mapClock: MapClock,
 ) : PluginScript() {
     override fun ScriptContext.startup() {
+        for (spot in FishingData.stationarySpotIds) {
+            onEvent<NpcStateEvents.Spawn>(spot) { npc.pinFishingSpot() }
+        }
+        onEvent<NpcStateEvents.Respawn> {
+            if (npc.id in FishingData.stationarySpotIds) {
+                npc.pinFishingSpot()
+            }
+        }
         for (spot in FishingData.spotOptions) {
             val method = spot.method
             when (spot.op) {
-                1 -> onNpcOp1(spot.npc) { fish(it.npc, method) }
-                2 -> onNpcOp2(spot.npc) { fish(it.npc, method) }
-                3 -> onNpcOp3(spot.npc) { fish(it.npc, method) }
-                4 -> onNpcOp4(spot.npc) { fish(it.npc, method) }
-                5 -> onNpcOp5(spot.npc) { fish(it.npc, method) }
+                1 -> onNpcOp1(spot.npc) { fish(it.npc, spot.op, method) }
+                2 -> onNpcOp2(spot.npc) { fish(it.npc, spot.op, method) }
+                3 -> onNpcOp3(spot.npc) { fish(it.npc, spot.op, method) }
+                4 -> onNpcOp4(spot.npc) { fish(it.npc, spot.op, method) }
+                5 -> onNpcOp5(spot.npc) { fish(it.npc, spot.op, method) }
             }
         }
     }
 
-    private suspend fun ProtectedAccess.fish(spot: Npc, method: FishingMethod) {
-        arriveDelay()
-        val originalCoords = spot.coords
+    private fun Npc.pinFishingSpot() {
+        mode = NpcMode.None
+        movementLocked = true
+        abortRoute()
+    }
+
+    private fun ProtectedAccess.fish(spot: Npc, op: Int, method: FishingMethod) {
         if (!canFish(method)) {
+            resetAnim()
             return
         }
 
-        spam(method.startMessage)
-        try {
-            while (true) {
-                if (spot.coords != originalCoords || !canFish(method)) {
-                    return
-                }
-                faceEntitySquare(spot)
-                anim(RSCM.getReverseMapping(RSCMType.SEQ, method.animation))
-                delay(5)
+        faceEntitySquare(spot)
+        if (actionDelay < mapClock) {
+            startFishing(spot, op, method)
+            return
+        }
 
-                if (spot.coords != originalCoords || !canFish(method)) {
-                    return
-                }
-                val catch = rollCatch(method) ?: continue
+        if (skillAnimDelay <= mapClock) {
+            playFishingAnim(method)
+        }
+
+        if (actionDelay == mapClock) {
+            val catch = rollCatch(method)
+            if (catch != null) {
                 if (!removeBait(catch)) {
+                    resetAnim()
                     return
                 }
-
                 val xp = catch.xp * xpMods.get(player, "stat.fishing")
                 statAdvance("stat.fishing", xp)
                 invAdd(inv, catch.obj)
                 spam(catch.message)
             }
-        } finally {
-            resetAnim()
+            actionDelay = mapClock + CATCH_INTERVAL
+        }
+
+        continueFishing(spot, op)
+    }
+
+    private fun ProtectedAccess.startFishing(spot: Npc, op: Int, method: FishingMethod) {
+        actionDelay = mapClock + CATCH_INTERVAL
+        playFishingAnim(method)
+        spam(method.startMessage)
+        continueFishing(spot, op)
+    }
+
+    private fun ProtectedAccess.playFishingAnim(method: FishingMethod) {
+        skillAnimDelay = mapClock + ANIM_INTERVAL
+        anim(RSCM.getReverseMapping(RSCMType.SEQ, method.animation))
+    }
+
+    private fun ProtectedAccess.continueFishing(spot: Npc, op: Int) {
+        when (op) {
+            1 -> opNpc1(spot)
+            2 -> opNpc2(spot)
+            3 -> opNpc3(spot)
+            4 -> opNpc4(spot)
+            else -> resetAnim()
         }
     }
 
@@ -138,4 +178,9 @@ constructor(
         npc: Int,
         action: suspend ProtectedAccess.(NpcEvents.Op5) -> Unit,
     ): Unit = onProtectedEvent<NpcEvents.Op5>(npc, action)
+
+    private companion object {
+        private const val CATCH_INTERVAL: Int = 5
+        private const val ANIM_INTERVAL: Int = 5
+    }
 }
