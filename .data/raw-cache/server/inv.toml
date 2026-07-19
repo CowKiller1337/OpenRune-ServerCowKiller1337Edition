@@ -40,3 +40,12 @@ id = "inv.skill_guide_hunting_tracking"
 inherit = "inv.skill_guide_hunting_tracking"
 stack = "Never"
 
+[[inventory]]
+isServerOnly = true
+id = "inv.fish_barrel"
+inherit = "inv.fish_barrel"
+size = 28
+scope = "Perm"
+stack = "Never"
+protect = false
+
