@@ -1,22 +1,39 @@
 package org.rsmod.content.generic.locs.banks
 
 import dev.openrune.ServerCacheManager
+import dev.openrune.types.ItemServerType
 import dev.openrune.types.ObjectServerType
 import org.rsmod.api.player.protect.ProtectedAccess
 import org.rsmod.api.script.onOpContentLoc2
+import org.rsmod.api.script.onOpContentLocU
 import org.rsmod.api.script.onOpLoc1
 import org.rsmod.api.script.onOpLoc2
 import org.rsmod.api.script.onOpLoc3
 import org.rsmod.api.script.onOpLoc4
 import org.rsmod.api.script.onOpLoc5
+import org.rsmod.content.interfaces.bank.confirmAndExchangeBanknote
+import org.rsmod.content.interfaces.bank.tryOpenBank
 import org.rsmod.plugin.scripts.PluginScript
 import org.rsmod.plugin.scripts.ScriptContext
 
 class BankBooth : PluginScript() {
     override fun ScriptContext.startup() {
-        onOpContentLoc2("content.bank_booth") { openBank() }
-        onOpContentLoc2("content.bank_chest") { openBank() }
+        onOpContentLoc2("content.bank_booth") { tryOpenBank() }
+        onOpContentLoc2("content.bank_chest") { tryOpenBank() }
+        onOpContentLocU("content.bank_booth") { unnote(it.invSlot, it.objType) }
         bindDiscoveredBankAccessLocs()
+    }
+
+    private suspend fun ProtectedAccess.unnote(invSlot: Int, objType: ItemServerType) {
+        if (!objType.isCert) {
+            mes("Nothing interesting happens.")
+            return
+        }
+        if (inv.isFull()) {
+            mes("You don't have any inventory space.")
+            return
+        }
+        startDialogue { confirmAndExchangeBanknote(invSlot, objType) }
     }
 
     private fun ScriptContext.bindDiscoveredBankAccessLocs() {
@@ -35,17 +52,13 @@ class BankBooth : PluginScript() {
                 continue
             }
             when (slot) {
-                1 -> onOpLoc1(loc) { openBank() }
-                2 -> onOpLoc2(loc) { openBank() }
-                3 -> onOpLoc3(loc) { openBank() }
-                4 -> onOpLoc4(loc) { openBank() }
-                5 -> onOpLoc5(loc) { openBank() }
+                1 -> onOpLoc1(loc) { tryOpenBank() }
+                2 -> onOpLoc2(loc) { tryOpenBank() }
+                3 -> onOpLoc3(loc) { tryOpenBank() }
+                4 -> onOpLoc4(loc) { tryOpenBank() }
+                5 -> onOpLoc5(loc) { tryOpenBank() }
             }
         }
-    }
-
-    private fun ProtectedAccess.openBank() {
-        ifOpenMainSidePair(main = "interface.bankmain", side = "interface.bankside")
     }
 
     private companion object {

@@ -9,6 +9,7 @@ import jakarta.inject.Inject
 import kotlin.math.min
 import org.rsmod.api.enums.BankEnums.bank_space_purchase_block_cost
 import org.rsmod.api.player.dialogue.Dialogue
+import org.rsmod.api.player.ironman.isUltimateIronman
 import org.rsmod.api.player.protect.ProtectedAccess
 import org.rsmod.api.script.onApContentNpc1
 import org.rsmod.api.script.onApContentNpc3
@@ -30,9 +31,10 @@ import org.rsmod.api.script.onOpNpc4
 import org.rsmod.api.script.onOpNpc5
 import org.rsmod.api.script.onOpNpcU
 import org.rsmod.api.utils.format.formatAmount
+import org.rsmod.content.interfaces.bank.confirmAndExchangeBanknote
 import org.rsmod.content.interfaces.bank.scripts.BankTutorialScript
+import org.rsmod.content.interfaces.bank.tryOpenBank
 import org.rsmod.game.entity.Npc
-import org.rsmod.game.inv.isType
 import org.rsmod.plugin.scripts.PluginScript
 import org.rsmod.plugin.scripts.ScriptContext
 
@@ -154,7 +156,7 @@ private constructor(
     }
 
     private fun ProtectedAccess.openBank() {
-        ifOpenMainSidePair(main = "interface.bankmain", side = "interface.bankside")
+        tryOpenBank()
     }
 
     private suspend fun ProtectedAccess.apTalkToBanker(npc: Npc) {
@@ -196,7 +198,7 @@ private constructor(
                 5,
             )
         when (option) {
-            1 -> access.openBank()
+            1 -> accessBankAccount()
             2 -> access.openPin()
             3 -> access.openCollectionBox()
             4 -> {
@@ -220,7 +222,7 @@ private constructor(
                 4,
             )
         when (option) {
-            1 -> access.openBank()
+            1 -> accessBankAccount()
             2 -> access.openPin()
             3 -> access.openCollectionBox()
             4 -> whatIsThisPlace()
@@ -251,7 +253,7 @@ private constructor(
             )
         when (option) {
             1 -> howToUseBank()
-            2 -> access.openBank()
+            2 -> accessBankAccount()
             3 -> access.openPin()
             4 -> access.openCollectionBox()
             5 -> {
@@ -277,11 +279,20 @@ private constructor(
             )
         when (option) {
             1 -> howToUseBank()
-            2 -> access.openBank()
+            2 -> accessBankAccount()
             3 -> access.openPin()
             4 -> access.openCollectionBox()
             5 -> whatIsThisPlace()
         }
+    }
+
+    private suspend fun Dialogue.accessBankAccount() {
+        if (access.player.isUltimateIronman) {
+            chatNpc(quiz, "Why? You don't use the bank.")
+            chatPlayer(confused, "Oh yeah... Never mind then.")
+            return
+        }
+        access.openBank()
     }
 
     private fun ProtectedAccess.openPin() {
@@ -293,8 +304,11 @@ private constructor(
     }
 
     private suspend fun Dialogue.buyBankSlots() {
-        // TODO(content): Check if player is ultimate ironman. If so, give dialogue and return
-        //  early.
+        if (access.player.isUltimateIronman) {
+            chatNpc(quiz, "Why? You don't use the bank.")
+            chatPlayer(confused, "Oh yeah... Never mind then.")
+            return
+        }
 
         val blocks = access.vars["varbit.bank_extra_blocks_purchased"]
         val costs = spaceShop.listCosts(blocks)
@@ -690,29 +704,7 @@ private constructor(
             return
         }
 
-        startDialogue(npc) {
-            val confirmation = choice2("Yes", true, "No", false, "Un-note the banknote?")
-            if (!confirmation) {
-                return@startDialogue
-            }
-
-            val invObj = inv[invSlot]
-            check(invObj.isType(objType)) {
-                "Unexpected `invObj` when un-certifying! (found=$invObj, expectedType=$objType)"
-            }
-
-            val count = min(inv.freeSpace(), invObj.count)
-            if (count == 0) {
-                chatNpcNoTurn(sad, "You don't have any inventory space.")
-                return@startDialogue
-            }
-
-            val uncert = ocUncert(objType)
-            val replace = invReplace(inv, invSlot, count, uncert)
-            if (replace.success) {
-                objbox(RSCM.getReverseMapping(RSCMType.OBJ,uncert.id), 400, "The bank exchanges your banknote for an item.")
-            }
-        }
+        startDialogue(npc) { confirmAndExchangeBanknote(invSlot, objType) }
     }
 
     private companion object {
