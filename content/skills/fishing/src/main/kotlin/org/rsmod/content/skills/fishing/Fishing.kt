@@ -76,7 +76,10 @@ constructor(
                 }
                 val xp = catch.xp * xpMods.get(player, "stat.fishing")
                 statAdvance("stat.fishing", xp)
-                invAdd(inv, catch.obj)
+                for (extra in catch.extraXp) {
+                    statAdvance(extra.stat, extra.xp * xpMods.get(player, extra.stat))
+                }
+                invAdd(inv, catch.obj, random.of(catch.count))
                 spam(catch.message)
             }
             actionDelay = mapClock + CATCH_INTERVAL
@@ -112,7 +115,7 @@ constructor(
             mes("You need a Fishing level of ${method.level} to fish here.")
             return false
         }
-        if (inv.isFull()) {
+        if (!canFitAnyCatch(method)) {
             mes("Your inventory is too full to hold any more fish.")
             soundSynth("synth.pillory_wrong")
             return false
@@ -122,11 +125,20 @@ constructor(
             return false
         }
         val baitName = method.baitName ?: return true
-        if (method.catches.none { catch -> catch.bait == null || catch.bait in inv }) {
+        if (method.catches.none { catch -> catch.baits.isEmpty() || catch.baits.any { it in inv } }) {
             mes("You don't have any $baitName.")
             return false
         }
         return true
+    }
+
+    private fun ProtectedAccess.canFitAnyCatch(method: FishingMethod): Boolean {
+        if (!inv.isFull()) {
+            return true
+        }
+        return method.catches.any { catch ->
+            player.fishingLvl >= catch.level && invAdd(inv, catch.obj, autoCommit = false).success
+        }
     }
 
     private fun ProtectedAccess.rollCatch(method: FishingMethod): FishingCatch? {
@@ -134,8 +146,7 @@ constructor(
             if (player.fishingLvl < catch.level) {
                 continue
             }
-            val bait = catch.bait
-            if (bait != null && bait !in inv) {
+            if (catch.baits.isNotEmpty() && catch.baits.none { it in inv }) {
                 continue
             }
             if (statRandom("stat.fishing", catch.low, catch.high, invisibleLvls)) {
@@ -146,7 +157,7 @@ constructor(
     }
 
     private fun ProtectedAccess.removeBait(catch: FishingCatch): Boolean {
-        val bait = catch.bait ?: return true
+        val bait = catch.baits.firstOrNull { it in inv } ?: return catch.baits.isEmpty()
         if (bait !in inv) {
             return false
         }

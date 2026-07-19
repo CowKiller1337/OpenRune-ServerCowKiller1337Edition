@@ -17,8 +17,22 @@ internal data class FishingCatch(
     val low: Int,
     val high: Int,
     val message: String,
-    val bait: String? = null,
-)
+    val baits: List<String> = emptyList(),
+    val count: IntRange = 1..1,
+    val extraXp: List<FishingExtraXp> = emptyList(),
+) {
+    constructor(
+        obj: String,
+        level: Int,
+        xp: Double,
+        low: Int,
+        high: Int,
+        message: String,
+        bait: String,
+    ) : this(obj, level, xp, low, high, message, listOf(bait))
+}
+
+internal data class FishingExtraXp(val stat: String, val xp: Double)
 
 internal data class FishingSpotOption(val npc: Int, val op: Int, val method: FishingMethod)
 
@@ -29,6 +43,7 @@ internal object FishingData {
     private const val CAGE_ANIM = 619
     private const val BIG_NET_ANIM = 620
     private const val KARAMBWAN_ANIM = 1193
+    private const val BARBARIAN_ROD_ANIM = 9350
 
     private val fishingRodTools =
         listOf("obj.fishing_rod", "obj.fishingrod_pearl")
@@ -38,6 +53,18 @@ internal object FishingData {
 
     private val oilyFishingRodTools =
         listOf("obj.oily_fishing_rod", "obj.fishingrod_pearl_oily")
+
+    private val barbarianRodTools =
+        listOf("obj.brut_fishing_rod", "obj.fishingrod_pearl_brut")
+
+    private val barbarianBaits =
+        listOf(
+            "obj.feather",
+            "obj.fishing_bait",
+            "obj.fish_chunks",
+            "obj.brut_roe",
+            "obj.brut_caviar",
+        )
 
     private val harpoonTools =
         listOf(
@@ -145,6 +172,28 @@ internal object FishingData {
                 ),
         )
 
+    val darkCrabCage =
+        FishingMethod(
+            tools = listOf("obj.lobster_pot"),
+            toolName = "lobster pot",
+            level = 85,
+            animation = CAGE_ANIM,
+            startMessage = "You attempt to catch a dark crab.",
+            baitName = "dark fishing bait",
+            catches =
+                listOf(
+                    FishingCatch(
+                        "obj.raw_dark_crab",
+                        85,
+                        130.0,
+                        16,
+                        32,
+                        "You catch a dark crab.",
+                        "obj.wilderness_fishing_bait",
+                    )
+                ),
+        )
+
     val bigNet =
         FishingMethod(
             tools = listOf("obj.big_net"),
@@ -158,6 +207,61 @@ internal object FishingData {
                     FishingCatch("obj.raw_cod", 23, 45.0, 15, 55, "You catch a cod."),
                     FishingCatch("obj.raw_bass", 46, 100.0, 19, 40, "You catch a bass."),
                     FishingCatch("obj.seaweed", 16, 1.0, 5, 15, "You catch some seaweed."),
+                ),
+        )
+
+    val barbarianRod =
+        FishingMethod(
+            tools = barbarianRodTools,
+            toolName = "barbarian rod",
+            level = 48,
+            animation = BARBARIAN_ROD_ANIM,
+            startMessage = "You attempt to catch a fish.",
+            baitName = "feathers or fishing bait",
+            catches =
+                listOf(
+                    FishingCatch(
+                        obj = "obj.brut_spawning_trout",
+                        level = 48,
+                        xp = 50.0,
+                        low = 62,
+                        high = 119,
+                        message = "You catch a leaping trout.",
+                        baits = barbarianBaits,
+                        extraXp =
+                            listOf(
+                                FishingExtraXp("stat.strength", 5.0),
+                                FishingExtraXp("stat.agility", 5.0),
+                            ),
+                    ),
+                    FishingCatch(
+                        obj = "obj.brut_spawning_salmon",
+                        level = 58,
+                        xp = 70.0,
+                        low = 39,
+                        high = 96,
+                        message = "You catch a leaping salmon.",
+                        baits = barbarianBaits,
+                        extraXp =
+                            listOf(
+                                FishingExtraXp("stat.strength", 6.0),
+                                FishingExtraXp("stat.agility", 6.0),
+                            ),
+                    ),
+                    FishingCatch(
+                        obj = "obj.brut_sturgeon",
+                        level = 70,
+                        xp = 80.0,
+                        low = 28,
+                        high = 64,
+                        message = "You catch a leaping sturgeon.",
+                        baits = barbarianBaits,
+                        extraXp =
+                            listOf(
+                                FishingExtraXp("stat.strength", 7.0),
+                                FishingExtraXp("stat.agility", 7.0),
+                            ),
+                    ),
                 ),
         )
 
@@ -247,6 +351,69 @@ internal object FishingData {
             startMessage = "You attempt to catch a fish.",
             baitName = "fishing bait",
             catches = listOf(FishingCatch("obj.raw_lava_eel", 53, 60.0, 58, 96, "You catch a lava eel.", "obj.fishing_bait")),
+        )
+
+    val infernalEel =
+        FishingMethod(
+            tools = oilyFishingRodTools,
+            toolName = "oily fishing rod",
+            level = 80,
+            animation = ROD_ANIM,
+            startMessage = "You attempt to catch a fish.",
+            baitName = "fishing bait",
+            catches =
+                listOf(
+                    FishingCatch(
+                        "obj.infernal_eel",
+                        80,
+                        95.0,
+                        28,
+                        55,
+                        "You catch an infernal eel.",
+                        "obj.fishing_bait",
+                    )
+                ),
+        )
+
+    val minnowNet =
+        FishingMethod(
+            tools = listOf("obj.net"),
+            toolName = "small fishing net",
+            level = 82,
+            animation = NET_ANIM,
+            startMessage = "You cast out your net...",
+            catches =
+                listOf(
+                    FishingCatch(
+                        obj = "obj.minnow",
+                        level = 82,
+                        xp = 26.1,
+                        low = 75,
+                        high = 95,
+                        message = "You catch some minnows.",
+                        count = 10..14,
+                    )
+                ),
+        )
+
+    val temporossHarpoonfish =
+        FishingMethod(
+            tools = harpoonTools,
+            toolName = "harpoon",
+            level = 35,
+            animation = HARPOON_ANIM,
+            startMessage = "You attempt to catch a harpoonfish.",
+            catches =
+                listOf(
+                    FishingCatch(
+                        "obj.tempoross_raw_harpoonfish",
+                        35,
+                        55.0,
+                        45,
+                        95,
+                        "You catch a raw harpoonfish.",
+                    )
+                ),
         )
 
     val anglerfish =
@@ -341,6 +508,7 @@ internal object FishingData {
             2146,
             3657,
             3914,
+            5820,
             7199,
             7460,
             7465,
@@ -371,6 +539,7 @@ internal object FishingData {
             4477,
             5233,
             5234,
+            5821,
             7200,
             7461,
             7466,
@@ -394,32 +563,26 @@ internal object FishingData {
             15087,
         )
     private val monkfishSpots = listOf(4316)
+    private val darkCrabSpots = listOf(1535, 1536)
+    private val barbarianSpots = listOf(1542, 7323)
     private val karambwanjiSpots = listOf(4710, 4711)
     private val karambwanSpots = listOf(4712, 4713, 4714)
     private val lavaEelSpots = listOf(4928, 6784, 15384)
+    private val infernalEelSpots = listOf(7676)
+    private val minnowSpots = listOf(7730, 7731, 7732, 7733)
+    private val temporossHarpoonfishSpots = listOf(10565, 10568, 10569, 10571)
     private val slimyEelSpots = listOf(2653, 2654, 2655)
     private val anglerfishSpots = listOf(6825)
     private val newPlayerNetSpots = listOf(3317, 9478)
     private val unsupportedStationarySpots =
         listOf(
-            1542,
             4079,
             4080,
             4081,
             4082,
             6488,
             6731,
-            7323,
-            7676,
-            7730,
-            7731,
-            7732,
-            7733,
             8523,
-            10565,
-            10568,
-            10569,
-            10571,
             10686,
             10687,
             10688,
@@ -460,9 +623,16 @@ internal object FishingData {
                 add(FishingSpotOption(it, op = 1, monkfishNet))
                 add(FishingSpotOption(it, op = 3, tunaSwordfish))
             }
+            darkCrabSpots.forEach { add(FishingSpotOption(it, op = 1, darkCrabCage)) }
+            barbarianSpots.forEach { add(FishingSpotOption(it, op = 1, barbarianRod)) }
             karambwanjiSpots.forEach { add(FishingSpotOption(it, op = 1, karambwanjiNet)) }
             karambwanSpots.forEach { add(FishingSpotOption(it, op = 1, karambwan)) }
             lavaEelSpots.forEach { add(FishingSpotOption(it, op = 1, lavaEel)) }
+            infernalEelSpots.forEach { add(FishingSpotOption(it, op = 1, infernalEel)) }
+            minnowSpots.forEach { add(FishingSpotOption(it, op = 1, minnowNet)) }
+            temporossHarpoonfishSpots.forEach {
+                add(FishingSpotOption(it, op = 1, temporossHarpoonfish))
+            }
             slimyEelSpots.forEach { add(FishingSpotOption(it, op = 1, swampBait)) }
             anglerfishSpots.forEach { add(FishingSpotOption(it, op = 1, anglerfish)) }
             newPlayerNetSpots.forEach { add(FishingSpotOption(it, op = 1, smallNet)) }
