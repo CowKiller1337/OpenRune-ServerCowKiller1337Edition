@@ -35,15 +35,19 @@ constructor(
 ) {
     private var lootTrackerEventId: Int = 0
 
-    public suspend fun deathNoDrops(access: StandardNpcAccess) {
-        access.death(npcRepo, players)
+    public suspend fun deathNoDrops(
+        access: StandardNpcAccess,
+        deathAnimOverride: String? = null,
+    ) {
+        access.death(npcRepo, players, deathAnimOverride)
     }
 
     public suspend fun deathWithDrops(
         access: StandardNpcAccess,
         dropCoords: CoordGrid = access.coords,
+        deathAnimOverride: String? = null,
     ) {
-        access.death(npcRepo, players)
+        access.death(npcRepo, players, deathAnimOverride)
         access.npc.spawnDeathDrops(dropCoords)
     }
 
@@ -128,7 +132,11 @@ private var Npc.aggressivePlayer by typePlayerUidVarn("varn.aggressive_player")
  *   (`onNpcQueue(npc_type, queues.death)`), you must explicitly handle drop spawns in the script by
  *   injecting `NpcDeath` and calling either [NpcDeath.deathWithDrops] or [NpcDeath.spawnDrops].
  */
-public suspend fun StandardNpcAccess.death(npcRepo: NpcRepository, players: PlayerList) {
+public suspend fun StandardNpcAccess.death(
+    npcRepo: NpcRepository,
+    players: PlayerList,
+    deathAnimOverride: String? = null,
+) {
     walk(coords)
     noneMode()
     hideAllOps()
@@ -151,7 +159,13 @@ public suspend fun StandardNpcAccess.death(npcRepo: NpcRepository, players: Play
         }
     }
 
-    val deathAnim = param(params.death_anim)
+    val deathAnim =
+        if (deathAnimOverride != null) {
+            ServerCacheManager.getAnim(deathAnimOverride.asRSCM(RSCMType.SEQ))
+                ?: error("Death anim type not found: $deathAnimOverride")
+        } else {
+            param(params.death_anim)
+        }
     anim(RSCM.getReverseMapping(RSCMType.SEQ,deathAnim.id))
     delay(deathAnim)
 

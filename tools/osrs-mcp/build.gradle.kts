@@ -32,6 +32,18 @@ tasks.register<JavaExec>("runMcp") {
     standardInput = System.`in`
 }
 
+tasks.register<JavaExec>("exportLookups") {
+    group = "MCP"
+    description = "Exports searchable NPC, item, cache, and command lookup CSVs."
+    mainClass.set("org.rsmod.tools.mcp.wiki.ExportLookupTablesKt")
+    classpath = sourceSets["main"].runtimeClasspath
+    args(
+        rootProject.projectDir.absolutePath,
+        (project.findProperty("lookupOut") as String?)
+            ?: rootProject.layout.projectDirectory.dir(".data/lookups").asFile.absolutePath,
+    )
+}
+
 dependencies {
     implementation("com.fasterxml.jackson.core:jackson-databind:2.17.2")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.17.2")

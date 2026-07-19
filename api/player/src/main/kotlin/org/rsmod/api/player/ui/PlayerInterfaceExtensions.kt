@@ -216,10 +216,13 @@ public fun Player.ifCloseModals(eventBus: EventBus) {
 }
 
 public fun Player.ifSetEvents(internal: String, range: IntRange, vararg event: IfEvent) {
-    val packed = event.fold(0L) { sum, element -> sum or element.bitmask }
-    ui.events.add(internal, range, packed)
-
     val target = ServerCacheManager.fromComponent(internal.asRSCM(RSCMType.COMPONENT))
+    ifSetEvents(target, range, *event)
+}
+
+public fun Player.ifSetEvents(target: ComponentType, range: IntRange, vararg event: IfEvent) {
+    val packed = event.fold(0L) { sum, element -> sum or element.bitmask }
+    ui.events.add(target, range, packed)
 
     val packedHigh = (packed shr 32).toInt()
     val packedLow = packed.toInt()

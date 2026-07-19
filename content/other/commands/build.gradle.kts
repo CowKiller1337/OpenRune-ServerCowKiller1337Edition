@@ -4,6 +4,7 @@ plugins {
 
 dependencies {
     implementation(libs.fastutil)
+    implementation(libs.rsprot.api)
     implementation(libs.simmetrics.core)
     implementation(projects.api.areaChecker)
     implementation(projects.api.registry)

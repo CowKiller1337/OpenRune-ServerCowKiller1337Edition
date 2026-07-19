@@ -1,5 +1,6 @@
 package org.rsmod.content.interfaces.journal.tab
 
+import dev.openrune.ServerCacheManager
 import dev.openrune.rscm.RSCM.asRSCM
 import dev.openrune.rscm.RSCMType
 import org.rsmod.api.player.output.ClientScripts
@@ -13,11 +14,20 @@ import org.rsmod.game.entity.Player
 
 internal var Player.sideJournalTab by enumVarBit<SideJournalTab>("varbit.side_journal_tab")
 
+private const val LEAGUE_ACCOUNT_VARBIT = 10031
+private const val LEAGUE_TYPE_VARBIT = 10032
+private const val LEAGUE_TUTORIAL_COMPLETED_VARBIT = 10037
+private const val MAP_FLAGS_CACHED_VARP = 3717
+private const val LEAGUE_6_POINTS_VARP = 5507
+private const val LEAGUE_PACT_POINTS_TO_SPEND_VARBIT = 11583
+private const val LEAGUE_PACT_POINTS_EARNED_VARBIT = 11584
+
 internal fun Player.openJournalTab(tab: SideJournalTab, eventBus: EventBus) =
     when (tab) {
         SideJournalTab.Summary -> openSummaryTab(eventBus)
         SideJournalTab.Quests -> openQuestTab(eventBus)
         SideJournalTab.Tasks -> openTaskTab(eventBus)
+        SideJournalTab.Leagues -> openLeagueTab(eventBus)
     }
 
 internal fun Player.openSummaryTab(eventBus: EventBus) {
@@ -54,11 +64,16 @@ internal fun Player.openTaskTab(eventBus: EventBus) {
     ifOpenOverlay("interface.area_task", "component.side_journal:tab_container", eventBus)
 }
 
+internal fun Player.openLeagueTab(eventBus: EventBus) {
+    ifOpenOverlay("interface.league_side_panel", "component.side_journal:tab_container", eventBus)
+}
+
 internal fun Player.prepareJournalTab(tab: SideJournalTab) =
     when (tab) {
         SideJournalTab.Summary -> prepareSummaryTab()
         SideJournalTab.Quests -> prepareQuestTab()
         SideJournalTab.Tasks -> {}
+        SideJournalTab.Leagues -> prepareLeagueTab()
     }
 
 internal fun Player.prepareSummaryTab() {
@@ -80,11 +95,22 @@ internal fun Player.prepareQuestTab() {
     ClientScripts.playerMember(this)
 }
 
+internal fun Player.prepareLeagueTab() {
+    resyncVarp(MAP_FLAGS_CACHED_VARP)
+    resyncVarBit(LEAGUE_ACCOUNT_VARBIT)
+    resyncVarBit(LEAGUE_TYPE_VARBIT)
+    resyncVarBit(LEAGUE_TUTORIAL_COMPLETED_VARBIT)
+    resyncVarp(LEAGUE_6_POINTS_VARP)
+    resyncVarBit(LEAGUE_PACT_POINTS_TO_SPEND_VARBIT)
+    resyncVarBit(LEAGUE_PACT_POINTS_EARNED_VARBIT)
+}
+
 internal fun Player.closeJournalTab(tab: SideJournalTab, eventBus: EventBus) =
     when (tab) {
         SideJournalTab.Summary -> ifCloseSub("interface.account_summary_sidepanel", eventBus)
         SideJournalTab.Quests -> ifCloseSub("interface.questlist", eventBus)
         SideJournalTab.Tasks -> ifCloseSub("interface.area_task", eventBus)
+        SideJournalTab.Leagues -> ifCloseSub("interface.league_side_panel", eventBus)
     }
 
 internal fun Player.switchJournalTab(open: SideJournalTab, eventBus: EventBus) {
@@ -93,4 +119,14 @@ internal fun Player.switchJournalTab(open: SideJournalTab, eventBus: EventBus) {
     closeJournalTab(previous, eventBus)
     prepareJournalTab(open)
     openJournalTab(open, eventBus)
+}
+
+private fun Player.resyncVarBit(id: Int) {
+    val varbit = ServerCacheManager.getVarbit(id) ?: return
+    resyncVar(varbit)
+}
+
+private fun Player.resyncVarp(id: Int) {
+    val varp = ServerCacheManager.getVarp(id) ?: return
+    resyncVar(varp)
 }

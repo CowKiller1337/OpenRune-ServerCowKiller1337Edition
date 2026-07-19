@@ -1,6 +1,6 @@
 # Game values
 # You want to edit these to fit your game.
-name: "OpenRune"
+name: "Relic2"
 game-port: 43594
 revision: 239
 environment: "LIVE"

@@ -92,6 +92,22 @@ class CacheTool {
         return searchSnapshot(snapshot, cacheKind, type, query, id, limit)
     }
 
+    fun all(cacheKind: CacheKind, type: CacheSearchType): SearchResult {
+        val root = resolveRoot(cacheKind)
+        val revision = resolveRevision(root)
+        val snapshot = snapshots.compute(cacheKind) { _, existing ->
+            if (existing?.revision == revision) existing else buildSnapshot(cacheKind, root, revision)
+        } ?: error("Failed to load cache snapshot.")
+        val pool =
+            if (type == CacheSearchType.All) {
+                snapshot.byType.values.flatten()
+            } else {
+                snapshot.byType[type].orEmpty()
+            }
+        val hits = pool.sortedWith(compareBy<IndexedHit> { it.hit.type }.thenBy { it.hit.id }).map { it.hit }
+        return SearchResult(cache = cacheKind, totalMatches = hits.size, matches = hits, truncated = false)
+    }
+
     internal fun searchSnapshot(
         snapshot: Snapshot,
         cacheKind: CacheKind,

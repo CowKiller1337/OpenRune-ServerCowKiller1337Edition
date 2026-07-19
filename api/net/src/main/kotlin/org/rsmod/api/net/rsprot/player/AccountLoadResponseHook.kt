@@ -1,6 +1,7 @@
 package org.rsmod.api.net.rsprot.player
 
 import com.github.michaelbull.logging.InlineLogger
+import dev.openrune.ServerCacheManager
 import java.time.LocalDateTime
 import net.rsprot.protocol.api.login.GameLoginResponseHandler
 import net.rsprot.protocol.loginprot.incoming.util.AuthenticationType
@@ -19,6 +20,8 @@ import org.rsmod.api.db.jdbc.GameDatabase
 import org.rsmod.api.net.central.CentralAuthResult
 import org.rsmod.api.net.central.InflightCentralAuth
 import org.rsmod.api.net.central.OpenRuneCentralWorldLink
+import org.rsmod.api.player.output.VarpSync
+import org.rsmod.api.player.vars.VarPlayerIntMapSetter
 import org.rsmod.api.player.vars.boolVarBit
 import org.rsmod.api.realm.RealmConfig
 import org.rsmod.api.registry.account.AccountRegistry
@@ -296,6 +299,29 @@ class AccountLoadResponseHook(
         pendingCentralRights = null
     }
 
+    private fun Player.applyDevWorldLocalRightsPolicy() {
+        if (!config.devMode || isConfiguredLocalAdmin()) {
+            return
+        }
+        modLevel = Rights.NONE
+    }
+
+    private fun Player.isConfiguredLocalAdmin(): Boolean {
+        val allowedNames = configuredLocalAdminNames()
+        val loginName = username.trim().lowercase()
+        val characterName = displayName.trim().lowercase()
+        return loginName in allowedNames || characterName in allowedNames
+    }
+
+    private fun configuredLocalAdminNames(): Set<String> {
+        val envNames =
+            System.getenv(LOCAL_ADMIN_NAMES_ENV)
+                ?.split(',', ';')
+                ?.mapNotNullTo(linkedSetOf()) { it.trim().lowercase().takeIf(String::isNotEmpty) }
+                .orEmpty()
+        return envNames.ifEmpty { DEFAULT_LOCAL_ADMIN_NAMES }
+    }
+
     public val LOGIN_EXIT_COORD: AttributeKey<Int> = AttributeKey(persistenceKey = "instance_exit_coord")
 
     private fun Player.applyConfigTransforms(config: RealmConfig) {
@@ -309,13 +335,10 @@ class AccountLoadResponseHook(
             return
         }
 
-        coords = config.spawnCoord
+        coords = NEW_PLAYER_SPAWN_COORD
         xpRate = config.baseXpRate
         if (config.autoAssignDisplayNames) {
             displayName = username.toDisplayName()
-        }
-        if (config.devMode) {
-            modLevel = Rights.ADMINISTRATOR
         }
     }
 
@@ -380,6 +403,7 @@ class AccountLoadResponseHook(
             return
         }
         applyCentralSessionToPlayer(player)
+        player.applyDevWorldLocalRightsPolicy()
 
         val slotId = playerRegistry.nextFreeSlot()
         if (slotId == null) {
@@ -416,6 +440,7 @@ class AccountLoadResponseHook(
         player.slotId = slotId
         val eventsStart = System.nanoTime()
         eventBus.publish(SessionStart(player, session))
+        player.seedLeagueWorldVarsForLogin()
         val register = playerRegistry.add(player)
         if (register.isSuccess()) {
             persistTrustedDevicesIfNeeded(loadResponse.account.accountId, player)
@@ -445,6 +470,25 @@ class AccountLoadResponseHook(
             userId = userId,
             userHash = userHash,
         )
+
+    private fun Player.seedLeagueWorldVarsForLogin() {
+        setLeagueLoginVarbit(LEAGUE_ACCOUNT_VARBIT, 1)
+        setLeagueLoginVarbit(LEAGUE_TYPE_VARBIT, LEAGUE_6_TYPE)
+        setLeagueLoginVarbit(LEAGUE_TUTORIAL_COMPLETED_VARBIT, LEAGUE_TUTORIAL_COMPLETE_STAGE)
+        ServerCacheManager.getVarp(MAP_FLAGS_CACHED_VARP)?.let { varp ->
+            val leagueWorldFlags =
+                (vars[varp] or LEAGUE_WORLD_MAP_FLAG) and DEADMAN_WORLD_MAP_FLAG.inv()
+            VarPlayerIntMapSetter.set(this, varp, leagueWorldFlags)
+            VarpSync.writeVarp(this, varp, vars[varp])
+        }
+    }
+
+    private fun Player.setLeagueLoginVarbit(id: Int, value: Int) {
+        val varbit = ServerCacheManager.getVarbit(id) ?: return
+        val baseVar = ServerCacheManager.getVarp(varbit.varp) ?: return
+        VarPlayerIntMapSetter.set(this, varbit, value)
+        VarpSync.writeVarp(this, baseVar, vars[baseVar])
+    }
 
     private fun Player.authenticatorResponse(auth: AccountLoadAuth): AuthenticatorResponse =
         when (auth) {
@@ -533,6 +577,20 @@ class AccountLoadResponseHook(
         private const val GAME_LOGIN_TIMING_INFO_MS = 100L
 
         private const val GAME_LOGIN_TIMING_WARN_MS = 600L
+
+        private const val LOCAL_ADMIN_NAMES_ENV = "OPENRUNE_LOCAL_ADMINS"
+
+        private val DEFAULT_LOCAL_ADMIN_NAMES: Set<String> = setOf("glyph", "glyph2")
+
+        private const val LEAGUE_ACCOUNT_VARBIT = 10031
+        private const val LEAGUE_TYPE_VARBIT = 10032
+        private const val LEAGUE_TUTORIAL_COMPLETED_VARBIT = 10037
+        private const val MAP_FLAGS_CACHED_VARP = 3717
+        private const val LEAGUE_6_TYPE = 6
+        private const val LEAGUE_TUTORIAL_COMPLETE_STAGE = 3
+        private const val LEAGUE_WORLD_MAP_FLAG = 1 shl 30
+        private const val DEADMAN_WORLD_MAP_FLAG = 1 shl 29
+        private val NEW_PLAYER_SPAWN_COORD = CoordGrid(1503, 5602, 0)
 
         private val logger = InlineLogger()
 

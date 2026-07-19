@@ -25,9 +25,10 @@ internal object InstanceTiming {
         totalTicks: Int,
         sent: MutableSet<Int>,
         players: Iterable<Player>,
+        thresholds: List<Int> = warningThresholds(totalTicks),
         message: (String) -> String,
     ) {
-        warningThresholds(totalTicks).filter { remainingTicks <= it && sent.add(it) }.forEach { threshold ->
+        thresholds.filter { it in 1..totalTicks && remainingTicks <= it && sent.add(it) }.forEach { threshold ->
             val text = message(formatRemaining(threshold))
             players.forEach { it.mes(text, ChatType.Engine) }
         }
