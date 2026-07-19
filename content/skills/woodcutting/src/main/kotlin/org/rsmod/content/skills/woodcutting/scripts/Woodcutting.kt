@@ -16,10 +16,12 @@ import org.rsmod.api.controller.vars.intVarCon
 import org.rsmod.api.player.output.ClientScripts
 import org.rsmod.api.player.protect.ProtectedAccess
 import org.rsmod.api.player.righthand
+import org.rsmod.api.player.stat.firemakingLvl
 import org.rsmod.api.player.stat.woodcuttingLvl
 import org.rsmod.api.random.GameRandom
 import org.rsmod.api.repo.controller.ControllerRepository
 import org.rsmod.api.repo.loc.LocRepository
+import org.rsmod.api.repo.obj.ObjRepository
 import org.rsmod.api.repo.player.PlayerRepository
 import org.rsmod.api.script.onAiConTimer
 import org.rsmod.api.script.onOpContentLoc1
@@ -27,6 +29,7 @@ import org.rsmod.api.script.onOpContentLoc3
 import org.rsmod.api.script.onOpContentU
 import org.rsmod.api.stats.levelmod.InvisibleLevels
 import org.rsmod.api.stats.xpmod.XpModifiers
+import org.rsmod.api.table.FiremakingLogsRow
 import org.rsmod.content.skills.woodcutting.configs.WoodcuttingParams
 import org.rsmod.events.UnboundEvent
 import org.rsmod.game.MapClock
@@ -39,14 +42,13 @@ import org.rsmod.map.zone.ZoneKey
 import org.rsmod.plugin.scripts.PluginScript
 import org.rsmod.plugin.scripts.ScriptContext
 
-// TODO:
-// - bird nests
-// - axe effects/charges
+// TODO: Degrade axe charges once charged-tool obj vars are safely decoded.
 class Woodcutting
 @Inject
 constructor(
     private val locRepo: LocRepository,
     private val conRepo: ControllerRepository,
+    private val objRepo: ObjRepository,
     private val playerRepo: PlayerRepository,
     private val xpMods: XpModifiers,
     private val invisibleLvls: InvisibleLevels,
@@ -72,21 +74,22 @@ constructor(
             return
         }
 
+        val axe = findAxe(player, type)
+        if (axe == null) {
+            mes("You need an axe to chop down this tree.")
+            mes("You do not have an axe which you have the woodcutting level to use.")
+            return
+        }
+
         if (actionDelay < mapClock) {
             actionDelay = mapClock + 3
-            skillAnimDelay = mapClock + 3
+            skillAnimDelay = mapClock + 4
+            swingAxe(axe, message = true)
             opLoc1(tree)
-        } else {
-            val axe = findAxe(player, type)
-            if (axe == null) {
-                mes("You need an axe to chop down this tree.")
-                mes("You do not have an axe which you have the woodcutting level to use.")
-                return
-            }
-            anim(RSCM.getReverseMapping(RSCMType.SEQ, getInvObj(axe).axeWoodcuttingAnim.id))
-            spam("You swing your axe at the tree.")
-            cut(tree, type)
+            return
         }
+
+        cut(tree, type)
     }
 
     private fun ProtectedAccess.cut(tree: BoundLocInfo, type: ObjectServerType) {
@@ -111,7 +114,7 @@ constructor(
 
         if (skillAnimDelay <= mapClock) {
             skillAnimDelay = mapClock + 4
-            anim(RSCM.getReverseMapping(RSCMType.SEQ,getInvObj(axe).axeWoodcuttingAnim.id))
+            swingAxe(axe)
         }
 
         var cutLogs = false
@@ -134,10 +137,30 @@ constructor(
         if (cutLogs) {
             val product = type.treeLogs
             val xp = type.treeXp * xpMods.get(player, "stat.woodcutting")
-            spam("You get some ${product.name.lowercase()}.")
             statAdvance("stat.woodcutting", xp)
-            invAdd(inv, RSCM.getReverseMapping(RSCMType.OBJ, product.id))
+
+            val infernalBurnXp = infernalBurnXp(axe, product)
+            if (infernalBurnXp != null && random.randomBoolean(INFERNAL_AXE_BURN_CHANCE)) {
+                spam("The infernal axe burns the logs to ashes.")
+                statAdvance(
+                    "stat.firemaking",
+                    infernalBurnXp * xpMods.get(player, "stat.firemaking"),
+                )
+            } else {
+                val productName = product.name.lowercase()
+                val add = invAdd(inv, RSCM.getReverseMapping(RSCMType.OBJ, product.id))
+                if (add.failure) {
+                    mes("Your inventory is too full to hold any more $productName.")
+                    soundSynth("synth.pillory_wrong")
+                    resetAnim()
+                    return
+                }
+                spam("You get some $productName.")
+                soundSynth(LOG_OBTAINED_SOUND)
+            }
+
             publish(CutLogs(player, tree, product))
+            rollBirdNest(product)
         }
 
         if (despawn) {
@@ -149,6 +172,53 @@ constructor(
         }
 
         opLoc3(tree)
+    }
+
+    private fun ProtectedAccess.swingAxe(axe: InvObj, message: Boolean = false) {
+        anim(RSCM.getReverseMapping(RSCMType.SEQ, getInvObj(axe).axeWoodcuttingAnim.id))
+        soundSynth(CHOP_SOUND)
+        if (message) {
+            spam("You swing your axe at the tree.")
+        }
+    }
+
+    private fun ProtectedAccess.rollBirdNest(product: ItemServerType) {
+        if (product.isType("obj.blisterwood_logs")) {
+            return
+        }
+
+        val nest =
+            when {
+                product.isType("obj.redwood_logs") -> {
+                    if (!random.randomBoolean(REDWOOD_CLUE_NEST_CHANCE)) {
+                        return
+                    }
+                    NestDrop(random.rollClueNest(), "A clue nest falls out of the tree.")
+                }
+                random.randomBoolean(player.resolveClueNestChance()) ->
+                    NestDrop(random.rollClueNest(), "A clue nest falls out of the tree.")
+                random.randomBoolean(player.resolveBirdNestChance()) ->
+                    NestDrop(
+                        random.rollRegularNest(player.wearingStrungRabbitFoot()),
+                        "A bird's nest falls out of the tree.",
+                    )
+                else -> return
+            }
+
+        mes("<col=B50A11>${nest.message}")
+        objRepo.add(nest.obj, coords, BIRD_NEST_DURATION, player)
+    }
+
+    private fun ProtectedAccess.infernalBurnXp(axe: InvObj, product: ItemServerType): Double? {
+        if (axe.id !in infernalAxeIds) {
+            return null
+        }
+        val log = firemakingLogRows.firstOrNull { it.input.id == product.id } ?: return null
+        val firemakingReq = log.statReq.firstOrNull()?.t1 ?: 1
+        if (player.firemakingLvl < firemakingReq && !product.isType("obj.redwood_logs")) {
+            return null
+        }
+        return log.xp * INFERNAL_AXE_FIREMAKING_XP_MULTIPLIER
     }
 
     private fun Controller.treeDespawnTick() {
@@ -254,7 +324,10 @@ constructor(
             if (worn != null && carried != null) {
                 val wornSuccess = cutSuccessRates(type, worn)
                 val carriedSuccess = cutSuccessRates(type, carried)
-                if ((wornSuccess.first + wornSuccess.second) / 2 >= (carriedSuccess.first + carriedSuccess.second) / 2) {
+                if (
+                    (wornSuccess.first + wornSuccess.second) / 2 >=
+                        (carriedSuccess.first + carriedSuccess.second) / 2
+                ) {
                     return worn
                 }
                 return carried
@@ -290,5 +363,92 @@ constructor(
             val high = rates and 0xFFFF
             return low to high
         }
+
+        private fun GameRandom.rollRegularNest(wearingRabbitFoot: Boolean): String {
+            return if (wearingRabbitFoot) {
+                when (of(BIRD_NEST_ROLL_SLOTS)) {
+                    in 0 until 60 -> "obj.bird_nest_seeds_jan2019"
+                    in 60 until 90 -> "obj.bird_nest_ring"
+                    in 90 until 94 -> "obj.bird_nest_egg_blue"
+                    in 94 until 97 -> "obj.bird_nest_egg_red"
+                    else -> "obj.bird_nest_egg_green"
+                }
+            } else {
+                when (of(BIRD_NEST_ROLL_SLOTS)) {
+                    in 0 until 65 -> "obj.bird_nest_seeds_jan2019"
+                    in 65 until 97 -> "obj.bird_nest_ring"
+                    97 -> "obj.bird_nest_egg_blue"
+                    98 -> "obj.bird_nest_egg_red"
+                    else -> "obj.bird_nest_egg_green"
+                }
+            }
+        }
+
+        private fun GameRandom.rollClueNest(): String {
+            return when (of(CLUE_NEST_ROLL_SLOTS)) {
+                in 0 until 20 -> "obj.wc_clue_nest_beginner"
+                in 20 until 50 -> "obj.wc_clue_nest_easy"
+                in 50 until 75 -> "obj.wc_clue_nest_medium"
+                in 75 until 93 -> "obj.wc_clue_nest_hard"
+                else -> "obj.wc_clue_nest_elite"
+            }
+        }
+
+        private fun Player.wearingStrungRabbitFoot(): Boolean {
+            return worn.any { obj -> obj != null && obj.id in strungRabbitFootIds }
+        }
+
+        private fun Player.wearingWoodcuttingCape(): Boolean {
+            return worn.any { obj -> obj != null && obj.id in woodcuttingCapeIds }
+        }
+
+        private fun Player.resolveBirdNestChance(): Int {
+            return if (wearingWoodcuttingCape()) BIRD_NEST_CAPE_CHANCE else BIRD_NEST_CHANCE
+        }
+
+        private fun Player.resolveClueNestChance(): Int {
+            return if (wearingWoodcuttingCape()) CLUE_NEST_CAPE_CHANCE else CLUE_NEST_CHANCE
+        }
+
+        private data class NestDrop(val obj: String, val message: String)
+
+        private val firemakingLogRows: List<FiremakingLogsRow> by lazy { FiremakingLogsRow.all() }
+
+        private val infernalAxeIds: Set<Int> by lazy {
+            itemIds("obj.infernal_axe", "obj.trailblazer_axe")
+        }
+
+        private val strungRabbitFootIds: Set<Int> by lazy {
+            itemIds("obj.hunting_strung_rabbit_foot")
+        }
+
+        private val woodcuttingCapeIds: Set<Int> by lazy {
+            setOfNotNull(
+                itemIdOrNull("obj.skillcape_woodcutting"),
+                itemIdOrNull("obj.skillcape_woodcutting_trimmed"),
+                itemIdOrNull("obj.skillcape_max"),
+            )
+        }
+
+        private fun itemIdOrNull(internal: String): Int? {
+            return runCatching { RSCM.getRSCM(internal) }.getOrNull()
+        }
+
+        private fun itemIds(vararg internals: String): Set<Int> {
+            return internals.mapNotNull(::itemIdOrNull).toSet()
+        }
+
+        private const val CHOP_SOUND: Int = 2053
+        private const val LOG_OBTAINED_SOUND: Int = 2734
+        private const val INFERNAL_AXE_BURN_CHANCE: Int = 3
+        private const val INFERNAL_AXE_FIREMAKING_XP_MULTIPLIER: Double = 0.5
+        private const val BIRD_NEST_CHANCE: Int = 256
+        private const val BIRD_NEST_CAPE_CHANCE: Int = 233
+        private const val CLUE_NEST_CHANCE: Int = 1024
+        private const val CLUE_NEST_CAPE_CHANCE: Int = 932
+        private const val BIRD_NEST_ROLL_SLOTS: Int = 100
+        private const val CLUE_NEST_ROLL_SLOTS: Int = 100
+        private const val REDWOOD_CLUE_NEST_CHANCE: Int = 380
+        private const val BIRD_NEST_DURATION: Int = 200
     }
 }
