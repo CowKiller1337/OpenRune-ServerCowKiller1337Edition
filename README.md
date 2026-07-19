@@ -84,6 +84,26 @@ Note: RSprox for Private Servers only works currently on Windows and Linux, NOT 
 
 > [!WARNING]
 > And stay away from client's like Devious, as they have been caught adding Account Stealer into their client.
+
+## Fishing Branch Status
+Estimated completion: about 60% overall, or about 75% of normal overworld spot fishing.
+
+Implemented:
+- Core fishing loop with level, inventory, tool, and bait checks.
+- Fishing XP and raw fish/item rewards.
+- Correct cache-backed item names and fishing animations.
+- Common spot families: small net, bait rod, fly lure, pike bait, lobster cage, harpoon tuna/swordfish/shark, big net, monkfish, swamp/cave eel, karambwanji, karambwan, lava eel, and anglerfish.
+- Equipped and inventory harpoon support, including dragon, infernal, crystal, and Trailblazer variants.
+
+Missing or unfinished:
+- Exact OSRS success-rate tuning for every fish and level.
+- Fishing spot movement/migration.
+- Fishing sounds, catch polish, and full message parity.
+- Bonus/perk systems: Rada's blessing, fish barrel, spirit flakes, heron pet, clue bottles, infernal harpoon cooking/charges, and future league relic interactions.
+- Special methods and activities: barbarian fishing, minnows, Tempoross/harpoonfish, aerial fishing, drift net fishing, and other non-standard region mechanics.
+- Karambwan vessel loading states; current version consumes raw karambwanji directly.
+- Big-net junk/rare rewards and big trophy fish.
+
 ## 📦 Release builds
 
 CI can produce a self-contained `openrune-server-release.zip` with `server.jar`, `game.yml`, and compiled `.data/`. Pushes to `production` publish automatically; other branches can be built manually from **Actions → Release Server**.

@@ -1,0 +1,320 @@
+package org.rsmod.content.skills.fishing
+
+internal data class FishingMethod(
+    val tools: List<String>,
+    val toolName: String,
+    val level: Int,
+    val animation: Int,
+    val startMessage: String,
+    val baitName: String? = null,
+    val catches: List<FishingCatch>,
+)
+
+internal data class FishingCatch(
+    val obj: String,
+    val level: Int,
+    val xp: Double,
+    val low: Int,
+    val high: Int,
+    val message: String,
+    val bait: String? = null,
+)
+
+internal data class FishingSpotOption(val npc: Int, val op: Int, val method: FishingMethod)
+
+internal object FishingData {
+    private const val NET_ANIM = 621
+    private const val ROD_ANIM = 622
+    private const val HARPOON_ANIM = 618
+    private const val CAGE_ANIM = 619
+    private const val BIG_NET_ANIM = 620
+    private const val KARAMBWAN_ANIM = 1193
+
+    private val fishingRodTools =
+        listOf("obj.fishing_rod", "obj.fishingrod_pearl")
+
+    private val flyFishingRodTools =
+        listOf("obj.fly_fishing_rod", "obj.fishingrod_pearl_fly")
+
+    private val oilyFishingRodTools =
+        listOf("obj.oily_fishing_rod", "obj.fishingrod_pearl_oily")
+
+    private val harpoonTools =
+        listOf(
+            "obj.harpoon",
+            "obj.hunting_barbed_harpoon",
+            "obj.dragon_harpoon",
+            "obj.infernal_harpoon",
+            "obj.infernal_harpoon_empty",
+            "obj.crystal_harpoon",
+            "obj.crystal_harpoon_inactive",
+            "obj.trailblazer_harpoon",
+            "obj.league_trailblazer_harpoon",
+            "obj.trailblazer_harpoon_empty",
+            "obj.trailblazer_harpoon_no_infernal",
+            "obj.trailblazer_reloaded_harpoon",
+            "obj.trailblazer_reloaded_harpoon_empty",
+            "obj.trailblazer_reloaded_harpoon_no_infernal",
+        )
+
+    val smallNet =
+        FishingMethod(
+            tools = listOf("obj.net"),
+            toolName = "small fishing net",
+            level = 1,
+            animation = NET_ANIM,
+            startMessage = "You cast out your net...",
+            catches =
+                listOf(
+                    FishingCatch("obj.raw_shrimp", 1, 10.0, 48, 127, "You catch some shrimps."),
+                    FishingCatch("obj.raw_anchovies", 15, 40.0, 24, 127, "You catch some anchovies."),
+                ),
+        )
+
+    val seaBait =
+        FishingMethod(
+            tools = fishingRodTools,
+            toolName = "fishing rod",
+            level = 5,
+            animation = ROD_ANIM,
+            startMessage = "You attempt to catch a fish.",
+            baitName = "fishing bait",
+            catches =
+                listOf(
+                    FishingCatch("obj.raw_sardine", 5, 20.0, 37, 95, "You catch a sardine.", "obj.fishing_bait"),
+                    FishingCatch("obj.raw_herring", 10, 30.0, 32, 128, "You catch a herring.", "obj.fishing_bait"),
+                ),
+        )
+
+    val lure =
+        FishingMethod(
+            tools = flyFishingRodTools,
+            toolName = "fly fishing rod",
+            level = 20,
+            animation = ROD_ANIM,
+            startMessage = "You attempt to catch a fish.",
+            baitName = "feathers",
+            catches =
+                listOf(
+                    FishingCatch("obj.raw_trout", 20, 50.0, 62, 119, "You catch a trout.", "obj.feather"),
+                    FishingCatch("obj.raw_salmon", 30, 70.0, 39, 96, "You catch a salmon.", "obj.feather"),
+                    FishingCatch(
+                        "obj.hunting_raw_fish_special",
+                        38,
+                        80.0,
+                        28,
+                        64,
+                        "You catch a rainbow fish.",
+                        "obj.hunting_stripy_bird_feather",
+                    ),
+                ),
+        )
+
+    val pikeBait =
+        FishingMethod(
+            tools = fishingRodTools,
+            toolName = "fishing rod",
+            level = 25,
+            animation = ROD_ANIM,
+            startMessage = "You attempt to catch a fish.",
+            baitName = "fishing bait",
+            catches = listOf(FishingCatch("obj.raw_pike", 25, 60.0, 35, 96, "You catch a pike.", "obj.fishing_bait")),
+        )
+
+    val lobsterCage =
+        FishingMethod(
+            tools = listOf("obj.lobster_pot"),
+            toolName = "lobster pot",
+            level = 40,
+            animation = CAGE_ANIM,
+            startMessage = "You attempt to catch a lobster.",
+            catches = listOf(FishingCatch("obj.raw_lobster", 40, 90.0, 40, 95, "You catch a lobster.")),
+        )
+
+    val tunaSwordfish =
+        FishingMethod(
+            tools = harpoonTools,
+            toolName = "harpoon",
+            level = 35,
+            animation = HARPOON_ANIM,
+            startMessage = "You attempt to catch a fish.",
+            catches =
+                listOf(
+                    FishingCatch("obj.raw_tuna", 35, 80.0, 27, 51, "You catch a tuna."),
+                    FishingCatch("obj.raw_swordfish", 50, 100.0, 26, 48, "You catch a swordfish."),
+                ),
+        )
+
+    val bigNet =
+        FishingMethod(
+            tools = listOf("obj.big_net"),
+            toolName = "big fishing net",
+            level = 16,
+            animation = BIG_NET_ANIM,
+            startMessage = "You cast out your net...",
+            catches =
+                listOf(
+                    FishingCatch("obj.raw_mackerel", 16, 20.0, 13, 65, "You catch a mackerel."),
+                    FishingCatch("obj.raw_cod", 23, 45.0, 15, 55, "You catch a cod."),
+                    FishingCatch("obj.raw_bass", 46, 100.0, 19, 40, "You catch a bass."),
+                    FishingCatch("obj.seaweed", 16, 1.0, 5, 15, "You catch some seaweed."),
+                ),
+        )
+
+    val sharkHarpoon =
+        FishingMethod(
+            tools = harpoonTools,
+            toolName = "harpoon",
+            level = 76,
+            animation = HARPOON_ANIM,
+            startMessage = "You attempt to catch a fish.",
+            catches = listOf(FishingCatch("obj.raw_shark", 76, 110.0, 30, 40, "You catch a shark.")),
+        )
+
+    val monkfishNet =
+        FishingMethod(
+            tools = listOf("obj.net"),
+            toolName = "small fishing net",
+            level = 62,
+            animation = NET_ANIM,
+            startMessage = "You cast out your net...",
+            catches = listOf(FishingCatch("obj.raw_monkfish", 62, 120.0, 74, 90, "You catch a monkfish.")),
+        )
+
+    val swampNet =
+        FishingMethod(
+            tools = listOf("obj.net"),
+            toolName = "small fishing net",
+            level = 33,
+            animation = NET_ANIM,
+            startMessage = "You cast out your net...",
+            catches = listOf(FishingCatch("obj.giant_frogspawn", 33, 75.0, 41, 96, "You catch some frog spawn.")),
+        )
+
+    val swampBait =
+        FishingMethod(
+            tools = fishingRodTools,
+            toolName = "fishing rod",
+            level = 28,
+            animation = ROD_ANIM,
+            startMessage = "You attempt to catch a fish.",
+            baitName = "fishing bait",
+            catches =
+                listOf(
+                    FishingCatch("obj.mort_slimey_eel", 28, 65.0, 29, 55, "You catch a slimy eel.", "obj.fishing_bait"),
+                    FishingCatch("obj.raw_cave_eel", 38, 80.0, 37, 80, "You catch a cave eel.", "obj.fishing_bait"),
+                ),
+        )
+
+    val karambwanjiNet =
+        FishingMethod(
+            tools = listOf("obj.net"),
+            toolName = "small fishing net",
+            level = 5,
+            animation = NET_ANIM,
+            startMessage = "You cast out your net...",
+            catches = listOf(FishingCatch("obj.tbwt_raw_karambwanji", 5, 5.0, 102, 250, "You catch a raw karambwanji.")),
+        )
+
+    val karambwan =
+        FishingMethod(
+            tools = listOf("obj.tbwt_karambwan_vessel"),
+            toolName = "karambwan vessel",
+            level = 65,
+            animation = KARAMBWAN_ANIM,
+            startMessage = "You attempt to catch a karambwan.",
+            baitName = "raw karambwanji",
+            catches =
+                listOf(
+                    FishingCatch(
+                        "obj.tbwt_raw_karambwan",
+                        65,
+                        105.0,
+                        105,
+                        160,
+                        "You catch a raw karambwan.",
+                        "obj.tbwt_raw_karambwanji",
+                    )
+                ),
+        )
+
+    val lavaEel =
+        FishingMethod(
+            tools = oilyFishingRodTools,
+            toolName = "oily fishing rod",
+            level = 53,
+            animation = ROD_ANIM,
+            startMessage = "You attempt to catch a fish.",
+            baitName = "fishing bait",
+            catches = listOf(FishingCatch("obj.raw_lava_eel", 53, 60.0, 58, 96, "You catch a lava eel.", "obj.fishing_bait")),
+        )
+
+    val anglerfish =
+        FishingMethod(
+            tools = fishingRodTools,
+            toolName = "fishing rod",
+            level = 82,
+            animation = ROD_ANIM,
+            startMessage = "You attempt to catch a fish.",
+            baitName = "sandworms",
+            catches =
+                listOf(
+                    FishingCatch(
+                        "obj.raw_anglerfish",
+                        82,
+                        120.0,
+                        25,
+                        40,
+                        "You catch an anglerfish.",
+                        "obj.piscarilius_sandworms",
+                    )
+                ),
+        )
+
+    private val freshwaterSpots = listOf(394, 1506, 3417, 12774, 14036, 14521)
+    private val seaNetBaitSpots = listOf(1544, 3913, 7155, 7459, 10513, 15066)
+    private val caveNetBaitSpots = listOf(1497, 10653)
+    private val cageHarpoonSpots = listOf(1510, 1519, 1522, 2146, 3657, 5820, 7199, 7946, 10635)
+    private val bigNetHarpoonSpots = listOf(1511, 1520, 4476, 5233, 9171)
+    private val monkfishSpots = listOf(4316)
+    private val karambwanjiSpots = listOf(4710, 4711)
+    private val karambwanSpots = listOf(4712, 4713, 4714)
+    private val lavaEelSpots = listOf(4928, 6784, 15384)
+    private val slimyEelSpots = listOf(2653)
+    private val anglerfishSpots = listOf(6825)
+    private val newPlayerNetSpots = listOf(3317, 9478)
+
+    val spotOptions: List<FishingSpotOption> =
+        buildList {
+            freshwaterSpots.forEach {
+                add(FishingSpotOption(it, op = 1, lure))
+                add(FishingSpotOption(it, op = 3, pikeBait))
+            }
+            seaNetBaitSpots.forEach {
+                add(FishingSpotOption(it, op = 1, smallNet))
+                add(FishingSpotOption(it, op = 3, seaBait))
+            }
+            caveNetBaitSpots.forEach {
+                add(FishingSpotOption(it, op = 1, swampNet))
+                add(FishingSpotOption(it, op = 3, swampBait))
+            }
+            cageHarpoonSpots.forEach {
+                add(FishingSpotOption(it, op = 1, lobsterCage))
+                add(FishingSpotOption(it, op = 3, tunaSwordfish))
+            }
+            bigNetHarpoonSpots.forEach {
+                add(FishingSpotOption(it, op = 1, bigNet))
+                add(FishingSpotOption(it, op = 3, sharkHarpoon))
+            }
+            monkfishSpots.forEach {
+                add(FishingSpotOption(it, op = 1, monkfishNet))
+                add(FishingSpotOption(it, op = 3, tunaSwordfish))
+            }
+            karambwanjiSpots.forEach { add(FishingSpotOption(it, op = 1, karambwanjiNet)) }
+            karambwanSpots.forEach { add(FishingSpotOption(it, op = 1, karambwan)) }
+            lavaEelSpots.forEach { add(FishingSpotOption(it, op = 1, lavaEel)) }
+            slimyEelSpots.forEach { add(FishingSpotOption(it, op = 1, swampBait)) }
+            anglerfishSpots.forEach { add(FishingSpotOption(it, op = 1, anglerfish)) }
+            newPlayerNetSpots.forEach { add(FishingSpotOption(it, op = 1, smallNet)) }
+        }
+}
