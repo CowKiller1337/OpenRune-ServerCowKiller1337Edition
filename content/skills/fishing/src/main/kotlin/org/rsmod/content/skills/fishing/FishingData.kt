@@ -16,7 +16,11 @@ internal data class FishingMethod(
     val attemptTicks: Int = 4,
     val attemptSound: Int? = FISHING_CAST_SOUND,
     val catchSound: Int? = FISH_SWIM_SOUND,
+    val allowRadasBlessing: Boolean = true,
+    val wornRequirements: List<FishingRequirement> = emptyList(),
 )
+
+internal data class FishingRequirement(val items: Set<String>, val message: String)
 
 internal data class FishingCatch(
     val obj: String,
@@ -28,6 +32,7 @@ internal data class FishingCatch(
     val baits: List<String> = emptyList(),
     val count: IntRange = 1..1,
     val extraXp: List<FishingExtraXp> = emptyList(),
+    val bonusEligible: Boolean = true,
 ) {
     constructor(
         obj: String,
@@ -218,11 +223,11 @@ internal object FishingData {
                     FishingCatch("obj.raw_mackerel", 16, 20.0, 5, 65, "You catch a mackerel."),
                     FishingCatch("obj.raw_cod", 23, 45.0, 4, 55, "You catch a cod."),
                     FishingCatch("obj.raw_bass", 46, 100.0, 3, 40, "You catch a bass."),
-                    FishingCatch("obj.seaweed", 16, 1.0, 10, 10, "You catch some seaweed."),
-                    FishingCatch("obj.leather_boots", 16, 1.0, 10, 10, "You fish up some leather boots."),
-                    FishingCatch("obj.leather_gloves", 16, 1.0, 10, 10, "You fish up some leather gloves."),
-                    FishingCatch("obj.oystershell", 16, 10.0, 3, 7, "You catch an oyster."),
-                    FishingCatch("obj.casket", 16, 0.0, 1, 2, "You fish up a casket."),
+                    FishingCatch("obj.seaweed", 16, 1.0, 10, 10, "You catch some seaweed.", bonusEligible = false),
+                    FishingCatch("obj.leather_boots", 16, 1.0, 10, 10, "You fish up some leather boots.", bonusEligible = false),
+                    FishingCatch("obj.leather_gloves", 16, 1.0, 10, 10, "You fish up some leather gloves.", bonusEligible = false),
+                    FishingCatch("obj.oystershell", 16, 10.0, 3, 7, "You catch an oyster.", bonusEligible = false),
+                    FishingCatch("obj.casket", 16, 0.0, 1, 2, "You fish up a casket.", bonusEligible = false),
                 ),
             attemptSound = NET_SOUND,
         )
@@ -400,6 +405,13 @@ internal object FishingData {
                 ),
             attemptTicks = SLOW_ATTEMPT_TICKS,
             attemptSound = LAVA_CAST_SOUND,
+            wornRequirements =
+                listOf(
+                    FishingRequirement(
+                        setOf("obj.ice_gloves"),
+                        "You need ice gloves to catch infernal eels.",
+                    )
+                ),
         )
 
     val minnowNet =
@@ -419,9 +431,11 @@ internal object FishingData {
                         high = 95,
                         message = "You catch some minnows.",
                         count = 10..14,
+                        bonusEligible = false,
                     )
                 ),
             attemptSound = NET_SOUND,
+            allowRadasBlessing = false,
         )
 
     val temporossHarpoonfish =
@@ -440,9 +454,11 @@ internal object FishingData {
                         45,
                         95,
                         "You catch a raw harpoonfish.",
+                        bonusEligible = false,
                     )
                 ),
             attemptTicks = SLOW_ATTEMPT_TICKS,
+            allowRadasBlessing = false,
         )
 
     val anglerfish =
@@ -668,4 +684,53 @@ internal object FishingData {
         }
 
     val stationarySpotIds: Set<Int> = (spotOptions.map { it.npc } + unsupportedStationarySpots).toSet()
+
+    val rawToCookedFish: Map<String, String> =
+        mapOf(
+            "obj.raw_shrimp" to "obj.shrimp",
+            "obj.raw_anchovies" to "obj.anchovies",
+            "obj.raw_sardine" to "obj.sardine",
+            "obj.raw_herring" to "obj.herring",
+            "obj.raw_trout" to "obj.trout",
+            "obj.raw_salmon" to "obj.salmon",
+            "obj.hunting_raw_fish_special" to "obj.hunting_fish_special",
+            "obj.raw_pike" to "obj.pike",
+            "obj.raw_lobster" to "obj.lobster",
+            "obj.raw_tuna" to "obj.tuna",
+            "obj.raw_swordfish" to "obj.swordfish",
+            "obj.raw_mackerel" to "obj.mackerel",
+            "obj.raw_cod" to "obj.cod",
+            "obj.raw_bass" to "obj.bass",
+            "obj.raw_monkfish" to "obj.monkfish",
+            "obj.mort_slimey_eel" to "obj.mort_slimey_eel_cooked",
+            "obj.raw_cave_eel" to "obj.cave_eel",
+            "obj.tbwt_raw_karambwan" to "obj.tbwt_cooked_karambwan",
+            "obj.raw_lava_eel" to "obj.lava_eel",
+            "obj.raw_dark_crab" to "obj.dark_crab",
+            "obj.raw_anglerfish" to "obj.anglerfish",
+            "obj.tempoross_raw_harpoonfish" to "obj.tempoross_harpoonfish",
+        )
+
+    val fishBarrelEligible: Set<String> =
+        setOf(
+            "obj.raw_shrimp",
+            "obj.raw_anchovies",
+            "obj.raw_sardine",
+            "obj.raw_herring",
+            "obj.raw_trout",
+            "obj.raw_salmon",
+            "obj.raw_pike",
+            "obj.raw_lobster",
+            "obj.raw_tuna",
+            "obj.raw_swordfish",
+            "obj.raw_shark",
+            "obj.raw_mackerel",
+            "obj.raw_cod",
+            "obj.raw_bass",
+            "obj.raw_monkfish",
+            "obj.raw_cave_eel",
+            "obj.tbwt_raw_karambwan",
+            "obj.raw_dark_crab",
+            "obj.raw_anglerfish",
+        )
 }

@@ -79,7 +79,11 @@ constructor(
                 for (extra in catch.extraXp) {
                     statAdvance(extra.stat, extra.xp * xpMods.get(player, extra.stat))
                 }
-                invAdd(inv, catch.obj, random.of(catch.count))
+                val baseCount = random.of(catch.count)
+                val extraCount = FishingRewards.run { extraCatchCount(method, catch, baseCount) }
+                val finalObj = FishingRewards.finalCatchObj(player, catch)
+                addCatch(finalObj, baseCount + extraCount)
+                FishingRewards.run { rollTertiaryRewards(catch) }
                 method.catchSound?.let { soundSynth(it) }
                 spam(catch.message)
             }
@@ -126,6 +130,12 @@ constructor(
             mes("You need a ${method.toolName} to catch these fish.")
             return false
         }
+        for (requirement in method.wornRequirements) {
+            if (requirement.items.none { it in player.worn }) {
+                mes(requirement.message)
+                return false
+            }
+        }
         val baitName = method.baitName ?: return true
         if (method.catches.none { catch -> catch.baits.isEmpty() || catch.baits.any { it in inv } }) {
             mes("You don't have any $baitName.")
@@ -139,8 +149,16 @@ constructor(
             return true
         }
         return method.catches.any { catch ->
-            player.fishingLvl >= catch.level && invAdd(inv, catch.obj, autoCommit = false).success
+            player.fishingLvl >= catch.level && canFitCatch(catch)
         }
+    }
+
+    private fun ProtectedAccess.canFitCatch(catch: FishingCatch): Boolean {
+        if (invAdd(inv, catch.obj, autoCommit = false).success) {
+            return true
+        }
+        val finalObj = FishingRewards.finalCatchObj(player, catch)
+        return FishBarrel.isOpen(player) && FishBarrel.canStore(finalObj) && !FishBarrel.inventory(player).isFull()
     }
 
     private fun ProtectedAccess.rollCatch(method: FishingMethod): FishingCatch? {
@@ -165,6 +183,14 @@ constructor(
         }
         invDel(inv, bait)
         return true
+    }
+
+    private fun ProtectedAccess.addCatch(obj: String, count: Int) {
+        val stored = FishBarrel.storeCatch(player, obj, count)
+        val remaining = count - stored
+        if (remaining > 0) {
+            invAdd(inv, obj, remaining)
+        }
     }
 
     private fun ScriptContext.onNpcOp1(
