@@ -30,13 +30,13 @@ constructor(
     }
 
     private fun resolveTestChickenType(): NpcServerType? {
-        return ServerCacheManager.getNpc(YAMA_LAIR_TEST_CHICKEN_ID)
+        return ServerCacheManager.getNpc(YAMA_LAIR_TEST_CHICKEN.asRSCM(RSCMType.NPC))
             ?: ServerCacheManager.getNpc(CHICKEN.asRSCM(RSCMType.NPC))
     }
 
     private companion object {
         private const val CHICKEN = "npc.chicken"
-        private const val YAMA_LAIR_TEST_CHICKEN_ID = 16383
+        private const val YAMA_LAIR_TEST_CHICKEN = "npc.league_dave_chicken"
         private val YAMA_LAIR_TEST_CHICKEN_COORD = CoordGrid(1507, 5602, 0)
     }
 }
