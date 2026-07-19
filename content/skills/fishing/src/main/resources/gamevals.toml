@@ -1,2 +1,5 @@
 [gamevals.inv]
 fish_barrel=65535
+
+[gamevals.queue]
+fishing_crack_infernal_eel=59

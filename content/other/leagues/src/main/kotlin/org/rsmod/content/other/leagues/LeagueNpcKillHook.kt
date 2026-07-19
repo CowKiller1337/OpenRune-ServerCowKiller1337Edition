@@ -1,5 +1,7 @@
 package org.rsmod.content.other.leagues
 
+import dev.openrune.rscm.RSCM.asRSCM
+import dev.openrune.rscm.RSCMType
 import jakarta.inject.Inject
 import org.rsmod.api.death.NpcDeathKillContext
 import org.rsmod.api.death.NpcDeathKillHook
@@ -19,14 +21,23 @@ constructor(
     }
 
     private fun Npc.isChicken(): Boolean =
-        CHICKEN_NPCS.any { type -> isType(type) || isVisType(type) }
+        type.id in chickenNpcIds || visType.id in chickenNpcIds
 
     private companion object {
         private const val DEFEAT_CHICKEN_TASK = "Defeat a Chicken"
+        private const val LEAGUE_DAVE_CHICKEN_ID = 16383
+
+        private val chickenNpcIds: Set<Int> by lazy {
+            buildSet {
+                add(LEAGUE_DAVE_CHICKEN_ID)
+                CHICKEN_NPCS.mapNotNullTo(this) { type ->
+                    runCatching { type.asRSCM(RSCMType.NPC) }.getOrNull()
+                }
+            }
+        }
 
         private val CHICKEN_NPCS =
             setOf(
-                "npc.league_dave_chicken",
                 "npc.chicken",
                 "npc.chicken_brown",
                 "npc.farm_chicken_brown",
