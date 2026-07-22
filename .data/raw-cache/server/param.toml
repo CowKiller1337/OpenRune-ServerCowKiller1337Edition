@@ -813,4 +813,15 @@ type = "INT"
 defaultInt = 0
 isMembers = true
 
+[[params]]
+id = "param.skill_action_delay"
+isServerOnly = true
+type = "INT"
+defaultInt = 3
+isMembers = true
 
+[[params]]
+id = "param.skill_wall_anim"
+isServerOnly = true
+type = "SEQ"
+isMembers = true
