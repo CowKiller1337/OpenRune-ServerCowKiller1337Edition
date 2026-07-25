@@ -1,0 +1,10 @@
+plugins {
+    id("base-conventions")
+}
+
+dependencies {
+    implementation(projects.api.attr)
+    implementation(projects.api.config)
+    implementation(projects.api.player)
+    implementation(projects.api.pluginCommons)
+}
