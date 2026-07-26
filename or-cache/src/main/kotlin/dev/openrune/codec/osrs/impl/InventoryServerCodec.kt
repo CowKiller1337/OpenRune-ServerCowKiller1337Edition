@@ -49,11 +49,17 @@ class InventoryServerCodec(
 
     override fun InventoryServerType.createData() {
         if (types == null) return
-        val inventoryType = types[id] ?: return
-        size = inventoryType.size
         val customData = custom?.get(id)
+        val inventoryType = types[id]
+
+        if (inventoryType != null) {
+            size = inventoryType.size
+        }
 
         if (customData != null) {
+            if (inventoryType == null || customData.size != InventoryServerType().size) {
+                size = customData.size
+            }
             scope = customData.scope
             stack = customData.stack
             flags = customData.flags

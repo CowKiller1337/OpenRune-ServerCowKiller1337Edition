@@ -18,6 +18,11 @@ object LeagueClientState {
             LeagueVarbits.LEAGUE_TUTORIAL_COMPLETED,
             if (profile.enabled) LeagueClientFlags.LEAGUE_TUTORIAL_COMPLETE_STAGE else 0,
         )
+        setVarbit(
+            player,
+            LeagueVarbits.LEAGUE_6_HOME_TELEPORT_UNLOCKED,
+            if (profile.enabled) 1 else 0,
+        )
         val leaguePoints = if (profile.enabled) profile.leaguePoints else 0
         setVarp(player, LeagueVarps.LEAGUE_POINTS_COMPLETED, leaguePoints)
         setVarp(player, LeagueVarps.LEAGUE_POINTS_CLAIMED, leaguePoints)

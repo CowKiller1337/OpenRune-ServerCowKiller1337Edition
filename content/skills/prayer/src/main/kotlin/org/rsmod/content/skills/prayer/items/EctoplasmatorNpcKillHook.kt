@@ -7,9 +7,10 @@ import org.rsmod.api.death.NpcDeathKillContext
 import org.rsmod.api.death.NpcDeathKillHook
 import org.rsmod.api.player.stat.statAdvance
 import org.rsmod.api.player.stat.statBase
+import org.rsmod.api.stats.xpmod.XpModifiers
 
 @Singleton
-public class EctoplasmatorNpcKillHook @Inject constructor() : NpcDeathKillHook {
+public class EctoplasmatorNpcKillHook @Inject constructor(private val xpMods: XpModifiers) : NpcDeathKillHook {
     override fun onKill(context: NpcDeathKillContext) {
         val player = context.hero
         if (player.statBase("stat.prayer") < 40) {
@@ -28,6 +29,6 @@ public class EctoplasmatorNpcKillHook @Inject constructor() : NpcDeathKillHook {
         if (xp <= 0) {
             return
         }
-        player.statAdvance("stat.prayer", xp.toDouble())
+        player.statAdvance("stat.prayer", xp.toDouble() * xpMods.get(player, "stat.prayer"))
     }
 }

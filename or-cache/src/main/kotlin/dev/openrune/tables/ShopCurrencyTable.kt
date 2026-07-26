@@ -31,5 +31,12 @@ object ShopCurrencyTable {
             column(PLURAL_NAME, "stardust")
             columnRSCM(OBJ, "obj.star_dust")
         }
+
+        row("dbrow.shop_currency_tokkul") {
+            column(KEY, "currency.tokkul")
+            column(SINGULAR_NAME, "tokkul")
+            column(PLURAL_NAME, "tokkul")
+            columnRSCM(OBJ, "obj.tzhaar_token")
+        }
     }
 }

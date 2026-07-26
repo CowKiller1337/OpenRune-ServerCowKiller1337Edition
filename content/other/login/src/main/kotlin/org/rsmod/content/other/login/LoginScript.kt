@@ -141,6 +141,9 @@ constructor(
         ServerCacheManager.getVarbit(LEAGUE_TUTORIAL_COMPLETED_VARBIT)?.let {
             VarPlayerIntMapSetter.set(this, it, LEAGUE_TUTORIAL_COMPLETE_STAGE)
         }
+        ServerCacheManager.getVarbit(LEAGUE_6_HOME_TELEPORT_UNLOCKED_VARBIT)?.let {
+            VarPlayerIntMapSetter.set(this, it, 1)
+        }
         ServerCacheManager.getVarp(MAP_FLAGS_CACHED_VARP)?.let { varp ->
             val leagueWorldFlags =
                 (vars[varp] or LEAGUE_WORLD_MAP_FLAG) and DEADMAN_WORLD_MAP_FLAG.inv()
@@ -214,6 +217,7 @@ constructor(
         private const val LEAGUE_ACCOUNT_VARBIT = 10031
         private const val LEAGUE_TYPE_VARBIT = 10032
         private const val LEAGUE_TUTORIAL_COMPLETED_VARBIT = 10037
+        private const val LEAGUE_6_HOME_TELEPORT_UNLOCKED_VARBIT = 13332
         private const val LEAGUE_GENERAL_VARP = 2606
         private const val MAP_FLAGS_CACHED_VARP = 3717
         private const val LEAGUE_6_TYPE = 6

@@ -6,6 +6,7 @@ import org.rsmod.api.player.protect.ProtectedAccess
 import org.rsmod.api.repo.world.WorldRepository
 import org.rsmod.api.script.onOpLocU
 import org.rsmod.api.script.onPlayerQueueWithArgs
+import org.rsmod.api.stats.xpmod.XpModifiers
 import org.rsmod.api.table.prayer.SkillPrayerRow
 import org.rsmod.content.skills.prayer.items.ZealotRobes.shouldConsume
 import org.rsmod.game.loc.BoundLocInfo
@@ -14,6 +15,7 @@ import org.rsmod.plugin.scripts.ScriptContext
 
 class GildedAltarEvents @Inject constructor(
     private val worldRepo: WorldRepository,
+    private val xpMods: XpModifiers,
 ) : PluginScript() {
 
     override fun ScriptContext.startup() {
@@ -71,7 +73,7 @@ class GildedAltarEvents @Inject constructor(
             task.altar.coords,
         )
 
-        statAdvance("stat.prayer", task.row.exp * 3.5)
+        statAdvance("stat.prayer", task.row.exp * 3.5 * xpMods.get(player, "stat.prayer"))
 
         if (shouldConsumeBone(task).not()) {
             mes("The Dark Lord spares your sacrifice, but rewards you for your efforts.")

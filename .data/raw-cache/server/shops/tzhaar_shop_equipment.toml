@@ -1,0 +1,24 @@
+[[inventory]]
+isServerOnly = true
+id = "inv.tzhaar_shop_equipment"
+name = "TzHaar-Hur-Tel's Shop"
+
+scope = "Shared"
+stack = "Always"
+
+sellMultiplier = 1500
+buyMultiplier = 600
+delta = 20
+
+size = 8
+
+protect = false
+runWeight = false
+restock = true
+allStock = false
+placeholders = false
+
+[[inventory.stock]]
+obj = "obj.tzhaar_maul"
+count = 10
+restockCycles = 100

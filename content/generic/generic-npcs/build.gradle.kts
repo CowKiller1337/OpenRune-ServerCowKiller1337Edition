@@ -3,6 +3,7 @@ plugins {
 }
 
 dependencies {
+    implementation(projects.api.shops)
     implementation(projects.api.pluginCommons)
     implementation(projects.content.interfaces.bank)
 }

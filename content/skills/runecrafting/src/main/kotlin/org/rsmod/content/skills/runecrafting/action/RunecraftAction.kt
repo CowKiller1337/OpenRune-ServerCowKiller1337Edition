@@ -95,7 +95,7 @@ object RunecraftAction {
         finishEssenceCraft(
             rune,
             daeyaltEssCount,
-            baseProduced * rune.xp * xpMultiplier,
+            daeyaltEssCount * rune.xp * xpMultiplier,
             xpMods,
             ouraniaAltar,
             produced,
@@ -147,7 +147,7 @@ object RunecraftAction {
         val baseGuardian = guardianEssCount * baseMultiplier
         val baseDark = darkEssCount * baseMultiplier
         val baseRune = runeEssCount * baseMultiplier
-        val totalXp = (basePure + baseGuardian + baseDark + baseRune) * rune.xp
+        val totalXp = totalEssence * rune.xp
         val xpMultiplier = if (ouraniaAltar) OURANIA_XP_MULTIPLIER else 1.0
         val produced =
             applyBonus(basePure) +
@@ -177,9 +177,7 @@ object RunecraftAction {
         val baseMultiplier = getBonusMultiplier(rune.output.internalName, level).toInt()
         var totalRunes = producedRunes ?: applyBonus(essenceConsumed * baseMultiplier)
 
-        if (inv.contains(rune.extract.internalName)) {
-            totalRunes += runecraftingExtract[rune.extract.internalName] ?: 0
-        }
+        totalRunes += consumeExtractBonus(rune.extract.internalName)
 
         if (
             !ouraniaAltar &&
@@ -275,7 +273,7 @@ object RunecraftAction {
             val rune = rollOuraniaRune(level)
             val multiplier = getBonusMultiplier(rune.output.internalName, level).toInt()
             val produced = applyBonus(multiplier)
-            totalXp += rune.xp * xpMultiplier * multiplier
+            totalXp += rune.xp * xpMultiplier
             invAdd(inv, rune.output.internalName, produced)
         }
 
@@ -349,9 +347,7 @@ object RunecraftAction {
         }
 
         var totalRunes = applyBonus(craftCount)
-        if (inv.contains("obj.scar_extract_scarred")) {
-            totalRunes += runecraftingExtract["obj.scar_extract_scarred"] ?: 0
-        }
+        totalRunes += consumeExtractBonus("obj.scar_extract_scarred")
 
         invAdd(inv, aetherRune.output.internalName, totalRunes)
         advanceRunecraftingXp(craftCount * aetherRune.xp.toDouble(), xpMods)
@@ -422,19 +418,18 @@ object RunecraftAction {
 
         val wearingBinding = player.isWearing()
         val removedCount = removedRunes.completed()
-        var finalCount =
+        val successfulCount =
             if (wearingBinding) {
                 removedCount
             } else {
                 (1..removedCount).count { random.of(100) < 50 }
             }
 
-        if (inv.contains("obj.scar_extract_twisted")) {
-            finalCount += runecraftingExtract["obj.scar_extract_twisted"] ?: 0
-        }
+        var finalCount = successfulCount
+        finalCount += consumeExtractBonus("obj.scar_extract_twisted")
 
         invAdd(inv, output.internalName, finalCount)
-        advanceRunecraftingXp(finalCount * (xp.toDouble() / 10.0), xpMods)
+        advanceRunecraftingXp(successfulCount * (xp.toDouble() / 10.0), xpMods)
 
         if (wearingBinding) {
             consumeChargeAfterCombo()
@@ -443,6 +438,17 @@ object RunecraftAction {
 
     fun ProtectedAccess.advanceRunecraftingXp(baseXp: Double, xpMods: XpModifiers) {
         statAdvance("stat.runecrafting", baseXp * xpMods.get(player, "stat.runecrafting"))
+    }
+
+    private fun ProtectedAccess.consumeExtractBonus(extract: String): Int {
+        val bonus = runecraftingExtract[extract] ?: return 0
+        if (!inv.contains(extract)) {
+            return 0
+        }
+        if (invDel(inv, extract, 1).failure) {
+            return 0
+        }
+        return bonus
     }
 
     private fun ProtectedAccess.countPureLikeEssence(): Int =

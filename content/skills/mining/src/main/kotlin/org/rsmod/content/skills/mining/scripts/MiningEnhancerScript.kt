@@ -5,6 +5,8 @@ import org.rsmod.api.player.events.skilling.SkillingActionCompleteEvent
 import org.rsmod.api.player.events.skilling.SkillingActionContext
 import org.rsmod.api.player.events.skilling.SkillingProduct
 import org.rsmod.api.player.events.skilling.SkillingProductSource
+import org.rsmod.api.player.output.mes
+import org.rsmod.api.player.skilling.SkillingAwardResult
 import org.rsmod.api.player.skilling.awardSkillingProduct
 import org.rsmod.api.random.GameRandom
 import org.rsmod.api.script.onEvent
@@ -31,13 +33,19 @@ constructor(private val random: GameRandom, private val eventBus: EventBus) : Pl
             }
 
             if (data.miningCape && wearingMiningCape() && random.of(100) < 5) {
-                awardBonus(ore, xp = product.experienceGranted, grantsXp = true, source)
+                if (awardBonus(ore, xp = product.experienceGranted, grantsXp = true, source)) {
+                    player.mes("Your Mining cape allows you to mine an extra ore.")
+                }
             }
             if (player.wearingVarrockArmourAtLeast(data.varrockArmourLevel) && random.of(100) < 10) {
-                awardBonus(ore, xp = product.experienceGranted, grantsXp = true, source)
+                if (awardBonus(ore, xp = product.experienceGranted, grantsXp = true, source)) {
+                    player.mes("Your Varrock armour allows you to mine an extra ore.")
+                }
             }
             if (data.celestialRing && wearingChargedCelestial() && random.of(100) < 10) {
-                awardBonus(ore, xp = product.experienceGranted, grantsXp = true, source)
+                if (awardBonus(ore, xp = product.experienceGranted, grantsXp = true, source)) {
+                    player.mes("Your celestial ring allows you to mine an extra ore.")
+                }
             }
         }
     }
@@ -47,8 +55,9 @@ constructor(private val random: GameRandom, private val eventBus: EventBus) : Pl
         xp: Double,
         grantsXp: Boolean,
         source: SkillingProductSource.Mining,
-    ) {
-        player.awardSkillingProduct(
+    ): Boolean {
+        val result =
+            player.awardSkillingProduct(
             eventBus,
             SkillingProduct(
                 player = player,
@@ -61,12 +70,15 @@ constructor(private val random: GameRandom, private val eventBus: EventBus) : Pl
                 isBonus = true,
             ),
         )
+        return result == SkillingAwardResult.Success
     }
 
     private fun SkillingActionCompleteEvent.wearingMiningCape(): Boolean =
         "obj.skillcape_mining" in player.worn || "obj.skillcape_mining_trimmed" in player.worn
 
     private fun SkillingActionCompleteEvent.wearingChargedCelestial(): Boolean =
-        "obj.celestial_ring_charged" in player.worn ||
+        "obj.celestial_ring" in player.worn ||
+            "obj.celestial_ring_charged" in player.worn ||
+            "obj.celestial_signet" in player.worn ||
             "obj.celestial_signet_charged" in player.worn
 }

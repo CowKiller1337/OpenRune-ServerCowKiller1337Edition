@@ -64,7 +64,10 @@ constructor(
     }
 
     private fun ScriptContext.bindMineableLocOptions() {
-        val types = ServerCacheManager.getObjects().values.filter { it.hasMineableOption }
+        val types =
+            ServerCacheManager.getObjects().values.filter {
+                it.hasMineableOption && !it.hasUnsupportedMineableOption
+            }
         for (type in types) {
             bindMineOption(type)
             bindProspectOption(type)
@@ -251,19 +254,28 @@ constructor(
     ) {
         val enhancers = ore.enhancers
         if (enhancers.miningCape && player.wearingAny(miningCapeIds) && random.randomBoolean(20)) {
-            invAddOrDropType(objRepo, bonusType)
+            awardBonusOre(bonusType, xp, "Your Mining cape allows you to mine an extra ore.")
         }
         if (
             enhancers.varrockArmourTier != null &&
                 player.varrockArmourTier() >= enhancers.varrockArmourTier &&
                 random.randomBoolean(10)
         ) {
-            invAddOrDropType(objRepo, bonusType)
-            statAdvance("stat.mining", xp)
+            awardBonusOre(bonusType, xp, "Your Varrock armour allows you to mine an extra ore.")
         }
         if (enhancers.ringOrSignet && player.wearingAny(celestialIds) && random.randomBoolean(10)) {
-            invAddOrDropType(objRepo, bonusType)
+            awardBonusOre(bonusType, xp, "Your celestial ring allows you to mine an extra ore.")
         }
+    }
+
+    private fun ProtectedAccess.awardBonusOre(
+        ore: ItemServerType,
+        xp: Double,
+        message: String,
+    ) {
+        invAddOrDropType(objRepo, ore)
+        statAdvance("stat.mining", xp)
+        mes(message)
     }
 
     private fun ProtectedAccess.rollClueGeode(ore: OreDefinition) {
@@ -298,7 +310,8 @@ constructor(
         }
 
         val rockKey = rock.depletionKey()
-        val gloveProtection = ore.enhancers.miningGloves?.takeIf { player.wearingMiningGloves(it) }
+        val gloveProtection =
+            ore.enhancers.miningGloves?.let { required -> player.miningGloveProtection(required) }
         if (
             gloveProtection != null && !gloveProtectionDepleted(rockKey, gloveProtection.extraMines)
         ) {
@@ -469,11 +482,13 @@ constructor(
         }
     }
 
-    private enum class MiningGloveTier(val extraMines: Int, val itemNames: Set<String>) {
-        Standard(extraMines = 1, itemNames = setOf("obj.mguild_gloves")),
-        Expert(extraMines = 2, itemNames = setOf("obj.mguild_gloves_expert")),
-        Superior(extraMines = 3, itemNames = setOf("obj.mguild_gloves_superior")),
+    private enum class MiningGloveTier(val itemNames: Set<String>) {
+        Standard(itemNames = setOf("obj.mguild_gloves")),
+        Superior(itemNames = setOf("obj.mguild_gloves_superior")),
+        Expert(itemNames = setOf("obj.mguild_gloves_expert")),
     }
+
+    private data class MiningGloveProtection(val extraMines: Int)
 
     private data class DepletionSession(val rockKey: Long, val threshold: Int, val mined: Int)
 
@@ -503,7 +518,12 @@ constructor(
         }
 
         private val celestialIds: Set<Int> by lazy {
-            itemIds("obj.celestial_ring", "obj.celestial_signet")
+            itemIds(
+                "obj.celestial_ring",
+                "obj.celestial_ring_charged",
+                "obj.celestial_signet",
+                "obj.celestial_signet_charged",
+            )
         }
 
         private val clayBraceletIds: Set<Int> by lazy {
@@ -573,6 +593,13 @@ constructor(
 
         private val ObjectServerType.hasMineableOption: Boolean
             get() = optionIndex("Mine") != null || optionIndex("Prospect") != null
+
+        private val ObjectServerType.hasUnsupportedMineableOption: Boolean
+            get() {
+                val key = internalName.substringAfter("loc.").lowercase()
+                val text = "$key ${name.orEmpty()} ${desc.orEmpty()}".lowercase()
+                return unsupportedMiningMarkers.any { text.contains(it) }
+            }
 
         private val ObjectServerType.miningBlockMessage: String?
             get() {
@@ -1337,8 +1364,37 @@ constructor(
             return 0
         }
 
-        private fun Player.wearingMiningGloves(tier: MiningGloveTier): Boolean {
-            return wearingAny(miningGloveIds.getValue(tier))
+        private fun Player.miningGloveProtection(
+            required: MiningGloveTier
+        ): MiningGloveProtection? {
+            val worn =
+                when {
+                    wearingAny(miningGloveIds.getValue(MiningGloveTier.Expert)) ->
+                        MiningGloveTier.Expert
+                    wearingAny(miningGloveIds.getValue(MiningGloveTier.Superior)) ->
+                        MiningGloveTier.Superior
+                    wearingAny(miningGloveIds.getValue(MiningGloveTier.Standard)) ->
+                        MiningGloveTier.Standard
+                    else -> return null
+                }
+            val extra =
+                when (required) {
+                    MiningGloveTier.Standard ->
+                        when (worn) {
+                            MiningGloveTier.Standard -> 1
+                            MiningGloveTier.Superior -> 2
+                            MiningGloveTier.Expert -> 3
+                        }
+                    MiningGloveTier.Superior ->
+                        when (worn) {
+                            MiningGloveTier.Superior -> 1
+                            MiningGloveTier.Expert -> 2
+                            else -> 0
+                        }
+                    MiningGloveTier.Expert ->
+                        if (worn == MiningGloveTier.Expert) 1 else 0
+                }
+            return extra.takeIf { it > 0 }?.let(::MiningGloveProtection)
         }
 
         private fun BoundLocInfo.depletionKey(): Long {

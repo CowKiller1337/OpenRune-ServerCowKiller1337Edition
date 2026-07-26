@@ -90,6 +90,9 @@ constructor(
         onCommand("master", "Max out all stats", ::master)
         onCommand("reset", "Reset all stats", ::reset)
         onCommand("mypos", "Get current coordinates", ::mypos)
+        onCommand("locs", "List nearby loc ids", ::locs) {
+            invalidArgs = "Use as ::locs [radius] (ex: ::locs 3)"
+        }
         onCommand("tele", "Teleport to coordgrid", ::tele) {
             invalidArgs = "Usage: ::tele mx mz [level](e.g. ::tele 3200 3200 0)"
         }
@@ -262,6 +265,47 @@ constructor(
             player.mes("  BuildArea(${player.buildArea})")
         }
 
+    private fun locs(cheat: Cheat) =
+        with(cheat) {
+            val radius = (args.getOrNull(0)?.toIntOrNull() ?: 2).coerceIn(0, 12)
+            val center = player.coords
+            val centerZone = ZoneKey.from(center)
+            val zoneRadius = (radius + ZoneGrid.LENGTH - 1) / ZoneGrid.LENGTH
+
+            val found =
+                buildList {
+                        for (xOffset in -zoneRadius..zoneRadius) {
+                            for (zOffset in -zoneRadius..zoneRadius) {
+                                val zone = centerZone.translate(xOffset, zOffset)
+                                addAll(
+                                    locRepo
+                                        .findAll(zone)
+                                        .filter { it.coords.level == center.level }
+                                        .filter { it.coords.chebyshevDistance(center) <= radius }
+                                )
+                            }
+                        }
+                    }
+                    .distinctBy { Triple(it.coords, it.layer, it.id) }
+                    .sortedWith(compareBy({ it.coords.chebyshevDistance(center) }, { it.id }))
+                    .take(10)
+
+            if (found.isEmpty()) {
+                player.mes("No locs found within $radius tiles.")
+                return@with
+            }
+
+            player.mes("Nearby locs within $radius tiles:")
+            for (loc in found) {
+                val type = ServerCacheManager.getObject(loc.id)
+                val name = type?.internalName?.removePrefix("loc.") ?: "unknown"
+                player.mes(
+                    "${loc.id} $name @ ${loc.coords.x},${loc.coords.z},${loc.coords.level} " +
+                        "sh=${loc.shapeId} a=${loc.angleId}"
+                )
+            }
+        }
+
     private fun tele(cheat: Cheat) =
         with(cheat) {
             val args = if (args.size == 1) args[0].split(",") else args
@@ -387,9 +431,9 @@ constructor(
 
     private fun locAdd(cheat: Cheat) =
         with(cheat) {
-            val typeId = "loc.${args[1]}".asRSCM()
+            val typeId = args[1].toIntOrNull() ?: "loc.${args[1]}".asRSCM()
 
-            val type = ServerCacheManager.getObject(typeId)!!
+            val type = ServerCacheManager.getObject(typeId)
             if (type == null) {
                 player.mes("That loc does not exist: $typeId")
                 return

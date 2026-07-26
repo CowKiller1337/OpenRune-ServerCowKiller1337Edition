@@ -6,6 +6,7 @@ import org.rsmod.api.death.NpcDeathDropContext
 import org.rsmod.api.death.NpcDeathDropHook
 import org.rsmod.api.player.vars.intVarBit
 import org.rsmod.api.player.stat.statAdvance
+import org.rsmod.api.stats.xpmod.XpModifiers
 import org.rsmod.api.table.prayer.SkillPrayerRow
 import org.rsmod.content.skills.prayer.items.ashsanctifier.AshSanctifierScript.Companion.ashSanctifierActivityEnabled
 import org.rsmod.content.skills.prayer.items.ashsanctifier.AshSanctifierScript.Companion.hasKourendKebosEliteDiaryComplete
@@ -14,7 +15,7 @@ import org.rsmod.game.entity.Player
 import org.rsmod.game.inv.isType
 
 @Singleton
-class AshSanctifierNpcDropHook @Inject constructor() : NpcDeathDropHook {
+class AshSanctifierNpcDropHook @Inject constructor(private val xpMods: XpModifiers) : NpcDeathDropHook {
 
     private val demonicAshXpByItem: Map<String, SkillPrayerRow> by lazy {
         SkillPrayerRow.all().filter { it.ashes }.associateBy { it.item.internalName }
@@ -49,7 +50,7 @@ class AshSanctifierNpcDropHook @Inject constructor() : NpcDeathDropHook {
         } else {
             scatterXp / 2.0
         }
-        player.statAdvance("stat.prayer", prayerXp)
+        player.statAdvance("stat.prayer", prayerXp * xpMods.get(player, "stat.prayer"))
 
         return true
     }

@@ -1,12 +1,14 @@
 package org.rsmod.content.skills.prayer.ecto
 
+import jakarta.inject.Inject
 import org.rsmod.api.player.protect.ProtectedAccess
 import org.rsmod.api.script.onOpLoc1
+import org.rsmod.api.stats.xpmod.XpModifiers
 import org.rsmod.content.skills.prayer.items.ZealotRobes.shouldConsume
 import org.rsmod.plugin.scripts.PluginScript
 import org.rsmod.plugin.scripts.ScriptContext
 
-class EctoWorshipEvents : PluginScript() {
+class EctoWorshipEvents @Inject constructor(private val xpMods: XpModifiers) : PluginScript() {
 
     override fun ScriptContext.startup() {
         onOpLoc1("loc.ahoy_ectofuntus") { worshipEctofuntus() }
@@ -41,7 +43,7 @@ class EctoWorshipEvents : PluginScript() {
             invAdd(inv, "obj.pot_empty", 1)
         }
 
-        statAdvance("stat.prayer", recipe.xp * 4.0)
+        statAdvance("stat.prayer", recipe.xp * 4.0 * xpMods.get(player, "stat.prayer"))
         ectoTokens += 5
     }
 }

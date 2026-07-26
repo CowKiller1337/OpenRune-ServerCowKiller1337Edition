@@ -1,5 +1,6 @@
 package org.rsmod.content.skills.prayer
 
+import jakarta.inject.Inject
 import org.rsmod.api.player.events.prayer.PrayerSkillAction
 import org.rsmod.api.player.events.skilling.SkillingActionCompleteEvent
 import org.rsmod.api.player.events.skilling.SkillingActionContext
@@ -8,13 +9,14 @@ import org.rsmod.api.player.protect.ProtectedAccess
 import org.rsmod.api.script.onOpHeld1
 import org.rsmod.api.script.onPlayerLogin
 import org.rsmod.api.script.onPlayerQueueWithArgs
+import org.rsmod.api.stats.xpmod.XpModifiers
 import org.rsmod.api.table.prayer.SkillPrayerRow
 import org.rsmod.content.skills.prayer.items.ZealotRobes.shouldConsume
 import org.rsmod.game.inv.isType
 import org.rsmod.plugin.scripts.PluginScript
 import org.rsmod.plugin.scripts.ScriptContext
 
-class PrayerBuryEvents : PluginScript() {
+class PrayerBuryEvents @Inject constructor(private val xpMods: XpModifiers) : PluginScript() {
 
     private val bones = Companion.bones
 
@@ -65,12 +67,13 @@ class PrayerBuryEvents : PluginScript() {
 
         val message = if (task.row.ashes) "You scatter the ashes." else "You bury the bones."
         mes(message)
-        statAdvance("stat.prayer", task.row.exp.toDouble())
+        val xp = task.row.exp.toDouble() * xpMods.get(player, "stat.prayer")
+        statAdvance("stat.prayer", xp)
         publish(SkillingActionCompleteEvent(player = player, context =
             SkillingActionContext.Prayer(PrayerSkillAction.BuryComplete(
                 itemInternal = task.row.item.internalName,
                 ashes = task.row.ashes,
-                experienceGranted = task.row.exp.toDouble(),
+                experienceGranted = xp,
                 catacombsBonePrayerRestore = task.row.prayerRestore
             ))),
         )

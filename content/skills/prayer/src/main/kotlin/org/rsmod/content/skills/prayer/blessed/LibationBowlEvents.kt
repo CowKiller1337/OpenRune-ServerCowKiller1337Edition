@@ -1,5 +1,6 @@
 package org.rsmod.content.skills.prayer.blessed
 
+import jakarta.inject.Inject
 import org.rsmod.api.player.protect.ProtectedAccess
 import org.rsmod.api.player.stat.basePrayerLvl
 import org.rsmod.api.player.stat.prayerLvl
@@ -9,6 +10,7 @@ import org.rsmod.api.script.onOpLoc1
 import org.rsmod.api.script.onOpLoc2
 import org.rsmod.api.script.onOpLocU
 import org.rsmod.api.script.onPlayerQueueWithArgs
+import org.rsmod.api.stats.xpmod.XpModifiers
 import org.rsmod.content.skills.SkillMultiConfig
 import org.rsmod.content.skills.SkillMultiEntry
 import org.rsmod.content.skills.openSkillMulti
@@ -17,7 +19,7 @@ import org.rsmod.game.loc.BoundLocInfo
 import org.rsmod.plugin.scripts.PluginScript
 import org.rsmod.plugin.scripts.ScriptContext
 
-class LibationBowlEvents : PluginScript() {
+class LibationBowlEvents @Inject constructor(private val xpMods: XpModifiers) : PluginScript() {
 
     override fun ScriptContext.startup() {
         onOpLocU("loc.varlamore_libation_bowl", "obj.jug_wine_blessed") { fillLibationBowl(sunfire = false) }
@@ -99,7 +101,7 @@ class LibationBowlEvents : PluginScript() {
         }
         libationWineCharges = (wineCharges - count).coerceAtLeast(0)
         statSub("stat.prayer", constant = 2, percent = 0)
-        statAdvance("stat.prayer", count * wineXpPerShard)
+        statAdvance("stat.prayer", count * wineXpPerShard * xpMods.get(player, "stat.prayer"))
 
         if (libationWineCharges <= 0) {
             if (!tryAutoRefillLibationBowl()) {

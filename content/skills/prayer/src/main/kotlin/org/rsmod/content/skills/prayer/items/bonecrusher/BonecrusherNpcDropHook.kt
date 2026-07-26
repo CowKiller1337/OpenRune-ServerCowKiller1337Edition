@@ -15,6 +15,7 @@ import org.rsmod.api.death.NpcDeathDropContext
 import org.rsmod.api.death.NpcDeathDropHook
 import org.rsmod.api.player.stat.statAdvance
 import org.rsmod.api.player.stat.statBoost
+import org.rsmod.api.stats.xpmod.XpModifiers
 import org.rsmod.api.table.prayer.SkillPrayerRow
 import org.rsmod.events.EventBus
 import org.rsmod.game.entity.Player
@@ -28,6 +29,7 @@ public class BonecrusherNpcDropHook
 constructor(
     private val areaChecker: AreaChecker,
     private val eventBus: EventBus,
+    private val xpMods: XpModifiers,
 ) : NpcDeathDropHook {
     private val boneXpByItem: Map<String, SkillPrayerRow> by lazy {
         SkillPrayerRow.all().filter { !it.ashes }.associateBy { it.item.internalName }
@@ -52,7 +54,7 @@ constructor(
             return false
         }
 
-        val prayerXp = row.exp.toDouble() / 2
+        val prayerXp = row.exp.toDouble() / 2 * xpMods.get(player, "stat.prayer")
         player.statAdvance("stat.prayer", prayerXp)
 
         eventBus.publish(SkillingActionCompleteEvent(player = player, context =
