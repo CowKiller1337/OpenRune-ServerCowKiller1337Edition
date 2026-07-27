@@ -4,6 +4,7 @@ import dev.openrune.rscm.RSCM.asRSCM
 import dev.openrune.rscm.RSCMType
 import dev.openrune.types.ItemServerType
 import dev.openrune.types.aconverted.CategoryType
+import dev.openrune.util.WeaponCategory
 import dev.openrune.util.Wearpos
 import org.rsmod.api.config.refs.params
 import org.rsmod.api.player.back
@@ -44,6 +45,19 @@ public object RangedAmmunition {
         weapon: ItemServerType,
         ammo: ItemServerType?,
     ): Boolean {
+        val salamander = WeaponCategory.getOrUnarmed(weapon.weaponCategory?.id) == WeaponCategory.Salamander
+        if (salamander) {
+            if (ammo == null) {
+                player.mes("There is no tar left in your quiver.")
+                return false
+            }
+            if (!validateSalamanderTar(weapon, ammo)) {
+                player.mes("You can't use that tar with your salamander.")
+                return false
+            }
+            return true
+        }
+
         val crossbow = weapon.isCategoryType("category.crossbow")
         if (crossbow) {
             if (ammo == null) {
@@ -239,6 +253,16 @@ public object RangedAmmunition {
             return Validation.Valid
         }
     }
+
+    private fun validateSalamanderTar(weapon: ItemServerType, ammo: ItemServerType): Boolean =
+        when {
+            weapon.isType("obj.green_salamander") -> ammo.isType("obj.salamander_tar_green")
+            weapon.isType("obj.orange_salamander") -> ammo.isType("obj.salamander_tar_orange")
+            weapon.isType("obj.red_salamander") -> ammo.isType("obj.salamander_tar_red")
+            weapon.isType("obj.black_salamander") -> ammo.isType("obj.salamander_tar_black")
+            weapon.isType("obj.mountain_salamander") -> ammo.isType("obj.salamander_tar_mountain")
+            else -> false
+        }
 
     public sealed class Validation {
         public data object Valid : Validation()

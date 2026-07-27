@@ -6,6 +6,7 @@ import org.rsmod.api.combat.commons.CombatAttack
 import org.rsmod.api.specials.combat.MagicSpecialAttack
 import org.rsmod.api.specials.combat.MeleeSpecialAttack
 import org.rsmod.api.specials.combat.RangedSpecialAttack
+import org.rsmod.api.specials.combat.ShieldSpecialAttack
 import org.rsmod.api.specials.instant.InstantSpecialAttack
 import org.rsmod.api.specials.weapon.SpecialAttackWeapons
 
@@ -28,6 +29,11 @@ constructor(private val registry: SpecialAttackRegistry) {
     public fun registerInstant(specWeapon: String, special: InstantSpecialAttack) {
         val result = registry.add(specWeapon, special)
         assertValidResult(specWeapon, result)
+    }
+
+    public fun registerInstant(specWeapon: Int, special: InstantSpecialAttack) {
+        val result = registry.add(specWeapon, special)
+        assertValidResult(specWeapon.toString(), result)
     }
 
     /**
@@ -70,6 +76,11 @@ constructor(private val registry: SpecialAttackRegistry) {
         assertValidResult(specWeapon, result)
     }
 
+    public fun registerMelee(specWeapon: Int, special: MeleeSpecialAttack) {
+        val result = registry.add(specWeapon, special)
+        assertValidResult(specWeapon.toString(), result)
+    }
+
     /**
      * Registers the [specWeapon] special attack ([special]) as a [RangedSpecialAttack], which
      * activates on the player's next ranged-based attack in combat.
@@ -107,6 +118,11 @@ constructor(private val registry: SpecialAttackRegistry) {
     public fun registerRanged(specWeapon: String, special: RangedSpecialAttack) {
         val result = registry.add(specWeapon, special)
         assertValidResult(specWeapon, result)
+    }
+
+    public fun registerRanged(specWeapon: Int, special: RangedSpecialAttack) {
+        val result = registry.add(specWeapon, special)
+        assertValidResult(specWeapon.toString(), result)
     }
 
     /**
@@ -150,6 +166,21 @@ constructor(private val registry: SpecialAttackRegistry) {
     public fun registerMagic(specWeapon: String, special: MagicSpecialAttack) {
         val result = registry.add(specWeapon, special)
         assertValidResult(specWeapon, result)
+    }
+
+    public fun registerMagic(specWeapon: Int, special: MagicSpecialAttack) {
+        val result = registry.add(specWeapon, special)
+        assertValidResult(specWeapon.toString(), result)
+    }
+
+    public fun registerShield(specWeapon: String, special: ShieldSpecialAttack) {
+        val result = registry.add(specWeapon, special)
+        assertValidResult(specWeapon, result)
+    }
+
+    public fun registerShield(specWeapon: Int, special: ShieldSpecialAttack) {
+        val result = registry.add(specWeapon, special)
+        assertValidResult(specWeapon.toString(), result)
     }
 
     private fun assertValidResult(

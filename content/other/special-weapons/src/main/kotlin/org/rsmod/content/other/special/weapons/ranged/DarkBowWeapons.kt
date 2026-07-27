@@ -29,6 +29,9 @@ class DarkBowWeapons @Inject constructor(private val ammunition: RangedAmmoManag
         register("obj.darkbow_yellow", DarkBow(manager, ammunition))
         register("obj.darkbow_white", DarkBow(manager, ammunition))
         register("obj.bh_darkbow_imbue", DarkBow(manager, ammunition))
+        register("obj.br_darkbow", DarkBow(manager, ammunition))
+        register("obj.deadman_darkbow", DarkBow(manager, ammunition))
+        register("obj.deadman_blighted_dark_bow", DarkBow(manager, ammunition))
     }
 
     private class DarkBow(
@@ -70,10 +73,17 @@ class DarkBowWeapons @Inject constructor(private val ammunition: RangedAmmoManag
             }
 
             val launchSpotanim = quiverType.paramOrNull(params.proj_launch)
+            val launchSpot = launchSpotanim?.let { spotanimMappingOrNull(it.id) }
+            val travelSpot = spotanimMappingOrNull(travelSpotanim.id)
+            if (travelSpot == null) {
+                manager.stopCombat(this)
+                mes("You are unable to fire your ammunition.")
+                return
+            }
             val quiverCount = player.quiver?.count ?: 0
 
             if (quiverCount == 1) {
-                shootSingleArrow(target, attack, quiverType, RSCM.getReverseMapping(RSCMType.SPOTANIM,launchSpotanim!!.id), RSCM.getReverseMapping(RSCMType.SPOTANIM,travelSpotanim.id))
+                shootSingleArrow(target, attack, quiverType, launchSpot, travelSpot)
                 manager.continueCombat(this, target)
                 return
             }
@@ -81,7 +91,8 @@ class DarkBowWeapons @Inject constructor(private val ammunition: RangedAmmoManag
             if (quiverCount >= 2) {
                 val doubleLaunchSpotanim =
                     quiverType.paramOrNull(params.proj_launch_double) ?: launchSpotanim
-                shootDoubleArrow(target, attack, quiverType, RSCM.getReverseMapping(RSCMType.SPOTANIM,doubleLaunchSpotanim!!.id), RSCM.getReverseMapping(RSCMType.SPOTANIM,travelSpotanim.id))
+                val doubleLaunchSpot = doubleLaunchSpotanim?.let { spotanimMappingOrNull(it.id) }
+                shootDoubleArrow(target, attack, quiverType, doubleLaunchSpot, travelSpot)
                 manager.continueCombat(this, target)
                 return
             }
@@ -159,6 +170,13 @@ class DarkBowWeapons @Inject constructor(private val ammunition: RangedAmmoManag
             if (player.quiver?.count == 1) {
                 mes("You now have only 1 arrow left in your quiver.")
             }
+        }
+
+        private fun spotanimMappingOrNull(id: Int): String? {
+            if (id == 0xFFFF || id < 0) {
+                return null
+            }
+            return runCatching { RSCM.getReverseMapping(RSCMType.SPOTANIM, id) }.getOrNull()
         }
     }
 }

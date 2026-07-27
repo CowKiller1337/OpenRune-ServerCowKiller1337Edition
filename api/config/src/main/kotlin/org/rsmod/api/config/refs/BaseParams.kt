@@ -55,6 +55,16 @@ object BaseParams {
     val statreq1_level: ParamInt = param("statreq1_level")
     val statreq2_skill: ParamStat = param("statreq2_skill")
     val statreq2_level: ParamInt = param("statreq2_level")
+    val statreq3_skill: ParamStat = param("statreq3_skill")
+    val statreq3_level: ParamInt = param("statreq3_level")
+    val statreq4_skill: ParamStat = param("statreq4_skill")
+    val statreq4_level: ParamInt = param("statreq4_level")
+    val statreq5_skill: ParamStat = param("statreq5_skill")
+    val statreq5_level: ParamInt = param("statreq5_level")
+    val statreq6_skill: ParamStat = param("statreq6_skill")
+    val statreq6_level: ParamInt = param("statreq6_level")
+    val statreq7_skill: ParamStat = param("statreq7_skill")
+    val statreq7_level: ParamInt = param("statreq7_level")
     /**
      * Unlike [statreq1_level] and [statreq2_level], this level requirement is not used when
      * equipping objs but applies to specific skill-related actions.

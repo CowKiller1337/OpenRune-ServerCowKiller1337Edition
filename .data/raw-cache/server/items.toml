@@ -12062,6 +12062,7 @@ weaponCategory="Thrown"
 [item.params]
 "param.bas_walk_l"="seq.human_chinchompa_walk"
 "param.proj_type"="projanim.thrown"
+"param.proj_travel"="spotanim.chinchompa_grenade"
 "param.bas_walk_r"="seq.human_chinchompa_walk"
 "param.bas_running"="seq.human_chinchompa_run"
 "param.attack_range"=6
@@ -13510,6 +13511,7 @@ inherit = "obj.orange_salamander"
 weaponCategory="Salamander"
 [item.params]
 "param.bas_walk_l"="seq.human_walkforward_salamander"
+"param.proj_type"="projanim.thrown"
 "param.bas_walk_r"="seq.human_walkforward_salamander"
 "param.equipment_sound"=732
 "param.attack_anim_stance1"="seq.human_attack_salamander"
@@ -13529,6 +13531,7 @@ inherit = "obj.red_salamander"
 weaponCategory="Salamander"
 [item.params]
 "param.bas_walk_l"="seq.human_walkforward_salamander"
+"param.proj_type"="projanim.thrown"
 "param.bas_walk_r"="seq.human_walkforward_salamander"
 "param.equipment_sound"=732
 "param.attack_anim_stance1"="seq.human_attack_salamander"
@@ -13548,6 +13551,7 @@ inherit = "obj.black_salamander"
 weaponCategory="Salamander"
 [item.params]
 "param.bas_walk_l"="seq.human_walkforward_salamander"
+"param.proj_type"="projanim.thrown"
 "param.bas_walk_r"="seq.human_walkforward_salamander"
 "param.equipment_sound"=732
 "param.attack_anim_stance1"="seq.human_attack_salamander"
@@ -13567,6 +13571,7 @@ inherit = "obj.green_salamander"
 weaponCategory="Salamander"
 [item.params]
 "param.bas_walk_l"="seq.human_walkforward_salamander"
+"param.proj_type"="projanim.thrown"
 "param.bas_walk_r"="seq.human_walkforward_salamander"
 "param.equipment_sound"=732
 "param.attack_anim_stance1"="seq.human_attack_salamander"
@@ -16317,6 +16322,7 @@ tradeable = false
 [item.params]
 "param.bas_walk_l"="seq.human_halberdwalk_l"
 "param.proj_type"="projanim.thrown"
+"param.proj_travel"="spotanim.rune_dart_travel"
 "param.bas_walk_r"="seq.human_halberdwalk_r"
 "param.bas_running"="seq.human_halberdrunning"
 "param.attackrate"=3
@@ -19814,6 +19820,8 @@ weaponCategory="Thrown"
 tradeable = false
 [item.params]
 "param.proj_type"="projanim.thrown"
+"param.proj_travel"="spotanim.morrigans_javelin_travel"
+"param.proj_launch"="spotanim.morrigans_javelin_launch"
 "param.equipment_sound"=2247
 "param.attack_range"=5
 "param.attack_anim_stance1"="seq.human_stake2"
@@ -22779,6 +22787,7 @@ weaponCategory="Thrown"
 tradeable = false
 [item.params]
 "param.proj_type"="projanim.thrown"
+"param.proj_travel"="spotanim.dragon_tknife_travel"
 "param.equipment_sound"=2244
 "param.attack_range"=4
 "param.attack_anim_stance1"="seq.human_dragon_knife"
@@ -23324,6 +23333,8 @@ weaponCategory="Thrown"
 tradeable = false
 [item.params]
 "param.proj_type"="projanim.thrown"
+"param.proj_travel"="spotanim.morrigans_taxe_travel"
+"param.proj_launch"="spotanim.morrigans_taxe_launch"
 "param.equipment_sound"=2232
 "param.attack_range"=4
 "param.attack_anim_stance1"="seq.human_stake2"
@@ -23343,6 +23354,8 @@ weaponCategory="Thrown"
 tradeable = false
 [item.params]
 "param.proj_type"="projanim.thrown"
+"param.proj_travel"="spotanim.morrigans_javelin_travel"
+"param.proj_launch"="spotanim.morrigans_javelin_launch"
 "param.equipment_sound"=2247
 "param.attack_range"=5
 "param.attack_anim_stance1"="seq.human_stake2"
@@ -23403,6 +23416,7 @@ tradeable = false
 [item.params]
 "param.bas_walk_l"="seq.human_halberdwalk_l"
 "param.proj_type"="projanim.thrown"
+"param.proj_travel"="spotanim.rune_dart_travel"
 "param.bas_walk_r"="seq.human_halberdwalk_r"
 "param.bas_running"="seq.human_halberdrunning"
 "param.attackrate"=3
@@ -23426,6 +23440,7 @@ inherit = "obj.mountain_salamander"
 weaponCategory="Salamander"
 [item.params]
 "param.bas_walk_l"="seq.human_walkforward_salamander"
+"param.proj_type"="projanim.thrown"
 "param.bas_walk_r"="seq.human_walkforward_salamander"
 "param.equipment_sound"=732
 "param.attack_anim_stance1"="seq.human_attack_salamander"
@@ -23445,6 +23460,7 @@ inherit = "obj.tonalztics_of_ralos_uncharged"
 weaponCategory="Thrown"
 [item.params]
 "param.proj_type"="projanim.thrown"
+"param.proj_travel"="spotanim.rune_dart_travel"
 "param.equipment_sound"=2232
 "param.attack_range"=5
 "param.attack_anim_stance1"="seq.human_glaive_ralos01_uncharged_throw"
@@ -23464,6 +23480,7 @@ weaponCategory="Thrown"
 tradeable = false
 [item.params]
 "param.proj_type"="projanim.thrown"
+"param.proj_travel"="spotanim.rune_dart_travel"
 "param.equipment_sound"=2232
 "param.attack_range"=5
 "param.attack_anim_stance1"="seq.human_glaive_ralos01_uncharged_throw"
@@ -23770,8 +23787,18 @@ weaponCategory="Thrown"
 tradeable = false
 [item.params]
 "param.proj_type"="projanim.thrown"
+"param.proj_travel"="spotanim.rune_dart_travel"
+"param.proj_launch"="spotanim.rune_dart_launch"
 "param.equipment_sound"=2244
 "param.attackrate"=3
+"param.attack_range"=3
+"param.attack_anim_stance1"="seq.ii_human_dart_throw_pvn"
+"param.attack_sound_stance1"=2696
+"param.attack_anim_stance2"="seq.ii_human_dart_throw_pvn"
+"param.attack_sound_stance2"=2696
+"param.attack_anim_stance4"="seq.ii_human_dart_throw_pvn"
+"param.attack_sound_stance4"=2696
+"param.defend_anim"="seq.human_unarmedblock"
 
 
 [[item]]
@@ -28705,6 +28732,7 @@ inherit = "obj.hunting_black_spiked_vambraces"
 id = "obj.salamander_tar_green"
 inherit = "obj.salamander_tar_green"
 [item.params]
+"param.proj_travel"="spotanim.rune_dart_travel"
 "param.equipment_sound"=2244
 
 
@@ -28712,6 +28740,7 @@ inherit = "obj.salamander_tar_green"
 id = "obj.salamander_tar_orange"
 inherit = "obj.salamander_tar_orange"
 [item.params]
+"param.proj_travel"="spotanim.rune_dart_travel"
 "param.equipment_sound"=2244
 
 
@@ -28719,6 +28748,7 @@ inherit = "obj.salamander_tar_orange"
 id = "obj.salamander_tar_red"
 inherit = "obj.salamander_tar_red"
 [item.params]
+"param.proj_travel"="spotanim.rune_dart_travel"
 "param.equipment_sound"=2244
 
 
@@ -28726,6 +28756,7 @@ inherit = "obj.salamander_tar_red"
 id = "obj.salamander_tar_black"
 inherit = "obj.salamander_tar_black"
 [item.params]
+"param.proj_travel"="spotanim.rune_dart_travel"
 "param.equipment_sound"=2244
 
 
@@ -33725,9 +33756,18 @@ inherit = "obj.amethyst_dart"
 weaponCategory="Thrown"
 [item.params]
 "param.proj_type"="projanim.thrown"
+"param.proj_travel"="spotanim.rune_dart_travel"
+"param.proj_launch"="spotanim.rune_dart_launch"
 "param.equipment_sound"=2244
 "param.attack_range"=3
 "param.attackrate"=3
+"param.attack_anim_stance1"="seq.ii_human_dart_throw_pvn"
+"param.attack_sound_stance1"=2696
+"param.attack_anim_stance2"="seq.ii_human_dart_throw_pvn"
+"param.attack_sound_stance2"=2696
+"param.attack_anim_stance4"="seq.ii_human_dart_throw_pvn"
+"param.attack_sound_stance4"=2696
+"param.defend_anim"="seq.human_unarmedblock"
 
 
 [[item]]
@@ -33736,9 +33776,18 @@ inherit = "obj.amethyst_dart_p"
 weaponCategory="Thrown"
 [item.params]
 "param.proj_type"="projanim.thrown"
+"param.proj_travel"="spotanim.rune_dart_travel"
+"param.proj_launch"="spotanim.rune_dart_launch"
 "param.equipment_sound"=2244
 "param.attack_range"=3
 "param.attackrate"=3
+"param.attack_anim_stance1"="seq.ii_human_dart_throw_pvn"
+"param.attack_sound_stance1"=2696
+"param.attack_anim_stance2"="seq.ii_human_dart_throw_pvn"
+"param.attack_sound_stance2"=2696
+"param.attack_anim_stance4"="seq.ii_human_dart_throw_pvn"
+"param.attack_sound_stance4"=2696
+"param.defend_anim"="seq.human_unarmedblock"
 
 
 [[item]]
@@ -33747,9 +33796,18 @@ inherit = "obj.amethyst_dart_p+"
 weaponCategory="Thrown"
 [item.params]
 "param.proj_type"="projanim.thrown"
+"param.proj_travel"="spotanim.rune_dart_travel"
+"param.proj_launch"="spotanim.rune_dart_launch"
 "param.equipment_sound"=2244
 "param.attack_range"=3
 "param.attackrate"=3
+"param.attack_anim_stance1"="seq.ii_human_dart_throw_pvn"
+"param.attack_sound_stance1"=2696
+"param.attack_anim_stance2"="seq.ii_human_dart_throw_pvn"
+"param.attack_sound_stance2"=2696
+"param.attack_anim_stance4"="seq.ii_human_dart_throw_pvn"
+"param.attack_sound_stance4"=2696
+"param.defend_anim"="seq.human_unarmedblock"
 
 
 [[item]]
@@ -33758,9 +33816,18 @@ inherit = "obj.amethyst_dart_p++"
 weaponCategory="Thrown"
 [item.params]
 "param.proj_type"="projanim.thrown"
+"param.proj_travel"="spotanim.rune_dart_travel"
+"param.proj_launch"="spotanim.rune_dart_launch"
 "param.equipment_sound"=2244
 "param.attack_range"=3
 "param.attackrate"=3
+"param.attack_anim_stance1"="seq.ii_human_dart_throw_pvn"
+"param.attack_sound_stance1"=2696
+"param.attack_anim_stance2"="seq.ii_human_dart_throw_pvn"
+"param.attack_sound_stance2"=2696
+"param.attack_anim_stance4"="seq.ii_human_dart_throw_pvn"
+"param.attack_sound_stance4"=2696
+"param.defend_anim"="seq.human_unarmedblock"
 
 
 [[item]]
@@ -35392,6 +35459,7 @@ tradeable = false
 id = "obj.salamander_tar_mountain"
 inherit = "obj.salamander_tar_mountain"
 [item.params]
+"param.proj_travel"="spotanim.rune_dart_travel"
 "param.equipment_sound"=2244
 
 
@@ -46879,6 +46947,8 @@ weaponCategory="Thrown"
 tradeable = false
 [item.params]
 "param.proj_type"="projanim.thrown"
+"param.proj_travel"="spotanim.morrigans_taxe_travel"
+"param.proj_launch"="spotanim.morrigans_taxe_launch"
 "param.attack_range"=5
 "param.attackrate"=3
 
@@ -49462,8 +49532,17 @@ inherit = "obj.hg_hunter_spear"
 weaponCategory="Thrown"
 [item.params]
 "param.proj_type"="projanim.thrown"
+"param.proj_travel"="spotanim.morrigans_javelin_travel"
+"param.proj_launch"="spotanim.morrigans_javelin_launch"
 "param.attack_range"=5
 "param.attackrate"=6
+"param.attack_anim_stance1"="seq.human_stake2"
+"param.attack_sound_stance1"=2699
+"param.attack_anim_stance2"="seq.human_stake2"
+"param.attack_sound_stance2"=2699
+"param.attack_anim_stance4"="seq.human_stake2"
+"param.attack_sound_stance4"=2699
+"param.defend_anim"="seq.human_unarmedblock"
 
 
 [[item]]
@@ -49837,8 +49916,17 @@ weaponCategory="Thrown"
 tradeable = false
 [item.params]
 "param.proj_type"="projanim.thrown"
+"param.proj_travel"="spotanim.morrigans_javelin_travel"
+"param.proj_launch"="spotanim.morrigans_javelin_launch"
 "param.attack_range"=5
 "param.attackrate"=6
+"param.attack_anim_stance1"="seq.human_stake2"
+"param.attack_sound_stance1"=2699
+"param.attack_anim_stance2"="seq.human_stake2"
+"param.attack_sound_stance2"=2699
+"param.attack_anim_stance4"="seq.human_stake2"
+"param.attack_sound_stance4"=2699
+"param.defend_anim"="seq.human_unarmedblock"
 
 
 [[item]]
@@ -50557,6 +50645,7 @@ weaponCategory="Thrown"
 tradeable = false
 [item.params]
 "param.proj_type"="projanim.thrown"
+"param.proj_travel"="spotanim.rune_dart_travel"
 "param.attack_range"=6
 "param.attackrate"=3
 
@@ -50943,6 +51032,7 @@ inherit = "obj.toxic_blowpipe"
 weaponCategory="Thrown"
 [item.params]
 "param.proj_type"="projanim.thrown"
+"param.proj_travel"="spotanim.rune_dart_travel"
 "param.attack_range"=5
 "param.attackrate"=3
 
@@ -51270,6 +51360,7 @@ weaponCategory="Thrown"
 tradeable = false
 [item.params]
 "param.proj_type"="projanim.thrown"
+"param.proj_travel"="spotanim.rune_dart_travel"
 "param.attack_range"=4
 
 
@@ -51286,7 +51377,50 @@ inherit = "obj.echo_godsword"
 weaponCategory="TwoHandedSword"
 tradeable = false
 [item.params]
+"param.bas_walk_l"="seq.dh_sword_update_walk_left"
+"param.bas_walk_r"="seq.dh_sword_update_walk_right"
+"param.bas_running"="seq.dh_sword_update_run"
+"param.equipment_sound"=2248
 "param.attackrate"=6
+"param.attack_anim_stance1"="seq.dh_sword_update_slash"
+"param.attack_sound_stance1"=3847
+"param.attack_anim_stance2"="seq.dh_sword_update_slash"
+"param.attack_sound_stance2"=3847
+"param.attack_anim_stance3"="seq.dh_sword_update_smash"
+"param.attack_sound_stance3"=3846
+"param.attack_anim_stance4"="seq.dh_sword_update_block"
+"param.attack_sound_stance4"=3847
+"param.bas_readyanim"="seq.dh_sword_update_ready"
+"param.bas_turnonspot"="seq.dh_sword_update_turnonspot"
+"param.defend_anim"="seq.dh_sword_update_defend"
+"param.bas_walk_f"="seq.dh_sword_update_walk"
+"param.bas_walk_b"="seq.dh_sword_update_walk"
+
+
+[[item]]
+id = "obj.deadman_dogsword"
+inherit = "obj.deadman_dogsword"
+weaponCategory="TwoHandedSword"
+tradeable = false
+[item.params]
+"param.bas_walk_l"="seq.dh_sword_update_walk_left"
+"param.bas_walk_r"="seq.dh_sword_update_walk_right"
+"param.bas_running"="seq.dh_sword_update_run"
+"param.equipment_sound"=2248
+"param.attackrate"=6
+"param.attack_anim_stance1"="seq.dh_sword_update_slash"
+"param.attack_sound_stance1"=3847
+"param.attack_anim_stance2"="seq.dh_sword_update_slash"
+"param.attack_sound_stance2"=3847
+"param.attack_anim_stance3"="seq.dh_sword_update_smash"
+"param.attack_sound_stance3"=3846
+"param.attack_anim_stance4"="seq.dh_sword_update_block"
+"param.attack_sound_stance4"=3847
+"param.bas_readyanim"="seq.dh_sword_update_ready"
+"param.bas_turnonspot"="seq.dh_sword_update_turnonspot"
+"param.defend_anim"="seq.dh_sword_update_defend"
+"param.bas_walk_f"="seq.dh_sword_update_walk"
+"param.bas_walk_b"="seq.dh_sword_update_walk"
 
 
 [[item]]
@@ -51409,6 +51543,7 @@ weaponCategory="Thrown"
 tradeable = false
 [item.params]
 "param.proj_type"="projanim.thrown"
+"param.proj_travel"="spotanim.rune_dart_travel"
 "param.attack_range"=5
 "param.attackrate"=3
 
@@ -51514,6 +51649,7 @@ weaponCategory="Thrown"
 tradeable = false
 [item.params]
 "param.proj_type"="projanim.thrown"
+"param.proj_travel"="spotanim.rune_dart_travel"
 "param.attack_range"=6
 "param.attackrate"=3
 
@@ -51951,8 +52087,17 @@ weaponCategory="Thrown"
 tradeable = false
 [item.params]
 "param.proj_type"="projanim.thrown"
+"param.proj_travel"="spotanim.morrigans_taxe_travel"
+"param.proj_launch"="spotanim.morrigans_taxe_launch"
 "param.attack_range"=4
 "param.attackrate"=5
+"param.attack_anim_stance1"="seq.human_stake2"
+"param.attack_sound_stance1"=2706
+"param.attack_anim_stance2"="seq.human_stake2"
+"param.attack_sound_stance2"=2706
+"param.attack_anim_stance4"="seq.human_stake2"
+"param.attack_sound_stance4"=2706
+"param.defend_anim"="seq.human_unarmedblock"
 
 
 [[item]]

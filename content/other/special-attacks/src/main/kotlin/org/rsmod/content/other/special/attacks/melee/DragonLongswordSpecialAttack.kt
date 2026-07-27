@@ -14,7 +14,9 @@ import org.rsmod.game.entity.Player
 
 class DragonLongswordSpecialAttack : SpecialAttackMap {
     override fun SpecialAttackRepository.register(manager: SpecialAttackManager) {
-        registerMelee("obj.dragon_longsword", DragonLongsword(manager))
+        for (obj in DragonLongswords) {
+            registerMelee(obj, DragonLongsword(manager))
+        }
     }
 
     private class DragonLongsword(private val manager: SpecialAttackManager) : MeleeSpecialAttack {
@@ -55,5 +57,14 @@ class DragonLongswordSpecialAttack : SpecialAttackMap {
             manager.queueMeleeHit(this, target, damage)
             manager.continueCombat(this, target)
         }
+    }
+
+    private companion object {
+        private val DragonLongswords =
+            arrayOf(
+                "obj.dragon_longsword",
+                "obj.bh_dragon_longsword_imbue",
+                "obj.bh_dragon_longsword_corrupted",
+            )
     }
 }

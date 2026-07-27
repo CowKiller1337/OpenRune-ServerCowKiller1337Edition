@@ -488,6 +488,7 @@ constructor(
         when (specialReg[righthand]) {
             is SpecialAttack.Combat -> activateCombatSpecial()
             is SpecialAttack.Instant -> attemptInstantSpecial()
+            is SpecialAttack.Shield -> resetSpecialType()
             null -> {
                 resetSpecialType()
                 mes("This weapon does not have a special attack.")

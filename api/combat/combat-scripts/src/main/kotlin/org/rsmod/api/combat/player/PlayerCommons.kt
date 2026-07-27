@@ -225,7 +225,13 @@ internal suspend fun ProtectedAccess.activateShieldSpecial(
     target: PathingEntity,
     shield: InvObj?,
     specials: SpecialAttackRegistry,
-): Boolean = TODO()
+): Boolean {
+    val special = shield?.let(specials::get) ?: return false
+    if (special !is SpecialAttack.Shield) {
+        return false
+    }
+    return special.attack(this, target)
+}
 
 internal fun ProtectedAccess.setPkVars(target: Player) {
     pkPrey2 = pkPrey1

@@ -21,6 +21,15 @@ public class SpecialAttackWeapons() {
 
     public fun getSpecialDescription(objType: Int): String? = descriptions[objType]
 
+    public fun getAllSpecialWeapons(): List<SpecialAttackWeaponInfo> =
+        energyRequirements.map { (objType, energy) ->
+            SpecialAttackWeaponInfo(
+                objType = objType,
+                energy = energy,
+                description = descriptions[objType],
+            )
+        }
+
     internal fun startup() {
         val energyRequirements = loadEnergyRequirements()
         this.energyRequirements = energyRequirements
@@ -58,3 +67,9 @@ public class SpecialAttackWeapons() {
         private const val MAX_ENERGY = SpecialAttackEnergy.MAX_ENERGY
     }
 }
+
+public data class SpecialAttackWeaponInfo(
+    public val objType: Int,
+    public val energy: Int,
+    public val description: String?,
+)

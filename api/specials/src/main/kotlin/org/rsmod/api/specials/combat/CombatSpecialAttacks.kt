@@ -56,3 +56,9 @@ public interface MeleeSpecialAttack : CombatSpecialAttack<CombatAttack.Melee>
 public interface RangedSpecialAttack : CombatSpecialAttack<CombatAttack.Ranged>
 
 public interface MagicSpecialAttack : CombatSpecialAttack<CombatAttack.Staff>
+
+public interface ShieldSpecialAttack {
+    public suspend fun ProtectedAccess.attack(target: Npc): Boolean
+
+    public suspend fun ProtectedAccess.attack(target: Player): Boolean
+}

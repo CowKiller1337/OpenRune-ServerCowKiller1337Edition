@@ -8,6 +8,7 @@ import dev.openrune.types.SequenceServerType
 import dev.openrune.types.StatType
 import dev.openrune.types.aconverted.SpotanimType
 import dev.openrune.types.aconverted.SynthType
+import dev.openrune.util.WeaponCategory
 import jakarta.inject.Inject
 import kotlin.math.min
 import org.rsmod.api.combat.commons.CombatAttack
@@ -209,20 +210,41 @@ constructor(
      * Plays the animation and sound effects for the given [attack], using the
      * [CombatAttack.Ranged.weapon] obj type params to determine which effects to play.
      *
-     * If the weapon does not define an attack animation param (`attack_anim_stance1`), this
-     * function will return `false` to indicate that the weapon is considered "broken" or invalid in
-     * this context, and no effects will be played.
+     * If the weapon does not define an attack animation param (`attack_anim_stance1`), this uses a
+     * conservative fallback for the weapon category so sparse cache variants can still attack.
      *
      * @return `true` if the ranged weapon has an anim associated with param `attack_anim_stance1`.
      */
     public fun playWeaponFx(player: Player, attack: CombatAttack.Ranged): Boolean {
         val weapon = getInvObj(attack.weapon)
-        val attackAnim = weapon.paramOrNull(params.attack_anim_stance1) ?: return false
+        val attackAnim =
+            weapon.paramOrNull(params.attack_anim_stance1) ?: weapon.defaultRangedAttackAnim()
+                ?: return false
         player.anim(RSCM.getReverseMapping(RSCMType.SEQ,attackAnim.id))
         val attackSound = weapon.paramOrNull(params.attack_sound_stance1)
         attackSound?.let(player::soundSynth)
         return true
     }
+
+    private fun ItemServerType.defaultRangedAttackAnim(): SequenceServerType? {
+        val seq =
+            when (WeaponCategory.getOrUnarmed(weaponCategory?.id)) {
+                WeaponCategory.Bow -> "seq.human_bow"
+                WeaponCategory.Crossbow -> "seq.xbows_human_fire_and_reload_pvn"
+                WeaponCategory.Chinchompas -> "seq.human_chinchompa_attack_pvn"
+                WeaponCategory.Salamander -> "seq.human_attack_salamander"
+                WeaponCategory.Thrown -> defaultThrownAttackAnim()
+                else -> return null
+            }
+        return SequenceServerType(seq.asRSCM(RSCMType.SEQ))
+    }
+
+    private fun ItemServerType.defaultThrownAttackAnim(): String =
+        when {
+            name.contains("dart", ignoreCase = true) -> "seq.ii_human_dart_throw_pvn"
+            name.contains("blowpipe", ignoreCase = true) -> "seq.snakeboss_blowpipe_attack"
+            else -> "seq.human_stake2"
+        }
 
     /**
      * Calculates and grants combat experience based on the given [attack], [damage], and the

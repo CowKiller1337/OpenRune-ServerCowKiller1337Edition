@@ -114,7 +114,9 @@ public class HeldEquipOp @Inject constructor(private val eventBus: EventBus) {
 
     private fun equip(player: Player, type: ItemServerType): HeldEquipResult {
         val statRequirements =
-            type.statRequirements().filter { player.statBase(RSCM.getReverseMapping(RSCMType.STAT,it.stat.id)) < it.level }
+            type.equipmentStatRequirements().filter {
+                player.statBase(RSCM.getReverseMapping(RSCMType.STAT, it.stat.id)) < it.level
+            }
         if (statRequirements.isNotEmpty()) {
             val messages = type.toMessages(statRequirements)
             return HeldEquipResult.Fail.StatRequirements(messages)
@@ -137,42 +139,38 @@ public class HeldEquipOp @Inject constructor(private val eventBus: EventBus) {
         return HeldEquipResult.Success(unequipWearpos, wearpos1)
     }
 
-    private fun ItemServerType.statRequirements(): List<StatRequirement> {
-        val skillReq1 = paramOrNull(BaseParams.statreq1_skill)
-        val skillReq2 = paramOrNull(BaseParams.statreq2_skill)
-        if (skillReq1 == null && skillReq2 == null) {
-            return emptyList()
-        }
-        val levelReq1 = paramOrNull(BaseParams.statreq1_level) ?: 0
-        val levelReq2 = paramOrNull(BaseParams.statreq2_level) ?: 0
-        val statReq1 = skillReq1?.let { StatRequirement(it, levelReq1) }
-        val statReq2 = skillReq2?.let { StatRequirement(it, levelReq2) }
-        return listOfNotNull(statReq1, statReq2)
-    }
-
-    private fun ItemServerType.toMessages(reqs: List<StatRequirement>): Pair<String, String> {
+    private fun ItemServerType.toMessages(reqs: List<StatRequirement>): List<String> {
         val message1 = param(BaseParams.statreq_failmessage1)
         val message2 = paramOrNull(BaseParams.statreq_failmessage2)
-        val replace =
+        val messages =
             when (reqs.size) {
                 1 -> {
                     val message = message2 ?: DEFAULT_STAT_MESSAGE1
-                    message
-                        .replace("{skill1}", reqs[0].stat.displayName.addArticle())
-                        .replace("{level1}", reqs[0].level.toString())
+                    listOf(
+                        message
+                            .replace("{skill1}", reqs[0].stat.displayName.addArticle())
+                            .replace("{level1}", reqs[0].level.toString())
+                    )
                 }
                 2 -> {
                     val message = message2 ?: DEFAULT_STAT_MESSAGE2
-                    message
-                        .replace("{skill1}", reqs[0].stat.displayName.addArticle())
-                        .replace("{level1}", reqs[0].level.toString())
-                        .replace("{skill2}", reqs[1].stat.displayName.addArticle())
-                        .replace("{level2}", reqs[1].level.toString())
+                    listOf(
+                        message
+                            .replace("{skill1}", reqs[0].stat.displayName.addArticle())
+                            .replace("{level1}", reqs[0].level.toString())
+                            .replace("{skill2}", reqs[1].stat.displayName.addArticle())
+                            .replace("{level2}", reqs[1].level.toString())
+                    )
                 }
-                else -> error("Obj unexpected stat requirement list size: reqs=$reqs, type=$this")
+                else -> reqs.map { it.toRequirementMessage() }
             }
-        return message1 to replace
+        return listOf(message1) + messages
     }
+
+    private fun StatRequirement.toRequirementMessage(): String =
+        DEFAULT_STAT_MESSAGE1
+            .replace("{skill1}", stat.displayName.addArticle())
+            .replace("{level1}", level.toString())
 
     private fun ItemServerType.isTwoHanded(): Boolean =
         wearpos2 == Wearpos.LeftHand.slot || wearpos3 == Wearpos.LeftHand.slot

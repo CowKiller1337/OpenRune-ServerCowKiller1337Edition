@@ -206,8 +206,10 @@ constructor(
         val usingThrown = righthandType.isCategoryType("category.throwing_weapon")
 
         val weaponType = if (usingThrown) righthandType else quiverType
-        checkNotNull(weaponType) {
-            "Unexpected null weapon type: righthand=$righthandType, quiver=$quiverType"
+        if (weaponType == null) {
+            manager.stopCombat(player)
+            mes("There is no ammo left in your quiver.")
+            return
         }
 
         val projectileID = righthandType.paramOrNull(params.proj_type)?.id
@@ -220,7 +222,12 @@ constructor(
             return
         }
 
-        val projanimType = RSCM.getReverseMapping(RSCMType.PROJANIM,projectileID)
+        val projanimType = projanimMappingOrNull(projectileID)
+        if (projanimType == null) {
+            manager.stopCombat(player)
+            mes("You are unable to fire your ammunition.")
+            return
+        }
 
         // All valid ranged weapons require an `attack_anim_stance1` seq type param to be used in
         // combat.
@@ -237,7 +244,10 @@ constructor(
         // has no `proj_launch` param, a "null" (-1) spotanim will still be sent in the same slot
         // and height as usual.
         val launchSpotanim = weaponType.paramOrNull(params.proj_launch)?.id ?: NULL_SPOTANIM_ID
-        player.spotanim(RSCM.getReverseMapping(RSCMType.SPOTANIM,launchSpotanim), height = 96, slot = constants.spotanim_slot_combat)
+        val launchSpotanimName = spotanimMappingOrNull(launchSpotanim)
+        if (launchSpotanimName != null) {
+            player.spotanim(launchSpotanimName, height = 96, slot = constants.spotanim_slot_combat)
+        }
 
         val projanim = manager.spawnProjectile(player, target, travelSpotanim, projanimType)
         val (serverDelay, clientDelay) = projanim.durations
