@@ -12,12 +12,14 @@ This branch contains both weapon fixes and special attack work.
 - Equipment stat requirement cleanup for wielding weapons.
 - Special attack support for melee, ranged, magic, instant boost specs, and shields.
 - Dark bow variant support, including Deadman/blighted variants.
+- Official OpenRune multi-hit melee support, including Scythe of Vitur and the bopper family.
 
 ## Current Status
 
 - `::weaponaudit critical` shows `0` critical issues.
 - `::specaudit` shows `0` weapons missing a registered special attack.
 - `::weaponaudit visual` previously showed `185` visual issues. The latest definition pass should reduce this to roughly `37`, pending an in-game rerun of the audit command.
+- Official OpenRune `main` has been merged through `3dd2440cf`.
 
 The remaining weapon work is mostly visual polish. These weapons should no longer crash combat, but a few still use fallback attack animations or placeholder projectile/spotanim data.
 
