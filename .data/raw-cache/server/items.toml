@@ -2412,7 +2412,21 @@ tradeable = false
 "param.additional_spell_autocast2"=3309
 "param.equipment_sound"=2246
 "param.attackrate"=5
-
+[item.params]
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.attack_anim_stance1"="seq.human_stafforb_pummel"
+"param.attack_sound_stance1"=2555
+"param.attack_anim_stance2"="seq.human_stafforb_pummel"
+"param.attack_sound_stance2"=2555
+"param.attack_anim_stance4"="seq.human_stafforb_pummel"
+"param.attack_sound_stance4"=2555
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_stafforb_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 [[item]]
 id = "obj.pest_void_knight_mace_trouver"
@@ -2424,6 +2438,21 @@ tradeable = false
 "param.additional_spell_autocast2"=3309
 "param.equipment_sound"=2246
 "param.attackrate"=5
+[item.params]
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.attack_anim_stance1"="seq.human_stafforb_pummel"
+"param.attack_sound_stance1"=2555
+"param.attack_anim_stance2"="seq.human_stafforb_pummel"
+"param.attack_sound_stance2"=2555
+"param.attack_anim_stance4"="seq.human_stafforb_pummel"
+"param.attack_sound_stance4"=2555
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_stafforb_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 [[item]]
 id = "obj.minigame_teleport"
@@ -23700,7 +23729,16 @@ weaponCategory="StabSword"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2248
-
+[item.params]
+"param.attack_anim_stance1"="seq.human_sword_stab"
+"param.attack_sound_stance1"=2549
+"param.attack_anim_stance2"="seq.human_sword_stab"
+"param.attack_sound_stance2"=2549
+"param.attack_anim_stance3"="seq.human_sword_slash"
+"param.attack_sound_stance3"=2548
+"param.attack_anim_stance4"="seq.human_sword_stab"
+"param.attack_sound_stance4"=2549
+"param.defend_anim"="seq.human_sword_def"
 
 [[item]]
 id = "obj.unlitarrow"
@@ -24587,7 +24625,16 @@ weaponCategory="StabSword"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2248
-
+[item.params]
+"param.attack_anim_stance1"="seq.human_sword_stab"
+"param.attack_sound_stance1"=2549
+"param.attack_anim_stance2"="seq.human_sword_stab"
+"param.attack_sound_stance2"=2549
+"param.attack_anim_stance3"="seq.human_sword_slash"
+"param.attack_sound_stance3"=2548
+"param.attack_anim_stance4"="seq.human_sword_stab"
+"param.attack_sound_stance4"=2549
+"param.defend_anim"="seq.human_sword_def"
 
 [[item]]
 id = "obj.klanks_gauntlets"
@@ -25380,7 +25427,16 @@ tradeable = false
 [item.params]
 "param.equipment_sound"=2248
 "param.attackrate"=5
-
+[item.params]
+"param.attack_anim_stance1"="seq.human_sword_slash"
+"param.attack_sound_stance1"=2500
+"param.attack_anim_stance2"="seq.human_sword_slash"
+"param.attack_sound_stance2"=2500
+"param.attack_anim_stance3"="seq.human_sword_stab"
+"param.attack_sound_stance3"=2501
+"param.attack_anim_stance4"="seq.human_sword_slash"
+"param.attack_sound_stance4"=2500
+"param.defend_anim"="seq.human_sword_def"
 
 [[item]]
 id = "obj.castlewars_armour_body"
@@ -25655,7 +25711,16 @@ tradeable = false
 [item.params]
 "param.equipment_sound"=2248
 "param.attackrate"=5
-
+[item.params]
+"param.attack_anim_stance1"="seq.human_sword_slash"
+"param.attack_sound_stance1"=2500
+"param.attack_anim_stance2"="seq.human_sword_slash"
+"param.attack_sound_stance2"=2500
+"param.attack_anim_stance3"="seq.human_sword_stab"
+"param.attack_sound_stance3"=2501
+"param.attack_anim_stance4"="seq.human_sword_slash"
+"param.attack_sound_stance4"=2500
+"param.defend_anim"="seq.human_sword_def"
 
 [[item]]
 id = "obj.castlewars_armour_body_2"
@@ -25698,7 +25763,16 @@ tradeable = false
 [item.params]
 "param.equipment_sound"=2248
 "param.attackrate"=5
-
+[item.params]
+"param.attack_anim_stance1"="seq.human_sword_slash"
+"param.attack_sound_stance1"=2500
+"param.attack_anim_stance2"="seq.human_sword_slash"
+"param.attack_sound_stance2"=2500
+"param.attack_anim_stance3"="seq.human_sword_stab"
+"param.attack_sound_stance3"=2501
+"param.attack_anim_stance4"="seq.human_sword_slash"
+"param.attack_sound_stance4"=2500
+"param.defend_anim"="seq.human_sword_def"
 
 [[item]]
 id = "obj.castlewars_armour_body_3"
@@ -26688,7 +26762,16 @@ weaponCategory="StabSword"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2248
-
+[item.params]
+"param.attack_anim_stance1"="seq.human_sword_stab"
+"param.attack_sound_stance1"=2549
+"param.attack_anim_stance2"="seq.human_sword_stab"
+"param.attack_sound_stance2"=2549
+"param.attack_anim_stance3"="seq.human_sword_slash"
+"param.attack_sound_stance3"=2548
+"param.attack_anim_stance4"="seq.human_sword_stab"
+"param.attack_sound_stance4"=2549
+"param.defend_anim"="seq.human_sword_def"
 
 [[item]]
 id = "obj.poisoned_dagger_p++"
@@ -26697,7 +26780,16 @@ weaponCategory="StabSword"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2248
-
+[item.params]
+"param.attack_anim_stance1"="seq.human_sword_stab"
+"param.attack_sound_stance1"=2549
+"param.attack_anim_stance2"="seq.human_sword_stab"
+"param.attack_sound_stance2"=2549
+"param.attack_anim_stance3"="seq.human_sword_slash"
+"param.attack_sound_stance3"=2548
+"param.attack_anim_stance4"="seq.human_sword_stab"
+"param.attack_sound_stance4"=2549
+"param.defend_anim"="seq.human_sword_def"
 
 [[item]]
 id = "obj.poison_bolt+"
@@ -27568,7 +27660,16 @@ weaponCategory="StabSword"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2248
-
+[item.params]
+"param.attack_anim_stance1"="seq.human_sword_stab"
+"param.attack_sound_stance1"=2549
+"param.attack_anim_stance2"="seq.human_sword_stab"
+"param.attack_sound_stance2"=2549
+"param.attack_anim_stance3"="seq.human_sword_slash"
+"param.attack_sound_stance3"=2548
+"param.attack_anim_stance4"="seq.human_sword_stab"
+"param.attack_sound_stance4"=2549
+"param.defend_anim"="seq.human_sword_def"
 
 [[item]]
 id = "obj.soulbane_anger_axeq"
@@ -27578,7 +27679,16 @@ tradeable = false
 [item.params]
 "param.equipment_sound"=2232
 "param.attackrate"=6
-
+[item.params]
+"param.attack_anim_stance1"="seq.human_axe_hack"
+"param.attack_sound_stance1"=2498
+"param.attack_anim_stance2"="seq.human_axe_hack"
+"param.attack_sound_stance2"=2498
+"param.attack_anim_stance3"="seq.human_blunt_pound"
+"param.attack_sound_stance3"=2497
+"param.attack_anim_stance4"="seq.human_axe_hack"
+"param.attack_sound_stance4"=2498
+"param.defend_anim"="seq.human_axe_block"
 
 [[item]]
 id = "obj.soulbane_anger_maceq"
@@ -27588,7 +27698,16 @@ tradeable = false
 [item.params]
 "param.equipment_sound"=2246
 "param.attackrate"=5
-
+[item.params]
+"param.attack_anim_stance1"="seq.human_blunt_pound"
+"param.attack_sound_stance1"=2508
+"param.attack_anim_stance2"="seq.human_blunt_pound"
+"param.attack_sound_stance2"=2508
+"param.attack_anim_stance3"="seq.human_blunt_spike"
+"param.attack_sound_stance3"=2509
+"param.attack_anim_stance4"="seq.human_blunt_pound"
+"param.attack_sound_stance4"=2508
+"param.defend_anim"="seq.human_blunt_block"
 
 [[item]]
 id = "obj.soulbane_anger_spearq"
@@ -27598,7 +27717,23 @@ tradeable = false
 [item.params]
 "param.equipment_sound"=2247
 "param.attackrate"=5
-
+[item.params]
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.attack_anim_stance1"="seq.human_dspear_stab"
+"param.attack_sound_stance1"=2562
+"param.attack_anim_stance2"="seq.human_dspear_slash"
+"param.attack_sound_stance2"=2556
+"param.attack_anim_stance3"="seq.human_dspear_lunge"
+"param.attack_sound_stance3"=2555
+"param.attack_anim_stance4"="seq.human_dspear_stab"
+"param.attack_sound_stance4"=2562
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_dspear_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 [[item]]
 id = "obj.rag_ram_helm"
@@ -29908,7 +30043,23 @@ weaponCategory="TwoHandedSword"
 [item.params]
 "param.equipment_sound"=2248
 "param.attackrate"=5
-
+[item.params]
+"param.bas_walk_l"="seq.dh_sword_update_walk_left"
+"param.bas_walk_r"="seq.dh_sword_update_walk_right"
+"param.bas_running"="seq.dh_sword_update_run"
+"param.attack_anim_stance1"="seq.dh_sword_update_slash"
+"param.attack_sound_stance1"=3847
+"param.attack_anim_stance2"="seq.dh_sword_update_slash"
+"param.attack_sound_stance2"=3847
+"param.attack_anim_stance3"="seq.dh_sword_update_smash"
+"param.attack_sound_stance3"=3846
+"param.attack_anim_stance4"="seq.dh_sword_update_block"
+"param.attack_sound_stance4"=3847
+"param.bas_readyanim"="seq.dh_sword_update_ready"
+"param.bas_turnonspot"="seq.dh_sword_update_turnonspot"
+"param.defend_anim"="seq.dh_sword_update_defend"
+"param.bas_walk_f"="seq.dh_sword_update_walk"
+"param.bas_walk_b"="seq.dh_sword_update_walk"
 
 [[item]]
 id = "obj.rune_platebody_ancient"
@@ -30253,6 +30404,20 @@ tradeable = false
 "param.equipment_sound"=2247
 "param.attack_range"=2
 "param.attackrate"=7
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.attack_anim_stance1"="seq.human_spear_spike"
+"param.attack_sound_stance1"=2562
+"param.attack_anim_stance2"="seq.human_scythe_sweep"
+"param.attack_sound_stance2"=2524
+"param.attack_anim_stance4"="seq.human_spear_spike"
+"param.attack_sound_stance4"=2562
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_spear_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 
 [[item]]
@@ -30264,6 +30429,20 @@ tradeable = false
 "param.equipment_sound"=2247
 "param.attack_range"=2
 "param.attackrate"=7
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.attack_anim_stance1"="seq.human_spear_spike"
+"param.attack_sound_stance1"=2562
+"param.attack_anim_stance2"="seq.human_scythe_sweep"
+"param.attack_sound_stance2"=2524
+"param.attack_anim_stance4"="seq.human_spear_spike"
+"param.attack_sound_stance4"=2562
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_spear_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 
 [[item]]
@@ -30275,6 +30454,20 @@ tradeable = false
 "param.equipment_sound"=2247
 "param.attack_range"=2
 "param.attackrate"=7
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.attack_anim_stance1"="seq.human_spear_spike"
+"param.attack_sound_stance1"=2562
+"param.attack_anim_stance2"="seq.human_scythe_sweep"
+"param.attack_sound_stance2"=2524
+"param.attack_anim_stance4"="seq.human_spear_spike"
+"param.attack_sound_stance4"=2562
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_spear_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 
 [[item]]
@@ -30286,6 +30479,20 @@ tradeable = false
 "param.equipment_sound"=2247
 "param.attack_range"=2
 "param.attackrate"=7
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.attack_anim_stance1"="seq.human_spear_spike"
+"param.attack_sound_stance1"=2562
+"param.attack_anim_stance2"="seq.human_scythe_sweep"
+"param.attack_sound_stance2"=2524
+"param.attack_anim_stance4"="seq.human_spear_spike"
+"param.attack_sound_stance4"=2562
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_spear_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 
 [[item]]
@@ -30297,6 +30504,20 @@ tradeable = false
 "param.equipment_sound"=2247
 "param.attack_range"=2
 "param.attackrate"=7
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.attack_anim_stance1"="seq.human_spear_spike"
+"param.attack_sound_stance1"=2562
+"param.attack_anim_stance2"="seq.human_scythe_sweep"
+"param.attack_sound_stance2"=2524
+"param.attack_anim_stance4"="seq.human_spear_spike"
+"param.attack_sound_stance4"=2562
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_spear_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 
 [[item]]
@@ -30308,6 +30529,20 @@ tradeable = false
 "param.equipment_sound"=2247
 "param.attack_range"=2
 "param.attackrate"=7
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.attack_anim_stance1"="seq.human_spear_spike"
+"param.attack_sound_stance1"=2562
+"param.attack_anim_stance2"="seq.human_scythe_sweep"
+"param.attack_sound_stance2"=2524
+"param.attack_anim_stance4"="seq.human_spear_spike"
+"param.attack_sound_stance4"=2562
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_spear_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 
 [[item]]
@@ -30319,6 +30554,20 @@ tradeable = false
 "param.equipment_sound"=2247
 "param.attack_range"=2
 "param.attackrate"=7
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.attack_anim_stance1"="seq.human_spear_spike"
+"param.attack_sound_stance1"=2562
+"param.attack_anim_stance2"="seq.human_scythe_sweep"
+"param.attack_sound_stance2"=2524
+"param.attack_anim_stance4"="seq.human_spear_spike"
+"param.attack_sound_stance4"=2562
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_spear_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 
 [[item]]
@@ -30330,6 +30579,20 @@ tradeable = false
 "param.equipment_sound"=2247
 "param.attack_range"=2
 "param.attackrate"=7
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.attack_anim_stance1"="seq.human_spear_spike"
+"param.attack_sound_stance1"=2562
+"param.attack_anim_stance2"="seq.human_scythe_sweep"
+"param.attack_sound_stance2"=2524
+"param.attack_anim_stance4"="seq.human_spear_spike"
+"param.attack_sound_stance4"=2562
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_spear_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 
 [[item]]
@@ -30341,6 +30604,20 @@ tradeable = false
 "param.equipment_sound"=2247
 "param.attack_range"=2
 "param.attackrate"=7
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.attack_anim_stance1"="seq.human_spear_spike"
+"param.attack_sound_stance1"=2562
+"param.attack_anim_stance2"="seq.human_scythe_sweep"
+"param.attack_sound_stance2"=2524
+"param.attack_anim_stance4"="seq.human_spear_spike"
+"param.attack_sound_stance4"=2562
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_spear_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 
 [[item]]
@@ -30352,6 +30629,20 @@ tradeable = false
 "param.equipment_sound"=2247
 "param.attack_range"=2
 "param.attackrate"=7
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.attack_anim_stance1"="seq.human_spear_spike"
+"param.attack_sound_stance1"=2562
+"param.attack_anim_stance2"="seq.human_scythe_sweep"
+"param.attack_sound_stance2"=2524
+"param.attack_anim_stance4"="seq.human_spear_spike"
+"param.attack_sound_stance4"=2562
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_spear_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 
 [[item]]
@@ -30363,6 +30654,20 @@ tradeable = false
 "param.equipment_sound"=2247
 "param.attack_range"=2
 "param.attackrate"=7
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.attack_anim_stance1"="seq.human_spear_spike"
+"param.attack_sound_stance1"=2562
+"param.attack_anim_stance2"="seq.human_scythe_sweep"
+"param.attack_sound_stance2"=2524
+"param.attack_anim_stance4"="seq.human_spear_spike"
+"param.attack_sound_stance4"=2562
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_spear_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 
 [[item]]
@@ -32278,7 +32583,16 @@ tradeable = false
 [item.params]
 "param.equipment_sound"=2248
 "param.destroy_note_desc"="You can get another from a starter pack."
-
+[item.params]
+"param.attack_anim_stance1"="seq.human_sword_slash"
+"param.attack_sound_stance1"=2500
+"param.attack_anim_stance2"="seq.human_sword_slash"
+"param.attack_sound_stance2"=2500
+"param.attack_anim_stance3"="seq.human_sword_stab"
+"param.attack_sound_stance3"=2501
+"param.attack_anim_stance4"="seq.human_sword_slash"
+"param.attack_sound_stance4"=2500
+"param.defend_anim"="seq.human_sword_def"
 
 [[item]]
 id = "obj.easter18_eggshell_body"
@@ -32611,7 +32925,21 @@ weaponCategory="Staff"
 [item.params]
 "param.equipment_sound"=2247
 "param.attackrate"=5
-
+[item.params]
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.attack_anim_stance1"="seq.human_stafforb_pummel"
+"param.attack_sound_stance1"=2555
+"param.attack_anim_stance2"="seq.human_stafforb_pummel"
+"param.attack_sound_stance2"=2555
+"param.attack_anim_stance4"="seq.human_stafforb_pummel"
+"param.attack_sound_stance4"=2555
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_stafforb_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 [[item]]
 id = "obj.black_platebody_h1"
@@ -33065,7 +33393,16 @@ tradeable = false
 [item.params]
 "param.equipment_sound"=2248
 "param.attackrate"=5
-
+[item.params]
+"param.attack_anim_stance1"="seq.human_sword_slash"
+"param.attack_sound_stance1"=2500
+"param.attack_anim_stance2"="seq.human_sword_slash"
+"param.attack_sound_stance2"=2500
+"param.attack_anim_stance3"="seq.human_sword_stab"
+"param.attack_sound_stance3"=2501
+"param.attack_anim_stance4"="seq.human_sword_slash"
+"param.attack_sound_stance4"=2500
+"param.defend_anim"="seq.human_sword_def"
 
 [[item]]
 id = "obj.castlewars_armour_body_3_trouver"
@@ -33400,7 +33737,19 @@ inherit = "obj.trailblazer_banner"
 weaponCategory="Banner"
 [item.params]
 "param.equipment_sound"=2247
-
+[item.params]
+"param.bas_walk_l"="seq.human_bannerwalk_l"
+"param.bas_walk_r"="seq.human_bannerwalk_r"
+"param.bas_running"="seq.human_bannerrunning"
+"param.attack_anim_stance1"="seq.human_banner_spike"
+"param.attack_anim_stance2"="seq.human_banner_spike"
+"param.attack_anim_stance3"="seq.human_banner_spike"
+"param.attack_anim_stance4"="seq.human_banner_spike"
+"param.bas_readyanim"="seq.human_bannerready"
+"param.bas_turnonspot"="seq.human_bannerturnonspot"
+"param.defend_anim"="seq.human_banner_block"
+"param.bas_walk_f"="seq.human_bannerwalk_f"
+"param.bas_walk_b"="seq.human_bannerwalk_b"
 
 [[item]]
 id = "obj.beekeeper_gloves"
@@ -33730,7 +34079,16 @@ weaponCategory="Blunt"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2246
-
+[item.params]
+"param.attack_anim_stance1"="seq.human_blunt_pound"
+"param.attack_sound_stance1"=2508
+"param.attack_anim_stance2"="seq.human_blunt_pound"
+"param.attack_sound_stance2"=2508
+"param.attack_anim_stance3"="seq.human_blunt_spike"
+"param.attack_sound_stance3"=2509
+"param.attack_anim_stance4"="seq.human_blunt_pound"
+"param.attack_sound_stance4"=2508
+"param.defend_anim"="seq.human_blunt_block"
 
 [[item]]
 id = "obj.barronite_mace_trouver"
@@ -33739,7 +34097,16 @@ weaponCategory="Blunt"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2246
-
+[item.params]
+"param.attack_anim_stance1"="seq.human_blunt_pound"
+"param.attack_sound_stance1"=2508
+"param.attack_anim_stance2"="seq.human_blunt_pound"
+"param.attack_sound_stance2"=2508
+"param.attack_anim_stance3"="seq.human_blunt_spike"
+"param.attack_sound_stance3"=2509
+"param.attack_anim_stance4"="seq.human_blunt_pound"
+"param.attack_sound_stance4"=2508
+"param.defend_anim"="seq.human_blunt_block"
 
 [[item]]
 id = "obj.akd_protest_banner"
@@ -33748,7 +34115,19 @@ weaponCategory="Banner"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2247
-
+[item.params]
+"param.bas_walk_l"="seq.human_bannerwalk_l"
+"param.bas_walk_r"="seq.human_bannerwalk_r"
+"param.bas_running"="seq.human_bannerrunning"
+"param.attack_anim_stance1"="seq.human_banner_spike"
+"param.attack_anim_stance2"="seq.human_banner_spike"
+"param.attack_anim_stance3"="seq.human_banner_spike"
+"param.attack_anim_stance4"="seq.human_banner_spike"
+"param.bas_readyanim"="seq.human_bannerready"
+"param.bas_turnonspot"="seq.human_bannerturnonspot"
+"param.defend_anim"="seq.human_banner_block"
+"param.bas_walk_f"="seq.human_bannerwalk_f"
+"param.bas_walk_b"="seq.human_bannerwalk_b"
 
 [[item]]
 id = "obj.amethyst_dart"
@@ -34416,6 +34795,21 @@ tradeable = false
 [item.params]
 "param.equipment_sound"=2248
 "param.attackrate"=6
+"param.bas_walk_l"="seq.human_dh_weapon_walk"
+"param.bas_walk_r"="seq.human_dh_weapon_walk"
+"param.bas_running"="seq.human_dh_weapon_run"
+"param.attack_anim_stance1"="seq.human_dhsword_slash"
+"param.attack_sound_stance1"=2503
+"param.attack_anim_stance2"="seq.human_dhsword_slash"
+"param.attack_sound_stance2"=2503
+"param.attack_anim_stance3"="seq.human_dhsword_chop"
+"param.attack_sound_stance3"=2502
+"param.attack_anim_stance4"="seq.human_dhsword_slash"
+"param.attack_sound_stance4"=2503
+"param.bas_readyanim"="seq.human_dh_weapon_ready"
+"param.defend_anim"="seq.human_dhsword_block"
+"param.bas_walk_f"="seq.human_dh_weapon_walk"
+"param.bas_walk_b"="seq.human_dh_weapon_walk"
 
 
 [[item]]
@@ -34528,7 +34922,16 @@ tradeable = false
 [item.params]
 "param.equipment_sound"=2246
 "param.attackrate"=5
-
+[item.params]
+"param.attack_anim_stance1"="seq.human_blunt_pound"
+"param.attack_sound_stance1"=2508
+"param.attack_anim_stance2"="seq.human_blunt_pound"
+"param.attack_sound_stance2"=2508
+"param.attack_anim_stance3"="seq.human_blunt_spike"
+"param.attack_sound_stance3"=2509
+"param.attack_anim_stance4"="seq.human_blunt_pound"
+"param.attack_sound_stance4"=2508
+"param.defend_anim"="seq.human_blunt_block"
 
 [[item]]
 id = "obj.br_barrows_verac_body"
@@ -35057,7 +35460,23 @@ tradeable = false
 [item.params]
 "param.equipment_sound"=2248
 "param.destroy_note_desc"="You can get a replacement from Horvik."
-
+[item.params]
+"param.bas_walk_l"="seq.dh_sword_update_walk_left"
+"param.bas_walk_r"="seq.dh_sword_update_walk_right"
+"param.bas_running"="seq.dh_sword_update_run"
+"param.attack_anim_stance1"="seq.dh_sword_update_slash"
+"param.attack_sound_stance1"=3847
+"param.attack_anim_stance2"="seq.dh_sword_update_slash"
+"param.attack_sound_stance2"=3847
+"param.attack_anim_stance3"="seq.dh_sword_update_smash"
+"param.attack_sound_stance3"=3846
+"param.attack_anim_stance4"="seq.dh_sword_update_block"
+"param.attack_sound_stance4"=3847
+"param.bas_readyanim"="seq.dh_sword_update_ready"
+"param.bas_turnonspot"="seq.dh_sword_update_turnonspot"
+"param.defend_anim"="seq.dh_sword_update_defend"
+"param.bas_walk_f"="seq.dh_sword_update_walk"
+"param.bas_walk_b"="seq.dh_sword_update_walk"
 
 [[item]]
 id = "obj.bh_dragon_dagger_corrupted"
@@ -35066,6 +35485,15 @@ weaponCategory="StabSword"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2248
+"param.attack_anim_stance1"="seq.human_ddagger_lunge"
+"param.attack_sound_stance1"=2549
+"param.attack_anim_stance2"="seq.human_ddagger_lunge"
+"param.attack_sound_stance2"=2549
+"param.attack_anim_stance3"="seq.human_sword_slash"
+"param.attack_sound_stance3"=2548
+"param.attack_anim_stance4"="seq.human_ddagger_lunge"
+"param.attack_sound_stance4"=2549
+"param.defend_anim"="seq.human_sword_def"
 
 
 [[item]]
@@ -35075,6 +35503,15 @@ weaponCategory="StabSword"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2248
+"param.attack_anim_stance1"="seq.human_ddagger_lunge"
+"param.attack_sound_stance1"=2549
+"param.attack_anim_stance2"="seq.human_ddagger_lunge"
+"param.attack_sound_stance2"=2549
+"param.attack_anim_stance3"="seq.human_sword_slash"
+"param.attack_sound_stance3"=2548
+"param.attack_anim_stance4"="seq.human_ddagger_lunge"
+"param.attack_sound_stance4"=2549
+"param.defend_anim"="seq.human_sword_def"
 
 
 [[item]]
@@ -35084,6 +35521,15 @@ weaponCategory="StabSword"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2248
+"param.attack_anim_stance1"="seq.human_ddagger_lunge"
+"param.attack_sound_stance1"=2549
+"param.attack_anim_stance2"="seq.human_ddagger_lunge"
+"param.attack_sound_stance2"=2549
+"param.attack_anim_stance3"="seq.human_sword_slash"
+"param.attack_sound_stance3"=2548
+"param.attack_anim_stance4"="seq.human_ddagger_lunge"
+"param.attack_sound_stance4"=2549
+"param.defend_anim"="seq.human_sword_def"
 
 
 [[item]]
@@ -35093,6 +35539,15 @@ weaponCategory="StabSword"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2248
+"param.attack_anim_stance1"="seq.human_ddagger_lunge"
+"param.attack_sound_stance1"=2549
+"param.attack_anim_stance2"="seq.human_ddagger_lunge"
+"param.attack_sound_stance2"=2549
+"param.attack_anim_stance3"="seq.human_sword_slash"
+"param.attack_sound_stance3"=2548
+"param.attack_anim_stance4"="seq.human_ddagger_lunge"
+"param.attack_sound_stance4"=2549
+"param.defend_anim"="seq.human_sword_def"
 
 
 [[item]]
@@ -35102,6 +35557,15 @@ weaponCategory="Spiked"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2246
+"param.attack_anim_stance1"="seq.human_blunt_pound"
+"param.attack_sound_stance1"=2508
+"param.attack_anim_stance2"="seq.human_blunt_pound"
+"param.attack_sound_stance2"=2508
+"param.attack_anim_stance3"="seq.human_blunt_spike"
+"param.attack_sound_stance3"=2509
+"param.attack_anim_stance4"="seq.human_blunt_pound"
+"param.attack_sound_stance4"=2508
+"param.defend_anim"="seq.human_blunt_block"
 
 
 [[item]]
@@ -35111,6 +35575,15 @@ weaponCategory="StabSword"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2248
+"param.attack_anim_stance1"="seq.human_sword_stab"
+"param.attack_sound_stance1"=2549
+"param.attack_anim_stance2"="seq.human_sword_stab"
+"param.attack_sound_stance2"=2549
+"param.attack_anim_stance3"="seq.human_sword_slash"
+"param.attack_sound_stance3"=2548
+"param.attack_anim_stance4"="seq.human_sword_stab"
+"param.attack_sound_stance4"=2549
+"param.defend_anim"="seq.human_sword_def"
 
 
 [[item]]
@@ -35120,6 +35593,15 @@ weaponCategory="SlashSword"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2248
+"param.attack_anim_stance1"="seq.human_sword_slash"
+"param.attack_sound_stance1"=2500
+"param.attack_anim_stance2"="seq.human_sword_slash"
+"param.attack_sound_stance2"=2500
+"param.attack_anim_stance3"="seq.human_sword_stab"
+"param.attack_sound_stance3"=2501
+"param.attack_anim_stance4"="seq.human_sword_slash"
+"param.attack_sound_stance4"=2500
+"param.defend_anim"="seq.human_sword_def"
 
 
 [[item]]
@@ -35130,6 +35612,16 @@ tradeable = false
 [item.params]
 "param.equipment_sound"=2248
 "param.attackrate"=5
+"param.attack_anim_stance1"="seq.human_sword_slash"
+"param.attack_sound_stance1"=2500
+"param.attack_anim_stance2"="seq.human_sword_slash"
+"param.attack_sound_stance2"=2500
+"param.attack_anim_stance3"="seq.human_sword_stab"
+"param.attack_sound_stance3"=2501
+"param.attack_anim_stance4"="seq.human_sword_slash"
+"param.attack_sound_stance4"=2500
+"param.defend_anim"="seq.human_sword_def"
+"param.bas_readyanim"="seq.human_ds_ready"
 
 
 [[item]]
@@ -35140,6 +35632,13 @@ tradeable = false
 [item.params]
 "param.equipment_sound"=2233
 "param.attackrate"=6
+"param.attack_anim_stance1"="seq.human_blunt_pound"
+"param.attack_sound_stance1"=2567
+"param.attack_anim_stance2"="seq.human_blunt_pound"
+"param.attack_sound_stance2"=2567
+"param.attack_anim_stance4"="seq.human_blunt_pound"
+"param.attack_sound_stance4"=2567
+"param.defend_anim"="seq.human_blunt_block"
 
 
 [[item]]
@@ -35150,6 +35649,15 @@ tradeable = false
 [item.params]
 "param.equipment_sound"=2232
 "param.attackrate"=6
+"param.attack_anim_stance1"="seq.human_axe_hack"
+"param.attack_sound_stance1"=2498
+"param.attack_anim_stance2"="seq.human_axe_hack"
+"param.attack_sound_stance2"=2498
+"param.attack_anim_stance3"="seq.human_blunt_pound"
+"param.attack_sound_stance3"=2497
+"param.attack_anim_stance4"="seq.human_axe_hack"
+"param.attack_sound_stance4"=2498
+"param.defend_anim"="seq.human_axe_block"
 
 
 [[item]]
@@ -35159,6 +35667,22 @@ weaponCategory="Spear"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2247
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.attack_anim_stance1"="seq.human_dspear_stab"
+"param.attack_sound_stance1"=2562
+"param.attack_anim_stance2"="seq.human_dspear_slash"
+"param.attack_sound_stance2"=2556
+"param.attack_anim_stance3"="seq.human_dspear_lunge"
+"param.attack_sound_stance3"=2555
+"param.attack_anim_stance4"="seq.human_dspear_stab"
+"param.attack_sound_stance4"=2562
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_dspear_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 
 [[item]]
@@ -35168,6 +35692,22 @@ weaponCategory="Spear"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2247
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.attack_anim_stance1"="seq.human_dspear_stab"
+"param.attack_sound_stance1"=2562
+"param.attack_anim_stance2"="seq.human_dspear_slash"
+"param.attack_sound_stance2"=2556
+"param.attack_anim_stance3"="seq.human_dspear_lunge"
+"param.attack_sound_stance3"=2555
+"param.attack_anim_stance4"="seq.human_dspear_stab"
+"param.attack_sound_stance4"=2562
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_dspear_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 
 [[item]]
@@ -35177,6 +35717,22 @@ weaponCategory="Spear"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2247
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.attack_anim_stance1"="seq.human_dspear_stab"
+"param.attack_sound_stance1"=2562
+"param.attack_anim_stance2"="seq.human_dspear_slash"
+"param.attack_sound_stance2"=2556
+"param.attack_anim_stance3"="seq.human_dspear_lunge"
+"param.attack_sound_stance3"=2555
+"param.attack_anim_stance4"="seq.human_dspear_stab"
+"param.attack_sound_stance4"=2562
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_dspear_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 
 [[item]]
@@ -35186,6 +35742,22 @@ weaponCategory="Spear"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2247
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.attack_anim_stance1"="seq.human_dspear_stab"
+"param.attack_sound_stance1"=2562
+"param.attack_anim_stance2"="seq.human_dspear_slash"
+"param.attack_sound_stance2"=2556
+"param.attack_anim_stance3"="seq.human_dspear_lunge"
+"param.attack_sound_stance3"=2555
+"param.attack_anim_stance4"="seq.human_dspear_stab"
+"param.attack_sound_stance4"=2562
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_dspear_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 
 [[item]]
@@ -35197,6 +35769,20 @@ tradeable = false
 "param.equipment_sound"=2247
 "param.attack_range"=2
 "param.attackrate"=7
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.attack_anim_stance1"="seq.human_spear_spike"
+"param.attack_sound_stance1"=2562
+"param.attack_anim_stance2"="seq.human_scythe_sweep"
+"param.attack_sound_stance2"=2524
+"param.attack_anim_stance4"="seq.human_spear_spike"
+"param.attack_sound_stance4"=2562
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_spear_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 
 [[item]]
@@ -35207,6 +35793,21 @@ tradeable = false
 [item.params]
 "param.equipment_sound"=2248
 "param.attackrate"=7
+"param.bas_walk_l"="seq.human_dh_weapon_walk"
+"param.bas_walk_r"="seq.human_dh_weapon_walk"
+"param.bas_running"="seq.human_dh_weapon_run"
+"param.attack_anim_stance1"="seq.human_dhsword_slash"
+"param.attack_sound_stance1"=2503
+"param.attack_anim_stance2"="seq.human_dhsword_slash"
+"param.attack_sound_stance2"=2503
+"param.attack_anim_stance3"="seq.human_dhsword_chop"
+"param.attack_sound_stance3"=2502
+"param.attack_anim_stance4"="seq.human_dhsword_slash"
+"param.attack_sound_stance4"=2503
+"param.bas_readyanim"="seq.human_dh_weapon_ready"
+"param.defend_anim"="seq.human_dhsword_block"
+"param.bas_walk_f"="seq.human_dh_weapon_walk"
+"param.bas_walk_b"="seq.human_dh_weapon_walk"
 
 
 [[item]]
@@ -35219,6 +35820,17 @@ tradeable = false
 "param.equipment_sound"=2244
 "param.attack_range"=7
 "param.attackrate"=6
+"param.bas_running"="seq.xbows_human_run"
+"param.attack_anim_stance1"="seq.xbows_human_fire_and_reload_pvn"
+"param.attack_sound_stance1"=2695
+"param.attack_anim_stance2"="seq.xbows_human_fire_and_reload_pvn"
+"param.attack_sound_stance2"=2695
+"param.attack_anim_stance4"="seq.xbows_human_fire_and_reload_pvn"
+"param.attack_sound_stance4"=2695
+"param.bas_readyanim"="seq.xbows_human_ready"
+"param.defend_anim"="seq.human_unarmedblock"
+"param.bas_walk_f"="seq.xbows_human_walk_f"
+"param.bas_walk_b"="seq.xbows_human_walk_b"
 
 
 [[item]]
@@ -35311,7 +35923,16 @@ weaponCategory="Axe"
 [item.params]
 "param.equipment_sound"=2229
 "param.attackrate"=7
-
+[item.params]
+"param.attack_anim_stance1"="seq.human_axe_hack"
+"param.attack_sound_stance1"=2498
+"param.attack_anim_stance2"="seq.human_axe_hack"
+"param.attack_sound_stance2"=2498
+"param.attack_anim_stance3"="seq.human_blunt_pound"
+"param.attack_sound_stance3"=2497
+"param.attack_anim_stance4"="seq.human_axe_hack"
+"param.attack_sound_stance4"=2498
+"param.defend_anim"="seq.human_axe_block"
 
 [[item]]
 id = "obj.iron_axe_2h"
@@ -35320,7 +35941,16 @@ weaponCategory="Axe"
 [item.params]
 "param.equipment_sound"=2229
 "param.attackrate"=7
-
+[item.params]
+"param.attack_anim_stance1"="seq.human_axe_hack"
+"param.attack_sound_stance1"=2498
+"param.attack_anim_stance2"="seq.human_axe_hack"
+"param.attack_sound_stance2"=2498
+"param.attack_anim_stance3"="seq.human_blunt_pound"
+"param.attack_sound_stance3"=2497
+"param.attack_anim_stance4"="seq.human_axe_hack"
+"param.attack_sound_stance4"=2498
+"param.defend_anim"="seq.human_axe_block"
 
 [[item]]
 id = "obj.steel_axe_2h"
@@ -35329,7 +35959,16 @@ weaponCategory="Axe"
 [item.params]
 "param.equipment_sound"=2229
 "param.attackrate"=7
-
+[item.params]
+"param.attack_anim_stance1"="seq.human_axe_hack"
+"param.attack_sound_stance1"=2498
+"param.attack_anim_stance2"="seq.human_axe_hack"
+"param.attack_sound_stance2"=2498
+"param.attack_anim_stance3"="seq.human_blunt_pound"
+"param.attack_sound_stance3"=2497
+"param.attack_anim_stance4"="seq.human_axe_hack"
+"param.attack_sound_stance4"=2498
+"param.defend_anim"="seq.human_axe_block"
 
 [[item]]
 id = "obj.black_axe_2h"
@@ -35338,7 +35977,16 @@ weaponCategory="Axe"
 [item.params]
 "param.equipment_sound"=2229
 "param.attackrate"=5
-
+[item.params]
+"param.attack_anim_stance1"="seq.human_axe_hack"
+"param.attack_sound_stance1"=2498
+"param.attack_anim_stance2"="seq.human_axe_hack"
+"param.attack_sound_stance2"=2498
+"param.attack_anim_stance3"="seq.human_blunt_pound"
+"param.attack_sound_stance3"=2497
+"param.attack_anim_stance4"="seq.human_axe_hack"
+"param.attack_sound_stance4"=2498
+"param.defend_anim"="seq.human_axe_block"
 
 [[item]]
 id = "obj.mithril_axe_2h"
@@ -35347,7 +35995,16 @@ weaponCategory="Axe"
 [item.params]
 "param.equipment_sound"=2229
 "param.attackrate"=7
-
+[item.params]
+"param.attack_anim_stance1"="seq.human_axe_hack"
+"param.attack_sound_stance1"=2498
+"param.attack_anim_stance2"="seq.human_axe_hack"
+"param.attack_sound_stance2"=2498
+"param.attack_anim_stance3"="seq.human_blunt_pound"
+"param.attack_sound_stance3"=2497
+"param.attack_anim_stance4"="seq.human_axe_hack"
+"param.attack_sound_stance4"=2498
+"param.defend_anim"="seq.human_axe_block"
 
 [[item]]
 id = "obj.adamant_axe_2h"
@@ -35356,7 +36013,16 @@ weaponCategory="Axe"
 [item.params]
 "param.equipment_sound"=2229
 "param.attackrate"=7
-
+[item.params]
+"param.attack_anim_stance1"="seq.human_axe_hack"
+"param.attack_sound_stance1"=2498
+"param.attack_anim_stance2"="seq.human_axe_hack"
+"param.attack_sound_stance2"=2498
+"param.attack_anim_stance3"="seq.human_blunt_pound"
+"param.attack_sound_stance3"=2497
+"param.attack_anim_stance4"="seq.human_axe_hack"
+"param.attack_sound_stance4"=2498
+"param.defend_anim"="seq.human_axe_block"
 
 [[item]]
 id = "obj.rune_axe_2h"
@@ -35365,7 +36031,16 @@ weaponCategory="Axe"
 [item.params]
 "param.equipment_sound"=2229
 "param.attackrate"=7
-
+[item.params]
+"param.attack_anim_stance1"="seq.human_axe_hack"
+"param.attack_sound_stance1"=2498
+"param.attack_anim_stance2"="seq.human_axe_hack"
+"param.attack_sound_stance2"=2498
+"param.attack_anim_stance3"="seq.human_blunt_pound"
+"param.attack_sound_stance3"=2497
+"param.attack_anim_stance4"="seq.human_axe_hack"
+"param.attack_sound_stance4"=2498
+"param.defend_anim"="seq.human_axe_block"
 
 [[item]]
 id = "obj.dragon_axe_2h"
@@ -35374,7 +36049,16 @@ weaponCategory="Axe"
 [item.params]
 "param.equipment_sound"=2229
 "param.attackrate"=7
-
+[item.params]
+"param.attack_anim_stance1"="seq.human_axe_hack"
+"param.attack_sound_stance1"=2498
+"param.attack_anim_stance2"="seq.human_axe_hack"
+"param.attack_sound_stance2"=2498
+"param.attack_anim_stance3"="seq.human_blunt_pound"
+"param.attack_sound_stance3"=2497
+"param.attack_anim_stance4"="seq.human_axe_hack"
+"param.attack_sound_stance4"=2498
+"param.defend_anim"="seq.human_axe_block"
 
 [[item]]
 id = "obj.crystal_axe_2h"
@@ -35384,7 +36068,16 @@ tradeable = false
 [item.params]
 "param.equipment_sound"=2229
 "param.attackrate"=7
-
+[item.params]
+"param.attack_anim_stance1"="seq.human_axe_hack"
+"param.attack_sound_stance1"=2498
+"param.attack_anim_stance2"="seq.human_axe_hack"
+"param.attack_sound_stance2"=2498
+"param.attack_anim_stance3"="seq.human_blunt_pound"
+"param.attack_sound_stance3"=2497
+"param.attack_anim_stance4"="seq.human_axe_hack"
+"param.attack_sound_stance4"=2498
+"param.defend_anim"="seq.human_axe_block"
 
 [[item]]
 id = "obj.crystal_axe_2h_inactive"
@@ -35394,7 +36087,16 @@ tradeable = false
 [item.params]
 "param.equipment_sound"=2229
 "param.attackrate"=7
-
+[item.params]
+"param.attack_anim_stance1"="seq.human_axe_hack"
+"param.attack_sound_stance1"=2498
+"param.attack_anim_stance2"="seq.human_axe_hack"
+"param.attack_sound_stance2"=2498
+"param.attack_anim_stance3"="seq.human_blunt_pound"
+"param.attack_sound_stance3"=2497
+"param.attack_anim_stance4"="seq.human_axe_hack"
+"param.attack_sound_stance4"=2498
+"param.defend_anim"="seq.human_axe_block"
 
 [[item]]
 id = "obj.3a_axe_2h"
@@ -35403,7 +36105,16 @@ weaponCategory="Axe"
 [item.params]
 "param.equipment_sound"=2229
 "param.attackrate"=7
-
+[item.params]
+"param.attack_anim_stance1"="seq.human_axe_hack"
+"param.attack_sound_stance1"=2498
+"param.attack_anim_stance2"="seq.human_axe_hack"
+"param.attack_sound_stance2"=2498
+"param.attack_anim_stance3"="seq.human_blunt_pound"
+"param.attack_sound_stance3"=2497
+"param.attack_anim_stance4"="seq.human_axe_hack"
+"param.attack_sound_stance4"=2498
+"param.defend_anim"="seq.human_axe_block"
 
 [[item]]
 id = "obj.torva_helm_sanguine"
@@ -35453,7 +36164,14 @@ tradeable = false
 "param.equipment_sound"=2244
 "param.attack_range"=7
 "param.statreq1_level"=50
-
+[item.params]
+"param.attack_anim_stance1"="seq.human_bow"
+"param.attack_sound_stance1"=2693
+"param.attack_anim_stance2"="seq.human_bow"
+"param.attack_sound_stance2"=2693
+"param.attack_anim_stance4"="seq.human_bow"
+"param.attack_sound_stance4"=2693
+"param.defend_anim"="seq.human_unarmedblock"
 
 [[item]]
 id = "obj.salamander_tar_mountain"
@@ -35620,7 +36338,16 @@ weaponCategory="SlashSword"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2248
-
+[item.params]
+"param.attack_anim_stance1"="seq.human_sword_slash"
+"param.attack_sound_stance1"=2500
+"param.attack_anim_stance2"="seq.human_sword_slash"
+"param.attack_sound_stance2"=2500
+"param.attack_anim_stance3"="seq.human_sword_stab"
+"param.attack_sound_stance3"=2501
+"param.attack_anim_stance4"="seq.human_sword_slash"
+"param.attack_sound_stance4"=2500
+"param.defend_anim"="seq.human_sword_def"
 
 [[item]]
 id = "obj.mcannonremains"
@@ -49524,6 +50251,13 @@ tradeable = false
 [item.params]
 "param.proj_type"="projanim.arrow"
 "param.attack_range"=9
+"param.attack_anim_stance1"="seq.human_bow"
+"param.attack_sound_stance1"=2693
+"param.attack_anim_stance2"="seq.human_bow"
+"param.attack_sound_stance2"=2693
+"param.attack_anim_stance4"="seq.human_bow"
+"param.attack_sound_stance4"=2693
+"param.defend_anim"="seq.human_unarmedblock"
 
 
 [[item]]
@@ -49574,7 +50308,22 @@ inherit = "obj.wild_cave_accursed_uncharged_recol"
 weaponCategory="Staff"
 [item.params]
 "param.attackrate"=5
-
+[item.params]
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.equipment_sound"=2247
+"param.attack_anim_stance1"="seq.human_stafforb_pummel"
+"param.attack_sound_stance1"=2555
+"param.attack_anim_stance2"="seq.human_stafforb_pummel"
+"param.attack_sound_stance2"=2555
+"param.attack_anim_stance4"="seq.human_stafforb_pummel"
+"param.attack_sound_stance4"=2555
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_stafforb_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 [[item]]
 id = "obj.elena_picture"
@@ -49597,6 +50346,21 @@ inherit = "obj.barrows_ahrim_weapon_broken"
 weaponCategory="Staff"
 [item.params]
 "param.attackrate"=6
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.equipment_sound"=2247
+"param.attack_anim_stance1"="seq.barrows_quarterstaff_attack"
+"param.attack_sound_stance1"=1329
+"param.attack_anim_stance2"="seq.barrows_quarterstaff_attack"
+"param.attack_sound_stance2"=1329
+"param.attack_anim_stance4"="seq.barrows_quarterstaff_attack"
+"param.attack_sound_stance4"=1329
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.barrows_quarterstaff_defend"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 
 [[item]]
@@ -49613,7 +50377,23 @@ weaponCategory="PoweredStaff"
 tradeable = false
 [item.params]
 "param.attack_range"=8
-
+[item.params]
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.equipment_sound"=2247
+"param.attackrate"=5
+"param.attack_anim_stance1"="seq.human_stafforb_pummel"
+"param.attack_sound_stance1"=2555
+"param.attack_anim_stance2"="seq.human_stafforb_pummel"
+"param.attack_sound_stance2"=2555
+"param.attack_anim_stance4"="seq.human_stafforb_pummel"
+"param.attack_sound_stance4"=2555
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_stafforb_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 [[item]]
 id = "obj.pest_void_knight_mace_broken"
@@ -49622,7 +50402,22 @@ weaponCategory="Staff"
 tradeable = false
 [item.params]
 "param.attackrate"=5
-
+[item.params]
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.equipment_sound"=2247
+"param.attack_anim_stance1"="seq.human_stafforb_pummel"
+"param.attack_sound_stance1"=2555
+"param.attack_anim_stance2"="seq.human_stafforb_pummel"
+"param.attack_sound_stance2"=2555
+"param.attack_anim_stance4"="seq.human_stafforb_pummel"
+"param.attack_sound_stance4"=2555
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_stafforb_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 [[item]]
 id = "obj.mm_monkey_greegree_for_normal_monkey"
@@ -49687,7 +50482,23 @@ id = "obj.ancient_sceptre_blood_trouver"
 inherit = "obj.ancient_sceptre_blood_trouver"
 weaponCategory="Staff"
 tradeable = false
-
+[item.params]
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.equipment_sound"=2247
+"param.attackrate"=5
+"param.attack_anim_stance1"="seq.human_stafforb_pummel"
+"param.attack_sound_stance1"=2555
+"param.attack_anim_stance2"="seq.human_stafforb_pummel"
+"param.attack_sound_stance2"=2555
+"param.attack_anim_stance4"="seq.human_stafforb_pummel"
+"param.attack_sound_stance4"=2555
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_stafforb_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 [[item]]
 id = "obj.golem_letter"
@@ -49722,6 +50533,21 @@ tradeable = false
 "param.proj_type"="projanim.arrow"
 "param.attack_range"=6
 "param.attackrate"=5
+"param.bas_walk_l"="seq.human_weapon_bow_venator01_stepleft"
+"param.bas_walk_r"="seq.human_weapon_bow_venator01_stepright"
+"param.bas_running"="seq.human_weapon_bow_venator01_run"
+"param.attack_anim_stance1"="seq.human_weapon_bow_venator01_shoot"
+"param.statreq1_level"=80
+"param.attack_sound_stance1"=2693
+"param.attack_anim_stance2"="seq.human_weapon_bow_venator01_shoot"
+"param.attack_sound_stance2"=2693
+"param.attack_anim_stance4"="seq.human_weapon_bow_venator01_shoot"
+"param.attack_sound_stance4"=2693
+"param.bas_readyanim"="seq.human_weapon_bow_venator01_ready"
+"param.bas_turnonspot"="seq.human_weapon_bow_venator01_turn"
+"param.defend_anim"="seq.human_unarmedblock"
+"param.bas_walk_f"="seq.human_weapon_bow_venator01_walk"
+"param.bas_walk_b"="seq.human_weapon_bow_venator01_walk"
 
 
 [[item]]
@@ -49739,7 +50565,17 @@ weaponCategory="Axe"
 tradeable = false
 [item.params]
 "param.attackrate"=5
-
+[item.params]
+"param.equipment_sound"=2229
+"param.attack_anim_stance1"="seq.human_axe_hack"
+"param.attack_sound_stance1"=2498
+"param.attack_anim_stance2"="seq.human_axe_hack"
+"param.attack_sound_stance2"=2498
+"param.attack_anim_stance3"="seq.human_blunt_pound"
+"param.attack_sound_stance3"=2497
+"param.attack_anim_stance4"="seq.human_axe_hack"
+"param.attack_sound_stance4"=2498
+"param.defend_anim"="seq.human_axe_block"
 
 [[item]]
 id = "obj.trail_slidingpuzzleb07"
@@ -49805,6 +50641,13 @@ weaponCategory="Blunt"
 tradeable = false
 [item.params]
 "param.attackrate"=5
+"param.attack_anim_stance1"="seq.human_blunt_pound"
+"param.attack_sound_stance1"=2567
+"param.attack_anim_stance2"="seq.human_blunt_pound"
+"param.attack_sound_stance2"=2567
+"param.attack_anim_stance4"="seq.human_blunt_pound"
+"param.attack_sound_stance4"=2567
+"param.defend_anim"="seq.human_blunt_block"
 
 
 [[item]]
@@ -49877,7 +50720,22 @@ tradeable = false
 [item.params]
 "param.attack_range"=8
 "param.attackrate"=5
-
+[item.params]
+"param.bas_walk_l"="seq.human_zamorakspear_walkleft"
+"param.bas_walk_r"="seq.human_zamorakspear_walkright"
+"param.bas_running"="seq.human_zamorakspear_run"
+"param.equipment_sound"=2247
+"param.attack_anim_stance1"="seq.toa_sot_cast_b"
+"param.attack_sound_stance1"=6410
+"param.attack_anim_stance2"="seq.toa_sot_cast_b"
+"param.attack_sound_stance2"=6410
+"param.attack_anim_stance4"="seq.toa_sot_cast_b"
+"param.attack_sound_stance4"=6410
+"param.bas_readyanim"="seq.toa_sot_ready"
+"param.bas_turnonspot"="seq.human_zamorakspear_turnonspot"
+"param.defend_anim"="seq.human_stafforb_block"
+"param.bas_walk_f"="seq.human_zamorakspear_walk_f"
+"param.bas_walk_b"="seq.human_zamorakspear_walk_b"
 
 [[item]]
 id = "obj.trail_slidingpuzzleb09"
@@ -49951,7 +50809,22 @@ weaponCategory="Staff"
 [item.params]
 "param.attack_range"=10
 "param.attackrate"=5
-
+[item.params]
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.equipment_sound"=2247
+"param.attack_anim_stance1"="seq.human_stafforb_pummel"
+"param.attack_sound_stance1"=2555
+"param.attack_anim_stance2"="seq.human_stafforb_pummel"
+"param.attack_sound_stance2"=2555
+"param.attack_anim_stance4"="seq.human_stafforb_pummel"
+"param.attack_sound_stance4"=2555
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_stafforb_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 [[item]]
 id = "obj.trail_slidingpuzzled12"
@@ -49990,7 +50863,17 @@ weaponCategory="Axe"
 tradeable = false
 [item.params]
 "param.attackrate"=5
-
+[item.params]
+"param.equipment_sound"=2229
+"param.attack_anim_stance1"="seq.human_axe_hack"
+"param.attack_sound_stance1"=2498
+"param.attack_anim_stance2"="seq.human_axe_hack"
+"param.attack_sound_stance2"=2498
+"param.attack_anim_stance3"="seq.human_blunt_pound"
+"param.attack_sound_stance3"=2497
+"param.attack_anim_stance4"="seq.human_axe_hack"
+"param.attack_sound_stance4"=2498
+"param.defend_anim"="seq.human_axe_block"
 
 [[item]]
 id = "obj.trail_slidingpuzzled04"
@@ -50005,7 +50888,22 @@ inherit = "obj.wild_cave_sceptre_uncharged_recol"
 weaponCategory="Staff"
 [item.params]
 "param.attackrate"=5
-
+[item.params]
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.equipment_sound"=2247
+"param.attack_anim_stance1"="seq.human_stafforb_pummel"
+"param.attack_sound_stance1"=2555
+"param.attack_anim_stance2"="seq.human_stafforb_pummel"
+"param.attack_sound_stance2"=2555
+"param.attack_anim_stance4"="seq.human_stafforb_pummel"
+"param.attack_sound_stance4"=2555
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_stafforb_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 [[item]]
 id = "obj.trail_slidingpuzzlec17"
@@ -50050,7 +50948,22 @@ inherit = "obj.deadman_blighted_volatile_staff"
 weaponCategory="Staff"
 [item.params]
 "param.attackrate"=5
-
+[item.params]
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.equipment_sound"=2247
+"param.attack_anim_stance1"="seq.human_nightmare_staff_crush"
+"param.attack_sound_stance1"=2555
+"param.attack_anim_stance2"="seq.human_nightmare_staff_crush"
+"param.attack_sound_stance2"=2555
+"param.attack_anim_stance4"="seq.human_nightmare_staff_crush"
+"param.attack_sound_stance4"=2555
+"param.bas_readyanim"="seq.human_nightmare_staff_ready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_stafforb_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 [[item]]
 id = "obj.deadman_blighted_scythe_of_vitur_uncharged"
@@ -50058,6 +50971,17 @@ inherit = "obj.deadman_blighted_scythe_of_vitur_uncharged"
 weaponCategory="Scythe"
 [item.params]
 "param.attackrate"=5
+"param.equipment_sound"=2247
+"param.attack_anim_stance1"="seq.scythe_of_vitur_attack"
+"param.attack_sound_stance1"=2524
+"param.attack_anim_stance2"="seq.scythe_of_vitur_attack"
+"param.attack_sound_stance2"=2524
+"param.attack_anim_stance3"="seq.scythe_of_vitur_attack"
+"param.attack_sound_stance3"=2522
+"param.attack_anim_stance4"="seq.scythe_of_vitur_attack"
+"param.attack_sound_stance4"=2524
+"param.bas_readyanim"="seq.scythe_of_vitur_ready"
+"param.defend_anim"="seq.human_scythe_block"
 
 
 [[item]]
@@ -50072,7 +50996,23 @@ id = "obj.ancient_sceptre_ice_trouver"
 inherit = "obj.ancient_sceptre_ice_trouver"
 weaponCategory="Staff"
 tradeable = false
-
+[item.params]
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.equipment_sound"=2247
+"param.attackrate"=5
+"param.attack_anim_stance1"="seq.human_stafforb_pummel"
+"param.attack_sound_stance1"=2555
+"param.attack_anim_stance2"="seq.human_stafforb_pummel"
+"param.attack_sound_stance2"=2555
+"param.attack_anim_stance4"="seq.human_stafforb_pummel"
+"param.attack_sound_stance4"=2555
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_stafforb_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 [[item]]
 id = "obj.trail_slidingpuzzlec22"
@@ -50107,12 +51047,34 @@ tradeable = false
 id = "obj.deadman_blighted_voidwaker"
 inherit = "obj.deadman_blighted_voidwaker"
 weaponCategory="SlashSword"
+[item.params]
+"param.equipment_sound"=2248
+"param.attack_anim_stance1"="seq.human_sword_slash"
+"param.attack_sound_stance1"=2500
+"param.attack_anim_stance2"="seq.human_sword_slash"
+"param.attack_sound_stance2"=2500
+"param.attack_anim_stance3"="seq.human_sword_stab"
+"param.attack_sound_stance3"=2501
+"param.attack_anim_stance4"="seq.human_sword_slash"
+"param.attack_sound_stance4"=2500
+"param.defend_anim"="seq.human_sword_def"
+"param.bas_readyanim"="seq.human_ds_ready"
 
 
 [[item]]
 id = "obj.bone_claws"
 inherit = "obj.bone_claws"
 weaponCategory="Claw"
+[item.params]
+"param.attack_anim_stance1"="seq.human_axe_chop"
+"param.attack_sound_stance1"=4139
+"param.attack_anim_stance2"="seq.human_axe_chop"
+"param.attack_sound_stance2"=4139
+"param.attack_anim_stance3"="seq.d_claws_punch"
+"param.attack_sound_stance3"=4139
+"param.attack_anim_stance4"="seq.human_axe_chop"
+"param.attack_sound_stance4"=4139
+"param.defend_anim"="seq.human_unarmedblock"
 
 
 [[item]]
@@ -50136,6 +51098,17 @@ weaponCategory="SlashSword"
 tradeable = false
 [item.params]
 "param.attackrate"=5
+"param.equipment_sound"=2248
+"param.attack_anim_stance1"="seq.human_sword_slash"
+"param.attack_sound_stance1"=2500
+"param.attack_anim_stance2"="seq.human_sword_slash"
+"param.attack_sound_stance2"=2500
+"param.attack_anim_stance3"="seq.human_sword_stab"
+"param.attack_sound_stance3"=2501
+"param.attack_anim_stance4"="seq.human_sword_slash"
+"param.attack_sound_stance4"=2500
+"param.defend_anim"="seq.human_sword_def"
+"param.bas_readyanim"="seq.human_ds_ready"
 
 
 [[item]]
@@ -50204,6 +51177,17 @@ weaponCategory="SlashSword"
 tradeable = false
 [item.params]
 "param.attackrate"=5
+"param.equipment_sound"=2248
+"param.attack_anim_stance1"="seq.human_sword_slash"
+"param.attack_sound_stance1"=2500
+"param.attack_anim_stance2"="seq.human_sword_slash"
+"param.attack_sound_stance2"=2500
+"param.attack_anim_stance3"="seq.human_sword_stab"
+"param.attack_sound_stance3"=2501
+"param.attack_anim_stance4"="seq.human_sword_slash"
+"param.attack_sound_stance4"=2500
+"param.defend_anim"="seq.human_sword_def"
+"param.bas_readyanim"="seq.human_ds_ready"
 
 
 [[item]]
@@ -50227,7 +51211,17 @@ weaponCategory="Pickaxe"
 tradeable = false
 [item.params]
 "param.attackrate"=5
-
+[item.params]
+"param.equipment_sound"=2229
+"param.attack_anim_stance1"="seq.human_blunt_pound"
+"param.attack_sound_stance1"=2498
+"param.attack_anim_stance2"="seq.human_blunt_pound"
+"param.attack_sound_stance2"=2498
+"param.attack_anim_stance3"="seq.human_blunt_spike"
+"param.attack_sound_stance3"=2497
+"param.attack_anim_stance4"="seq.human_blunt_pound"
+"param.attack_sound_stance4"=2498
+"param.defend_anim"="seq.human_axe_block"
 
 [[item]]
 id = "obj.mm_monkey_talisman"
@@ -50277,7 +51271,24 @@ inherit = "obj.merfolk_trident"
 weaponCategory="Spear"
 [item.params]
 "param.attackrate"=5
-
+[item.params]
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.equipment_sound"=2247
+"param.attack_anim_stance1"="seq.human_dspear_stab"
+"param.attack_sound_stance1"=2562
+"param.attack_anim_stance2"="seq.human_dspear_slash"
+"param.attack_sound_stance2"=2556
+"param.attack_anim_stance3"="seq.human_dspear_lunge"
+"param.attack_sound_stance3"=2555
+"param.attack_anim_stance4"="seq.human_dspear_stab"
+"param.attack_sound_stance4"=2562
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_dspear_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 [[item]]
 id = "obj.reinitialisation_14_inactive"
@@ -50299,7 +51310,23 @@ id = "obj.ancient_sceptre_smoke_broken"
 inherit = "obj.ancient_sceptre_smoke_broken"
 weaponCategory="Staff"
 tradeable = false
-
+[item.params]
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.equipment_sound"=2247
+"param.attackrate"=5
+"param.attack_anim_stance1"="seq.human_stafforb_pummel"
+"param.attack_sound_stance1"=2555
+"param.attack_anim_stance2"="seq.human_stafforb_pummel"
+"param.attack_sound_stance2"=2555
+"param.attack_anim_stance4"="seq.human_stafforb_pummel"
+"param.attack_sound_stance4"=2555
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_stafforb_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 [[item]]
 id = "obj.iron_bar"
@@ -50320,14 +51347,34 @@ id = "obj.echo_gauntlet_crystal_dagger_t3"
 inherit = "obj.echo_gauntlet_crystal_dagger_t3"
 weaponCategory="StabSword"
 tradeable = false
-
+[item.params]
+"param.equipment_sound"=2248
+"param.attack_anim_stance1"="seq.human_sword_stab"
+"param.attack_sound_stance1"=2549
+"param.attack_anim_stance2"="seq.human_sword_stab"
+"param.attack_sound_stance2"=2549
+"param.attack_anim_stance3"="seq.human_sword_slash"
+"param.attack_sound_stance3"=2548
+"param.attack_anim_stance4"="seq.human_sword_stab"
+"param.attack_sound_stance4"=2549
+"param.defend_anim"="seq.human_sword_def"
 
 [[item]]
 id = "obj.br_inquisitors_mace"
 inherit = "obj.br_inquisitors_mace"
 weaponCategory="Spiked"
 tradeable = false
-
+[item.params]
+"param.equipment_sound"=2246
+"param.attack_anim_stance1"="seq.human_blunt_pound"
+"param.attack_sound_stance1"=2508
+"param.attack_anim_stance2"="seq.human_blunt_pound"
+"param.attack_sound_stance2"=2508
+"param.attack_anim_stance3"="seq.human_blunt_spike"
+"param.attack_sound_stance3"=2509
+"param.attack_anim_stance4"="seq.human_blunt_pound"
+"param.attack_sound_stance4"=2508
+"param.defend_anim"="seq.human_blunt_block"
 
 [[item]]
 id = "obj.blue_dragon_scale"
@@ -50343,7 +51390,17 @@ weaponCategory="Spiked"
 tradeable = false
 [item.params]
 "param.attackrate"=6
-
+[item.params]
+"param.equipment_sound"=2246
+"param.attack_anim_stance1"="seq.human_blunt_pound"
+"param.attack_sound_stance1"=2508
+"param.attack_anim_stance2"="seq.human_blunt_pound"
+"param.attack_sound_stance2"=2508
+"param.attack_anim_stance3"="seq.human_blunt_spike"
+"param.attack_sound_stance3"=2509
+"param.attack_anim_stance4"="seq.human_blunt_pound"
+"param.attack_sound_stance4"=2508
+"param.defend_anim"="seq.human_blunt_block"
 
 [[item]]
 id = "obj.br_atlatl_dart"
@@ -50360,6 +51417,17 @@ id = "obj.br_dual_macuahuitl"
 inherit = "obj.br_dual_macuahuitl"
 weaponCategory="Spiked"
 tradeable = false
+[item.params]
+"param.equipment_sound"=2233
+"param.attack_anim_stance1"="seq.pmoon_macuahuitl_crush"
+"param.attack_sound_stance1"=7930
+"param.attack_anim_stance2"="seq.pmoon_macuahuitl_crush"
+"param.attack_sound_stance2"=7930
+"param.attack_anim_stance3"="seq.pmoon_macuahuitl_crush"
+"param.attack_sound_stance3"=7930
+"param.attack_anim_stance4"="seq.pmoon_macuahuitl_crush"
+"param.attack_sound_stance4"=7930
+"param.defend_anim"="seq.human_unarmedblock"
 
 
 [[item]]
@@ -50380,7 +51448,22 @@ weaponCategory="Staff"
 tradeable = false
 [item.params]
 "param.attackrate"=5
-
+[item.params]
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.equipment_sound"=2247
+"param.attack_anim_stance1"="seq.human_nightmare_staff_crush"
+"param.attack_sound_stance1"=2555
+"param.attack_anim_stance2"="seq.human_nightmare_staff_crush"
+"param.attack_sound_stance2"=2555
+"param.attack_anim_stance4"="seq.human_nightmare_staff_crush"
+"param.attack_sound_stance4"=2555
+"param.bas_readyanim"="seq.human_nightmare_staff_ready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_stafforb_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 [[item]]
 id = "obj.garlic"
@@ -50401,7 +51484,23 @@ id = "obj.ancient_sceptre_trouver"
 inherit = "obj.ancient_sceptre_trouver"
 weaponCategory="Staff"
 tradeable = false
-
+[item.params]
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.equipment_sound"=2247
+"param.attackrate"=5
+"param.attack_anim_stance1"="seq.human_stafforb_pummel"
+"param.attack_sound_stance1"=2555
+"param.attack_anim_stance2"="seq.human_stafforb_pummel"
+"param.attack_sound_stance2"=2555
+"param.attack_anim_stance4"="seq.human_stafforb_pummel"
+"param.attack_sound_stance4"=2555
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_stafforb_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 [[item]]
 id = "obj.trailblazer_reloaded_pickaxe_no_infernal"
@@ -50410,7 +51509,17 @@ weaponCategory="Pickaxe"
 tradeable = false
 [item.params]
 "param.attackrate"=5
-
+[item.params]
+"param.equipment_sound"=2229
+"param.attack_anim_stance1"="seq.human_blunt_pound"
+"param.attack_sound_stance1"=2498
+"param.attack_anim_stance2"="seq.human_blunt_pound"
+"param.attack_sound_stance2"=2498
+"param.attack_anim_stance3"="seq.human_blunt_spike"
+"param.attack_sound_stance3"=2497
+"param.attack_anim_stance4"="seq.human_blunt_pound"
+"param.attack_sound_stance4"=2498
+"param.defend_anim"="seq.human_axe_block"
 
 [[item]]
 id = "obj.avas_assembler_masori_trouver"
@@ -50465,7 +51574,17 @@ weaponCategory="StabSword"
 tradeable = false
 [item.params]
 "param.attackrate"=5
-
+[item.params]
+"param.equipment_sound"=2248
+"param.attack_anim_stance1"="seq.human_sword_stab"
+"param.attack_sound_stance1"=2549
+"param.attack_anim_stance2"="seq.human_sword_stab"
+"param.attack_sound_stance2"=2549
+"param.attack_anim_stance3"="seq.human_sword_slash"
+"param.attack_sound_stance3"=2548
+"param.attack_anim_stance4"="seq.human_sword_stab"
+"param.attack_sound_stance4"=2549
+"param.defend_anim"="seq.human_sword_def"
 
 [[item]]
 id = "obj.castlewars_sword_3_broken"
@@ -50474,7 +51593,17 @@ weaponCategory="SlashSword"
 tradeable = false
 [item.params]
 "param.attackrate"=5
-
+[item.params]
+"param.equipment_sound"=2248
+"param.attack_anim_stance1"="seq.human_sword_slash"
+"param.attack_sound_stance1"=2500
+"param.attack_anim_stance2"="seq.human_sword_slash"
+"param.attack_sound_stance2"=2500
+"param.attack_anim_stance3"="seq.human_sword_stab"
+"param.attack_sound_stance3"=2501
+"param.attack_anim_stance4"="seq.human_sword_slash"
+"param.attack_sound_stance4"=2500
+"param.defend_anim"="seq.human_sword_def"
 
 [[item]]
 id = "obj.royal_coal_engine"
@@ -50572,6 +51701,13 @@ tradeable = false
 [item.params]
 "param.proj_type"="projanim.arrow"
 "param.attack_range"=9
+"param.attack_anim_stance1"="seq.human_bow"
+"param.attack_sound_stance1"=2693
+"param.attack_anim_stance2"="seq.human_bow"
+"param.attack_sound_stance2"=2693
+"param.attack_anim_stance4"="seq.human_bow"
+"param.attack_sound_stance4"=2693
+"param.defend_anim"="seq.human_unarmedblock"
 
 
 [[item]]
@@ -50580,6 +51716,14 @@ inherit = "obj.barrows_torag_weapon_broken"
 weaponCategory="Blunt"
 [item.params]
 "param.attackrate"=5
+"param.equipment_sound"=2233
+"param.attack_anim_stance1"="seq.barrow_torag_crush"
+"param.attack_sound_stance1"=1332
+"param.attack_anim_stance2"="seq.barrow_torag_crush"
+"param.attack_sound_stance2"=1332
+"param.attack_anim_stance4"="seq.barrow_torag_crush"
+"param.attack_sound_stance4"=1332
+"param.defend_anim"="seq.human_unarmedblock"
 
 
 [[item]]
@@ -50607,7 +51751,17 @@ tradeable = false
 id = "obj.glacial_temotli"
 inherit = "obj.glacial_temotli"
 weaponCategory="Spiked"
-
+[item.params]
+"param.equipment_sound"=2246
+"param.attack_anim_stance1"="seq.human_blunt_pound"
+"param.attack_sound_stance1"=2508
+"param.attack_anim_stance2"="seq.human_blunt_pound"
+"param.attack_sound_stance2"=2508
+"param.attack_anim_stance3"="seq.human_blunt_spike"
+"param.attack_sound_stance3"=2509
+"param.attack_anim_stance4"="seq.human_blunt_pound"
+"param.attack_sound_stance4"=2508
+"param.defend_anim"="seq.human_blunt_block"
 
 [[item]]
 id = "obj.looting_bag_open"
@@ -50648,6 +51802,20 @@ tradeable = false
 "param.proj_travel"="spotanim.rune_dart_travel"
 "param.attack_range"=6
 "param.attackrate"=3
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.attack_anim_stance1"="seq.snakeboss_blowpipe_attack"
+"param.attack_sound_stance1"=2696
+"param.attack_anim_stance2"="seq.snakeboss_blowpipe_attack"
+"param.attack_sound_stance2"=2696
+"param.attack_anim_stance4"="seq.snakeboss_blowpipe_attack"
+"param.attack_sound_stance4"=2696
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_spear_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 
 [[item]]
@@ -50655,6 +51823,18 @@ id = "obj.deadman_voidwaker"
 inherit = "obj.deadman_voidwaker"
 weaponCategory="SlashSword"
 tradeable = false
+[item.params]
+"param.equipment_sound"=2248
+"param.attack_anim_stance1"="seq.human_sword_slash"
+"param.attack_sound_stance1"=2500
+"param.attack_anim_stance2"="seq.human_sword_slash"
+"param.attack_sound_stance2"=2500
+"param.attack_anim_stance3"="seq.human_sword_stab"
+"param.attack_sound_stance3"=2501
+"param.attack_anim_stance4"="seq.human_sword_slash"
+"param.attack_sound_stance4"=2500
+"param.defend_anim"="seq.human_sword_def"
+"param.bas_readyanim"="seq.human_ds_ready"
 
 
 [[item]]
@@ -50714,7 +51894,19 @@ tradeable = false
 id = "obj.league_4_banner"
 inherit = "obj.league_4_banner"
 weaponCategory="Banner"
-
+[item.params]
+"param.bas_walk_l"="seq.human_bannerwalk_l"
+"param.bas_walk_r"="seq.human_bannerwalk_r"
+"param.bas_running"="seq.human_bannerrunning"
+"param.attack_anim_stance1"="seq.human_banner_spike"
+"param.attack_anim_stance2"="seq.human_banner_spike"
+"param.attack_anim_stance3"="seq.human_banner_spike"
+"param.attack_anim_stance4"="seq.human_banner_spike"
+"param.bas_readyanim"="seq.human_bannerready"
+"param.bas_turnonspot"="seq.human_bannerturnonspot"
+"param.defend_anim"="seq.human_banner_block"
+"param.bas_walk_f"="seq.human_bannerwalk_f"
+"param.bas_walk_b"="seq.human_bannerwalk_b"
 
 [[item]]
 id = "obj.mm_monkey_greegree_for_large_zombie_monkey"
@@ -50778,7 +51970,17 @@ id = "obj.thunder_khopesh"
 inherit = "obj.thunder_khopesh"
 weaponCategory="SlashSword"
 tradeable = false
-
+[item.params]
+"param.equipment_sound"=2248
+"param.attack_anim_stance1"="seq.human_sword_slash"
+"param.attack_sound_stance1"=2500
+"param.attack_anim_stance2"="seq.human_sword_slash"
+"param.attack_sound_stance2"=2500
+"param.attack_anim_stance3"="seq.human_sword_stab"
+"param.attack_sound_stance3"=2501
+"param.attack_anim_stance4"="seq.human_sword_slash"
+"param.attack_sound_stance4"=2500
+"param.defend_anim"="seq.human_sword_def"
 
 [[item]]
 id = "obj.reinitialisation_17_inactive"
@@ -50799,7 +52001,19 @@ id = "obj.league_5_banner"
 inherit = "obj.league_5_banner"
 weaponCategory="Banner"
 tradeable = false
-
+[item.params]
+"param.bas_walk_l"="seq.human_bannerwalk_l"
+"param.bas_walk_r"="seq.human_bannerwalk_r"
+"param.bas_running"="seq.human_bannerrunning"
+"param.attack_anim_stance1"="seq.human_banner_spike"
+"param.attack_anim_stance2"="seq.human_banner_spike"
+"param.attack_anim_stance3"="seq.human_banner_spike"
+"param.attack_anim_stance4"="seq.human_banner_spike"
+"param.bas_readyanim"="seq.human_bannerready"
+"param.bas_turnonspot"="seq.human_bannerturnonspot"
+"param.defend_anim"="seq.human_banner_block"
+"param.bas_walk_f"="seq.human_bannerwalk_f"
+"param.bas_walk_b"="seq.human_bannerwalk_b"
 
 [[item]]
 id = "obj.dinhs_bulwark_ornament"
@@ -50808,6 +52022,15 @@ weaponCategory="Bulwark"
 tradeable = false
 [item.params]
 "param.attackrate"=5
+"param.bas_walk_l"="seq.human_dinhs_bulwark_walk"
+"param.bas_walk_r"="seq.human_dinhs_bulwark_walk"
+"param.bas_running"="seq.human_dinhs_bulwark_run"
+"param.attack_anim_stance1"="seq.human_dinhs_bulwark_bash"
+"param.attack_sound_stance1"=3454
+"param.bas_readyanim"="seq.human_dinhs_bulwark_ready"
+"param.defend_anim"="seq.human_dinhs_bulwark_block"
+"param.bas_walk_f"="seq.human_dinhs_bulwark_walk"
+"param.bas_walk_b"="seq.human_dinhs_bulwark_walk"
 
 
 [[item]]
@@ -50839,6 +52062,23 @@ weaponCategory="TwoHandedSword"
 tradeable = false
 [item.params]
 "param.attackrate"=6
+"param.bas_walk_l"="seq.dh_sword_update_walk_left"
+"param.bas_walk_r"="seq.dh_sword_update_walk_right"
+"param.bas_running"="seq.dh_sword_update_run"
+"param.equipment_sound"=2248
+"param.attack_anim_stance1"="seq.dh_sword_update_slash"
+"param.attack_sound_stance1"=3847
+"param.attack_anim_stance2"="seq.dh_sword_update_slash"
+"param.attack_sound_stance2"=3847
+"param.attack_anim_stance3"="seq.dh_sword_update_smash"
+"param.attack_sound_stance3"=3846
+"param.attack_anim_stance4"="seq.dh_sword_update_block"
+"param.attack_sound_stance4"=3847
+"param.bas_readyanim"="seq.dh_sword_update_ready"
+"param.bas_turnonspot"="seq.dh_sword_update_turnonspot"
+"param.defend_anim"="seq.dh_sword_update_defend"
+"param.bas_walk_f"="seq.dh_sword_update_walk"
+"param.bas_walk_b"="seq.dh_sword_update_walk"
 
 
 [[item]]
@@ -50853,6 +52093,16 @@ id = "obj.bh_dragon_claws_corrupted"
 inherit = "obj.bh_dragon_claws_corrupted"
 weaponCategory="Claw"
 tradeable = false
+[item.params]
+"param.attack_anim_stance1"="seq.human_axe_chop"
+"param.attack_sound_stance1"=4139
+"param.attack_anim_stance2"="seq.human_axe_chop"
+"param.attack_sound_stance2"=4139
+"param.attack_anim_stance3"="seq.d_claws_punch"
+"param.attack_sound_stance3"=4139
+"param.attack_anim_stance4"="seq.human_axe_chop"
+"param.attack_sound_stance4"=4139
+"param.defend_anim"="seq.human_unarmedblock"
 
 
 [[item]]
@@ -50892,6 +52142,22 @@ weaponCategory="Spear"
 tradeable = false
 [item.params]
 "param.attackrate"=5
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.attack_anim_stance1"="seq.human_dspear_stab"
+"param.attack_sound_stance1"=2562
+"param.attack_anim_stance2"="seq.human_dspear_slash"
+"param.attack_sound_stance2"=2556
+"param.attack_anim_stance3"="seq.human_dspear_lunge"
+"param.attack_sound_stance3"=2555
+"param.attack_anim_stance4"="seq.human_dspear_stab"
+"param.attack_sound_stance4"=2562
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_dspear_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 
 [[item]]
@@ -51035,6 +52301,20 @@ weaponCategory="Thrown"
 "param.proj_travel"="spotanim.rune_dart_travel"
 "param.attack_range"=5
 "param.attackrate"=3
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.attack_anim_stance1"="seq.snakeboss_blowpipe_attack"
+"param.attack_sound_stance1"=2696
+"param.attack_anim_stance2"="seq.snakeboss_blowpipe_attack"
+"param.attack_sound_stance2"=2696
+"param.attack_anim_stance4"="seq.snakeboss_blowpipe_attack"
+"param.attack_sound_stance4"=2696
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_spear_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 
 [[item]]
@@ -51050,6 +52330,20 @@ weaponCategory="Crossbow"
 [item.params]
 "param.proj_type"="projanim.bolt"
 "param.attack_range"=8
+"param.bas_walk_l"="seq.barrows_repeating_crossbow_walk"
+"param.bas_walk_r"="seq.barrows_repeating_crossbow_walk"
+"param.bas_running"="seq.barrows_repeating_crossbow_run"
+"param.equipment_sound"=2241
+"param.attack_anim_stance1"="seq.barrows_repeating_crossbow_fire"
+"param.attack_sound_stance1"=2695
+"param.attack_anim_stance2"="seq.barrows_repeating_crossbow_fire"
+"param.attack_sound_stance2"=2695
+"param.attack_anim_stance4"="seq.barrows_repeating_crossbow_fire"
+"param.attack_sound_stance4"=2695
+"param.bas_readyanim"="seq.barrows_repeating_crossbow_ready"
+"param.defend_anim"="seq.human_unarmedblock"
+"param.bas_walk_f"="seq.barrows_repeating_crossbow_walk"
+"param.bas_walk_b"="seq.barrows_repeating_crossbow_walk"
 
 
 [[item]]
@@ -51072,7 +52366,23 @@ id = "obj.ancient_sceptre_ice_broken"
 inherit = "obj.ancient_sceptre_ice_broken"
 weaponCategory="Staff"
 tradeable = false
-
+[item.params]
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.equipment_sound"=2247
+"param.attackrate"=5
+"param.attack_anim_stance1"="seq.human_stafforb_pummel"
+"param.attack_sound_stance1"=2555
+"param.attack_anim_stance2"="seq.human_stafforb_pummel"
+"param.attack_sound_stance2"=2555
+"param.attack_anim_stance4"="seq.human_stafforb_pummel"
+"param.attack_sound_stance4"=2555
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_stafforb_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 [[item]]
 id = "obj.nex_message"
@@ -51117,6 +52427,23 @@ inherit = "obj.deadman_blighted_ags"
 weaponCategory="TwoHandedSword"
 [item.params]
 "param.attackrate"=6
+"param.bas_walk_l"="seq.dh_sword_update_walk_left"
+"param.bas_walk_r"="seq.dh_sword_update_walk_right"
+"param.bas_running"="seq.dh_sword_update_run"
+"param.equipment_sound"=2248
+"param.attack_anim_stance1"="seq.dh_sword_update_slash"
+"param.attack_sound_stance1"=3847
+"param.attack_anim_stance2"="seq.dh_sword_update_slash"
+"param.attack_sound_stance2"=3847
+"param.attack_anim_stance3"="seq.dh_sword_update_smash"
+"param.attack_sound_stance3"=3846
+"param.attack_anim_stance4"="seq.dh_sword_update_block"
+"param.attack_sound_stance4"=3847
+"param.bas_readyanim"="seq.dh_sword_update_ready"
+"param.bas_turnonspot"="seq.dh_sword_update_turnonspot"
+"param.defend_anim"="seq.dh_sword_update_defend"
+"param.bas_walk_f"="seq.dh_sword_update_walk"
+"param.bas_walk_b"="seq.dh_sword_update_walk"
 
 
 [[item]]
@@ -51160,7 +52487,23 @@ id = "obj.ancient_sceptre"
 inherit = "obj.ancient_sceptre"
 weaponCategory="Staff"
 tradeable = false
-
+[item.params]
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.equipment_sound"=2247
+"param.attackrate"=5
+"param.attack_anim_stance1"="seq.human_stafforb_pummel"
+"param.attack_sound_stance1"=2555
+"param.attack_anim_stance2"="seq.human_stafforb_pummel"
+"param.attack_sound_stance2"=2555
+"param.attack_anim_stance4"="seq.human_stafforb_pummel"
+"param.attack_sound_stance4"=2555
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_stafforb_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 [[item]]
 id = "obj.reinitialisation_09"
@@ -51223,7 +52566,23 @@ id = "obj.ancient_sceptre_blood_broken"
 inherit = "obj.ancient_sceptre_blood_broken"
 weaponCategory="Staff"
 tradeable = false
-
+[item.params]
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.equipment_sound"=2247
+"param.attackrate"=5
+"param.attack_anim_stance1"="seq.human_stafforb_pummel"
+"param.attack_sound_stance1"=2555
+"param.attack_anim_stance2"="seq.human_stafforb_pummel"
+"param.attack_sound_stance2"=2555
+"param.attack_anim_stance4"="seq.human_stafforb_pummel"
+"param.attack_sound_stance4"=2555
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_stafforb_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 [[item]]
 id = "obj.reinitialisation_18"
@@ -51239,7 +52598,22 @@ weaponCategory="Staff"
 tradeable = false
 [item.params]
 "param.attackrate"=5
-
+[item.params]
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.equipment_sound"=2247
+"param.attack_anim_stance1"="seq.human_stafforb_pummel"
+"param.attack_sound_stance1"=2555
+"param.attack_anim_stance2"="seq.human_stafforb_pummel"
+"param.attack_sound_stance2"=2555
+"param.attack_anim_stance4"="seq.human_stafforb_pummel"
+"param.attack_sound_stance4"=2555
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_stafforb_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 [[item]]
 id = "obj.roguesden_puzzle_mosaic_tile2"
@@ -51344,7 +52718,17 @@ weaponCategory="StabSword"
 tradeable = false
 [item.params]
 "param.attackrate"=5
-
+[item.params]
+"param.equipment_sound"=2248
+"param.attack_anim_stance1"="seq.human_sword_stab"
+"param.attack_sound_stance1"=2549
+"param.attack_anim_stance2"="seq.human_sword_stab"
+"param.attack_sound_stance2"=2549
+"param.attack_anim_stance3"="seq.human_sword_slash"
+"param.attack_sound_stance3"=2548
+"param.attack_anim_stance4"="seq.human_sword_stab"
+"param.attack_sound_stance4"=2549
+"param.defend_anim"="seq.human_sword_def"
 
 [[item]]
 id = "obj.reinitialisation_08_inactive"
@@ -51428,7 +52812,17 @@ id = "obj.barronite_mace_broken"
 inherit = "obj.barronite_mace_broken"
 weaponCategory="Blunt"
 tradeable = false
-
+[item.params]
+"param.equipment_sound"=2246
+"param.attack_anim_stance1"="seq.human_blunt_pound"
+"param.attack_sound_stance1"=2508
+"param.attack_anim_stance2"="seq.human_blunt_pound"
+"param.attack_sound_stance2"=2508
+"param.attack_anim_stance3"="seq.human_blunt_spike"
+"param.attack_sound_stance3"=2509
+"param.attack_anim_stance4"="seq.human_blunt_pound"
+"param.attack_sound_stance4"=2508
+"param.defend_anim"="seq.human_blunt_block"
 
 [[item]]
 id = "obj.reinitialisation_02"
@@ -51546,6 +52940,20 @@ tradeable = false
 "param.proj_travel"="spotanim.rune_dart_travel"
 "param.attack_range"=5
 "param.attackrate"=3
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.attack_anim_stance1"="seq.snakeboss_blowpipe_attack"
+"param.attack_sound_stance1"=2696
+"param.attack_anim_stance2"="seq.snakeboss_blowpipe_attack"
+"param.attack_sound_stance2"=2696
+"param.attack_anim_stance4"="seq.snakeboss_blowpipe_attack"
+"param.attack_sound_stance4"=2696
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_spear_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 
 [[item]]
@@ -51553,7 +52961,23 @@ id = "obj.ancient_sceptre_shadow"
 inherit = "obj.ancient_sceptre_shadow"
 weaponCategory="Staff"
 tradeable = false
-
+[item.params]
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.equipment_sound"=2247
+"param.attackrate"=5
+"param.attack_anim_stance1"="seq.human_stafforb_pummel"
+"param.attack_sound_stance1"=2555
+"param.attack_anim_stance2"="seq.human_stafforb_pummel"
+"param.attack_sound_stance2"=2555
+"param.attack_anim_stance4"="seq.human_stafforb_pummel"
+"param.attack_sound_stance4"=2555
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_stafforb_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 [[item]]
 id = "obj.poh_pugel"
@@ -51590,7 +53014,19 @@ weaponCategory="Crossbow"
 [item.params]
 "param.proj_type"="projanim.bolt"
 "param.attack_range"=8
-
+[item.params]
+"param.bas_running"="seq.xbows_human_run"
+"param.equipment_sound"=2244
+"param.attack_anim_stance1"="seq.xbows_human_fire_and_reload_pvn"
+"param.attack_sound_stance1"=2695
+"param.attack_anim_stance2"="seq.xbows_human_fire_and_reload_pvn"
+"param.attack_sound_stance2"=2695
+"param.attack_anim_stance4"="seq.xbows_human_fire_and_reload_pvn"
+"param.attack_sound_stance4"=2695
+"param.bas_readyanim"="seq.xbows_human_ready"
+"param.defend_anim"="seq.human_unarmedblock"
+"param.bas_walk_f"="seq.xbows_human_walk_f"
+"param.bas_walk_b"="seq.xbows_human_walk_b"
 
 [[item]]
 id = "obj.trail_slidingpuzzled07"
@@ -51652,6 +53088,20 @@ tradeable = false
 "param.proj_travel"="spotanim.rune_dart_travel"
 "param.attack_range"=6
 "param.attackrate"=3
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.attack_anim_stance1"="seq.snakeboss_blowpipe_attack"
+"param.attack_sound_stance1"=2696
+"param.attack_anim_stance2"="seq.snakeboss_blowpipe_attack"
+"param.attack_sound_stance2"=2696
+"param.attack_anim_stance4"="seq.snakeboss_blowpipe_attack"
+"param.attack_sound_stance4"=2696
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_spear_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 
 [[item]]
@@ -51674,7 +53124,23 @@ id = "obj.ancient_sceptre_shadow_trouver"
 inherit = "obj.ancient_sceptre_shadow_trouver"
 weaponCategory="Staff"
 tradeable = false
-
+[item.params]
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.equipment_sound"=2247
+"param.attackrate"=5
+"param.attack_anim_stance1"="seq.human_stafforb_pummel"
+"param.attack_sound_stance1"=2555
+"param.attack_anim_stance2"="seq.human_stafforb_pummel"
+"param.attack_sound_stance2"=2555
+"param.attack_anim_stance4"="seq.human_stafforb_pummel"
+"param.attack_sound_stance4"=2555
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_stafforb_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 [[item]]
 id = "obj.topaz_ring"
@@ -51690,7 +53156,17 @@ weaponCategory="Axe"
 tradeable = false
 [item.params]
 "param.attackrate"=5
-
+[item.params]
+"param.equipment_sound"=2229
+"param.attack_anim_stance1"="seq.human_axe_hack"
+"param.attack_sound_stance1"=2498
+"param.attack_anim_stance2"="seq.human_axe_hack"
+"param.attack_sound_stance2"=2498
+"param.attack_anim_stance3"="seq.human_blunt_pound"
+"param.attack_sound_stance3"=2497
+"param.attack_anim_stance4"="seq.human_axe_hack"
+"param.attack_sound_stance4"=2498
+"param.defend_anim"="seq.human_axe_block"
 
 [[item]]
 id = "obj.reinitialisation_01"
@@ -51745,6 +53221,17 @@ weaponCategory="Scythe"
 tradeable = false
 [item.params]
 "param.attackrate"=5
+"param.equipment_sound"=2247
+"param.attack_anim_stance1"="seq.scythe_of_vitur_attack"
+"param.attack_sound_stance1"=2524
+"param.attack_anim_stance2"="seq.scythe_of_vitur_attack"
+"param.attack_sound_stance2"=2524
+"param.attack_anim_stance3"="seq.scythe_of_vitur_attack"
+"param.attack_sound_stance3"=2522
+"param.attack_anim_stance4"="seq.scythe_of_vitur_attack"
+"param.attack_sound_stance4"=2524
+"param.bas_readyanim"="seq.scythe_of_vitur_ready"
+"param.defend_anim"="seq.human_scythe_block"
 
 
 [[item]]
@@ -51765,6 +53252,13 @@ weaponCategory="Bow"
 "param.attack_range"=10
 "param.statreq1_level"=85
 "param.attackrate"=6
+"param.attack_anim_stance1"="seq.human_bow"
+"param.attack_sound_stance1"=2700
+"param.attack_anim_stance2"="seq.human_bow"
+"param.attack_sound_stance2"=2700
+"param.attack_anim_stance4"="seq.human_bow"
+"param.attack_sound_stance4"=2700
+"param.defend_anim"="seq.human_unarmedblock"
 
 
 [[item]]
@@ -51800,7 +53294,23 @@ id = "obj.ancient_sceptre_smoke_trouver"
 inherit = "obj.ancient_sceptre_smoke_trouver"
 weaponCategory="Staff"
 tradeable = false
-
+[item.params]
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.equipment_sound"=2247
+"param.attackrate"=5
+"param.attack_anim_stance1"="seq.human_stafforb_pummel"
+"param.attack_sound_stance1"=2555
+"param.attack_anim_stance2"="seq.human_stafforb_pummel"
+"param.attack_sound_stance2"=2555
+"param.attack_anim_stance4"="seq.human_stafforb_pummel"
+"param.attack_sound_stance4"=2555
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_stafforb_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 [[item]]
 id = "obj.trailblazer_reloaded_harpoon_no_infernal"
@@ -51809,7 +53319,17 @@ weaponCategory="StabSword"
 tradeable = false
 [item.params]
 "param.attackrate"=5
-
+[item.params]
+"param.equipment_sound"=2248
+"param.attack_anim_stance1"="seq.human_sword_stab"
+"param.attack_sound_stance1"=2549
+"param.attack_anim_stance2"="seq.human_sword_stab"
+"param.attack_sound_stance2"=2549
+"param.attack_anim_stance3"="seq.human_sword_slash"
+"param.attack_sound_stance3"=2548
+"param.attack_anim_stance4"="seq.human_sword_stab"
+"param.attack_sound_stance4"=2549
+"param.defend_anim"="seq.human_sword_def"
 
 [[item]]
 id = "obj.trail_slidingpuzzled16"
@@ -51853,7 +53373,23 @@ inherit = "obj.warped_sceptre_uncharged"
 weaponCategory="PoweredStaff"
 [item.params]
 "param.attack_range"=7
-
+[item.params]
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.equipment_sound"=2247
+"param.attackrate"=5
+"param.attack_anim_stance1"="seq.human_stafforb_pummel"
+"param.attack_sound_stance1"=2555
+"param.attack_anim_stance2"="seq.human_stafforb_pummel"
+"param.attack_sound_stance2"=2555
+"param.attack_anim_stance4"="seq.human_stafforb_pummel"
+"param.attack_sound_stance4"=2555
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_stafforb_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 [[item]]
 id = "obj.mm_monkey_greegree_for_small_ninja_monkey"
@@ -51924,7 +53460,22 @@ weaponCategory="PoweredStaff"
 [item.params]
 "param.attack_range"=8
 "param.attackrate"=5
-
+[item.params]
+"param.bas_walk_l"="seq.human_zamorakspear_walkleft"
+"param.bas_walk_r"="seq.human_zamorakspear_walkright"
+"param.bas_running"="seq.human_zamorakspear_run"
+"param.equipment_sound"=2247
+"param.attack_anim_stance1"="seq.toa_sot_cast_b"
+"param.attack_sound_stance1"=6410
+"param.attack_anim_stance2"="seq.toa_sot_cast_b"
+"param.attack_sound_stance2"=6410
+"param.attack_anim_stance4"="seq.toa_sot_cast_b"
+"param.attack_sound_stance4"=6410
+"param.bas_readyanim"="seq.toa_sot_ready"
+"param.bas_turnonspot"="seq.human_zamorakspear_turnonspot"
+"param.defend_anim"="seq.human_stafforb_block"
+"param.bas_walk_f"="seq.human_zamorakspear_walk_f"
+"param.bas_walk_b"="seq.human_zamorakspear_walk_b"
 
 [[item]]
 id = "obj.roguesden_puzzle_mosaic_tile4"
@@ -52032,7 +53583,22 @@ weaponCategory="Staff"
 tradeable = false
 [item.params]
 "param.attackrate"=5
-
+[item.params]
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.equipment_sound"=2247
+"param.attack_anim_stance1"="seq.human_stafforb_pummel"
+"param.attack_sound_stance1"=2555
+"param.attack_anim_stance2"="seq.human_stafforb_pummel"
+"param.attack_sound_stance2"=2555
+"param.attack_anim_stance4"="seq.human_stafforb_pummel"
+"param.attack_sound_stance4"=2555
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_stafforb_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 [[item]]
 id = "obj.trail_slidingpuzzleb19"
@@ -52069,7 +53635,23 @@ id = "obj.ancient_sceptre_blood"
 inherit = "obj.ancient_sceptre_blood"
 weaponCategory="Staff"
 tradeable = false
-
+[item.params]
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.equipment_sound"=2247
+"param.attackrate"=5
+"param.attack_anim_stance1"="seq.human_stafforb_pummel"
+"param.attack_sound_stance1"=2555
+"param.attack_anim_stance2"="seq.human_stafforb_pummel"
+"param.attack_sound_stance2"=2555
+"param.attack_anim_stance4"="seq.human_stafforb_pummel"
+"param.attack_sound_stance4"=2555
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_stafforb_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 [[item]]
 id = "obj.brokenibanstaff"
@@ -52078,7 +53660,22 @@ weaponCategory="Staff"
 tradeable = false
 [item.params]
 "param.attackrate"=5
-
+[item.params]
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.equipment_sound"=2247
+"param.attack_anim_stance1"="seq.human_stafforb_pummel"
+"param.attack_sound_stance1"=2555
+"param.attack_anim_stance2"="seq.human_stafforb_pummel"
+"param.attack_sound_stance2"=2555
+"param.attack_anim_stance4"="seq.human_stafforb_pummel"
+"param.attack_sound_stance4"=2555
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_stafforb_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 [[item]]
 id = "obj.morrigans_thrownaxe_bh_inactive"
@@ -52114,7 +53711,23 @@ weaponCategory="PoweredStaff"
 tradeable = false
 [item.params]
 "param.attack_range"=7
-
+[item.params]
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.equipment_sound"=2247
+"param.attackrate"=5
+"param.attack_anim_stance1"="seq.human_stafforb_pummel"
+"param.attack_sound_stance1"=2555
+"param.attack_anim_stance2"="seq.human_stafforb_pummel"
+"param.attack_sound_stance2"=2555
+"param.attack_anim_stance4"="seq.human_stafforb_pummel"
+"param.attack_sound_stance4"=2555
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_stafforb_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 [[item]]
 id = "obj.reinitialisation_23"
@@ -52211,7 +53824,23 @@ id = "obj.ancient_sceptre_smoke"
 inherit = "obj.ancient_sceptre_smoke"
 weaponCategory="Staff"
 tradeable = false
-
+[item.params]
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.equipment_sound"=2247
+"param.attackrate"=5
+"param.attack_anim_stance1"="seq.human_stafforb_pummel"
+"param.attack_sound_stance1"=2555
+"param.attack_anim_stance2"="seq.human_stafforb_pummel"
+"param.attack_sound_stance2"=2555
+"param.attack_anim_stance4"="seq.human_stafforb_pummel"
+"param.attack_sound_stance4"=2555
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_stafforb_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 [[item]]
 id = "obj.huntguide_hunting_beast"
@@ -52325,7 +53954,17 @@ weaponCategory="StabSword"
 tradeable = false
 [item.params]
 "param.attackrate"=5
-
+[item.params]
+"param.equipment_sound"=2248
+"param.attack_anim_stance1"="seq.human_sword_stab"
+"param.attack_sound_stance1"=2549
+"param.attack_anim_stance2"="seq.human_sword_stab"
+"param.attack_sound_stance2"=2549
+"param.attack_anim_stance3"="seq.human_sword_slash"
+"param.attack_sound_stance3"=2548
+"param.attack_anim_stance4"="seq.human_sword_stab"
+"param.attack_sound_stance4"=2549
+"param.defend_anim"="seq.human_sword_def"
 
 [[item]]
 id = "obj.mm_monkey_greegree_for_bearded_gorilla"
@@ -52470,7 +54109,17 @@ id = "obj.emberlight"
 inherit = "obj.emberlight"
 weaponCategory="SlashSword"
 tradeable = false
-
+[item.params]
+"param.equipment_sound"=2248
+"param.attack_anim_stance1"="seq.human_sword_slash"
+"param.attack_sound_stance1"=2500
+"param.attack_anim_stance2"="seq.human_sword_slash"
+"param.attack_sound_stance2"=2500
+"param.attack_anim_stance3"="seq.human_sword_stab"
+"param.attack_sound_stance3"=2501
+"param.attack_anim_stance4"="seq.human_sword_slash"
+"param.attack_sound_stance4"=2500
+"param.defend_anim"="seq.human_sword_def"
 
 [[item]]
 id = "obj.macro_broken_mithril_hatchet"
@@ -52592,6 +54241,15 @@ inherit = "obj.zombie_axe"
 weaponCategory="Axe"
 [item.params]
 "param.attackrate"=5
+"param.attack_anim_stance1"="seq.human_axe_hack"
+"param.attack_sound_stance1"=2498
+"param.attack_anim_stance2"="seq.human_axe_hack"
+"param.attack_sound_stance2"=2498
+"param.attack_anim_stance3"="seq.human_blunt_pound"
+"param.attack_sound_stance3"=2497
+"param.attack_anim_stance4"="seq.human_axe_hack"
+"param.attack_sound_stance4"=2498
+"param.defend_anim"="seq.human_axe_block"
 
 
 [[item]]
@@ -52599,7 +54257,23 @@ id = "obj.ancient_sceptre_ice"
 inherit = "obj.ancient_sceptre_ice"
 weaponCategory="Staff"
 tradeable = false
-
+[item.params]
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.equipment_sound"=2247
+"param.attackrate"=5
+"param.attack_anim_stance1"="seq.human_stafforb_pummel"
+"param.attack_sound_stance1"=2555
+"param.attack_anim_stance2"="seq.human_stafforb_pummel"
+"param.attack_sound_stance2"=2555
+"param.attack_anim_stance4"="seq.human_stafforb_pummel"
+"param.attack_sound_stance4"=2555
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_stafforb_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 [[item]]
 id = "obj.regicide_barrel_empty"
@@ -52623,7 +54297,17 @@ weaponCategory="Pickaxe"
 tradeable = false
 [item.params]
 "param.attackrate"=5
-
+[item.params]
+"param.equipment_sound"=2229
+"param.attack_anim_stance1"="seq.human_blunt_pound"
+"param.attack_sound_stance1"=2498
+"param.attack_anim_stance2"="seq.human_blunt_pound"
+"param.attack_sound_stance2"=2498
+"param.attack_anim_stance3"="seq.human_blunt_spike"
+"param.attack_sound_stance3"=2497
+"param.attack_anim_stance4"="seq.human_blunt_pound"
+"param.attack_sound_stance4"=2498
+"param.defend_anim"="seq.human_axe_block"
 
 [[item]]
 id = "obj.royal_lift_manual"
@@ -52649,7 +54333,15 @@ tradeable = false
 "param.proj_type"="projanim.arrow"
 "param.attack_range"=10
 "param.attackrate"=5
-
+[item.params]
+"param.equipment_sound"=2244
+"param.attack_anim_stance1"="seq.human_bow"
+"param.attack_sound_stance1"=2693
+"param.attack_anim_stance2"="seq.human_bow"
+"param.attack_sound_stance2"=2693
+"param.attack_anim_stance4"="seq.human_bow"
+"param.attack_sound_stance4"=2693
+"param.defend_anim"="seq.human_unarmedblock"
 
 [[item]]
 id = "obj.barrows_dharok_weapon_broken"
@@ -52657,6 +54349,21 @@ inherit = "obj.barrows_dharok_weapon_broken"
 weaponCategory="Axe"
 [item.params]
 "param.attackrate"=7
+"param.bas_walk_l"="seq.barrow_dharok_walk"
+"param.bas_walk_r"="seq.barrow_dharok_walk"
+"param.equipment_sound"=2232
+"param.attack_anim_stance1"="seq.barrow_dharok_crush"
+"param.attack_sound_stance1"=1321
+"param.attack_anim_stance2"="seq.barrow_dharok_crush"
+"param.attack_sound_stance2"=1321
+"param.attack_anim_stance3"="seq.barrow_dharok_slash"
+"param.attack_sound_stance3"=1316
+"param.attack_anim_stance4"="seq.barrow_dharok_crush"
+"param.attack_sound_stance4"=1321
+"param.bas_readyanim"="seq.barrow_dharok_ready"
+"param.defend_anim"="seq.human_unarmedblock"
+"param.bas_walk_f"="seq.barrow_dharok_walk"
+"param.bas_walk_b"="seq.barrow_dharok_walk"
 
 
 [[item]]
@@ -52699,6 +54406,20 @@ inherit = "obj.barrows_verac_weapon_broken"
 weaponCategory="Spiked"
 [item.params]
 "param.attackrate"=5
+"param.bas_walk_l"="seq.barrow_guthan_walk"
+"param.bas_walk_r"="seq.barrow_guthan_walk"
+"param.equipment_sound"=2246
+"param.attack_anim_stance1"="seq.barrow_guthan_crush"
+"param.attack_sound_stance1"=1323
+"param.attack_anim_stance2"="seq.barrow_guthan_crush"
+"param.attack_sound_stance2"=1323
+"param.attack_anim_stance3"="seq.barrow_guthan_crush"
+"param.attack_sound_stance3"=1324
+"param.attack_anim_stance4"="seq.barrow_guthan_crush"
+"param.attack_sound_stance4"=1323
+"param.bas_readyanim"="seq.barrow_guthan_ready"
+"param.bas_walk_f"="seq.barrow_guthan_walk"
+"param.bas_walk_b"="seq.barrow_guthan_walk"
 
 
 [[item]]
@@ -52718,6 +54439,13 @@ weaponCategory="Bow"
 "param.attack_range"=10
 "param.statreq1_level"=80
 "param.attackrate"=5
+"param.attack_anim_stance1"="seq.human_bow"
+"param.attack_sound_stance1"=1352
+"param.attack_anim_stance2"="seq.human_bow"
+"param.attack_sound_stance2"=1352
+"param.attack_anim_stance4"="seq.human_bow"
+"param.attack_sound_stance4"=1352
+"param.defend_anim"="seq.human_unarmedblock"
 
 
 [[item]]
@@ -52739,6 +54467,16 @@ tradeable = false
 id = "obj.deadman_blighted_dragon_claws"
 inherit = "obj.deadman_blighted_dragon_claws"
 weaponCategory="Claw"
+[item.params]
+"param.attack_anim_stance1"="seq.human_axe_chop"
+"param.attack_sound_stance1"=4139
+"param.attack_anim_stance2"="seq.human_axe_chop"
+"param.attack_sound_stance2"=4139
+"param.attack_anim_stance3"="seq.d_claws_punch"
+"param.attack_sound_stance3"=4139
+"param.attack_anim_stance4"="seq.human_axe_chop"
+"param.attack_sound_stance4"=4139
+"param.defend_anim"="seq.human_unarmedblock"
 
 
 [[item]]
@@ -52746,7 +54484,23 @@ id = "obj.ancient_sceptre_shadow_broken"
 inherit = "obj.ancient_sceptre_shadow_broken"
 weaponCategory="Staff"
 tradeable = false
-
+[item.params]
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.equipment_sound"=2247
+"param.attackrate"=5
+"param.attack_anim_stance1"="seq.human_stafforb_pummel"
+"param.attack_sound_stance1"=2555
+"param.attack_anim_stance2"="seq.human_stafforb_pummel"
+"param.attack_sound_stance2"=2555
+"param.attack_anim_stance4"="seq.human_stafforb_pummel"
+"param.attack_sound_stance4"=2555
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_stafforb_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 [[item]]
 id = "obj.naturerune"
@@ -52775,6 +54529,23 @@ inherit = "obj.barrows_guthan_weapon_broken"
 weaponCategory="Spear"
 [item.params]
 "param.attackrate"=5
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.equipment_sound"=2247
+"param.attack_anim_stance1"="seq.barrows_war_spear_stab"
+"param.attack_sound_stance1"=1337
+"param.attack_anim_stance2"="seq.barrows_war_spear_slash"
+"param.attack_sound_stance2"=1336
+"param.attack_anim_stance3"="seq.barrows_war_spear_crush"
+"param.attack_sound_stance3"=1335
+"param.attack_anim_stance4"="seq.barrows_war_spear_stab"
+"param.attack_sound_stance4"=1337
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_spear_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 
 [[item]]

@@ -7,7 +7,7 @@ This branch contains both weapon fixes and special attack work.
 - Weapon audit commands for finding broken weapon data.
 - Safer ranged combat so missing projectile or spotanim data does not disconnect players.
 - Fallback attack animations for bows, crossbows, thrown weapons, blowpipes, chinchompas, and salamanders.
-- Extra server item params for newer revision weapons and ranged ammo.
+- Extra server item params for newer revision weapons, ranged ammo, and common visual animation gaps.
 - Salamander tar checks.
 - Equipment stat requirement cleanup for wielding weapons.
 - Special attack support for melee, ranged, magic, instant boost specs, and shields.
@@ -17,29 +17,18 @@ This branch contains both weapon fixes and special attack work.
 
 - `::weaponaudit critical` shows `0` critical issues.
 - `::specaudit` shows `0` weapons missing a registered special attack.
-- `::weaponaudit visual` still shows `185` visual issues.
+- `::weaponaudit visual` previously showed `185` visual issues. The latest definition pass should reduce this to roughly `37`, pending an in-game rerun of the audit command.
 
-The remaining weapon work is mostly visual polish. These weapons should no longer crash combat, but some still use fallback attack animations or placeholder projectile/spotanim data.
+The remaining weapon work is mostly visual polish. These weapons should no longer crash combat, but a few still use fallback attack animations or placeholder projectile/spotanim data.
 
 ## Remaining Weapon Fixes
 
-Biggest visual buckets from the latest audit:
+Biggest visual buckets expected after the latest cache-definition pass:
 
-- Blunt weapons: 32
-- Staves: 27
-- Axes: 18
-- Stab swords: 17
-- Slash swords: 16
-- Polearms: 12
-- Spiked weapons: 10
-- Bows: 8
-- Spears: 8
-- Thrown weapons: 6
-- 2h swords: 6
-- Powered staves: 5
-- Claws: 5
+- Blunt weapons and event props: 26
+- Small leftover weapon oddities: 11
 
-These need proper stance, attack, block, projectile, or spotanim data from cache references.
+Most real weapons now have stance, attack, block, projectile, or spotanim data assigned. The leftovers are mainly joke/event handhelds, claws/boxing gloves, and a few fringe weapons that need cache-perfect references before tuning.
 
 ## Remaining Special Attack Polish
 
@@ -57,4 +46,3 @@ These need proper stance, attack, block, projectile, or spotanim data from cache
 - `::objdebug <item>`
 - `::seqdebug <id>`
 - `::spotdebug <id>`
-
