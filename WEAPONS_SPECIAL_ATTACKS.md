@@ -18,19 +18,15 @@ This branch contains both weapon fixes and special attack work.
 
 - `::weaponaudit critical` shows `0` critical issues.
 - `::specaudit` shows `0` weapons missing a registered special attack.
-- `::weaponaudit visual` previously showed `185` visual issues. The latest definition pass should reduce this to roughly `37`, pending an in-game rerun of the audit command.
+- `::weaponaudit visual` shows `0` visual issues.
 - Official OpenRune `main` has been merged through `3dd2440cf`.
 
-The remaining weapon work is mostly visual polish. These weapons should no longer crash combat, but a few still use fallback attack animations or placeholder projectile/spotanim data.
+The audit commands are clean. Remaining work is deeper behaviour polish for exact OSRS formulas, timings, and special-case effects.
 
 ## Remaining Weapon Fixes
 
-Biggest visual buckets expected after the latest cache-definition pass:
-
-- Blunt weapons and event props: 26
-- Small leftover weapon oddities: 11
-
-Most real weapons now have stance, attack, block, projectile, or spotanim data assigned. The leftovers are mainly joke/event handhelds, claws/boxing gloves, and a few fringe weapons that need cache-perfect references before tuning.
+- No remaining critical or visual audit issues.
+- Manual in-game animation review can still polish individual weapons if their cache-perfect animation differs from the sane fallback assigned here.
 
 ## Remaining Special Attack Polish
 

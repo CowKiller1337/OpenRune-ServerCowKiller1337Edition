@@ -10994,6 +10994,8 @@ inherit = "obj.mourning_paint_gun"
 weaponCategory="Gun"
 tradeable = false
 [item.params]
+"param.proj_type"="projanim.arrow"
+"param.attack_range"=5
 "param.bas_walk_l"="seq.human_toadcannon_walk_l"
 "param.bas_walk_r"="seq.human_toadcannon_walk_r"
 "param.bas_running"="seq.human_toadcannon_running"
@@ -27615,6 +27617,13 @@ inherit = "obj.poh_boxing_gloves_red"
 weaponCategory="Claw"
 tradeable = false
 [item.params]
+"param.attack_anim_stance1"="seq.human_unarmedpunch"
+"param.attack_sound_stance1"=2564
+"param.attack_anim_stance2"="seq.human_unarmedpunch"
+"param.attack_sound_stance2"=2564
+"param.attack_anim_stance4"="seq.human_unarmedpunch"
+"param.attack_sound_stance4"=2564
+"param.defend_anim"="seq.human_unarmedblock"
 "param.equipment_sound"=2236
 
 
@@ -27624,6 +27633,13 @@ inherit = "obj.poh_boxing_gloves_blue"
 weaponCategory="Claw"
 tradeable = false
 [item.params]
+"param.attack_anim_stance1"="seq.human_unarmedpunch"
+"param.attack_sound_stance1"=2564
+"param.attack_anim_stance2"="seq.human_unarmedpunch"
+"param.attack_sound_stance2"=2564
+"param.attack_anim_stance4"="seq.human_unarmedpunch"
+"param.attack_sound_stance4"=2564
+"param.defend_anim"="seq.human_unarmedblock"
 "param.equipment_sound"=2236
 
 
@@ -27640,6 +27656,16 @@ id = "obj.soulbane_zaros_spear"
 inherit = "obj.soulbane_zaros_spear"
 weaponCategory="Polestaff"
 [item.params]
+"param.attack_anim_stance1"="seq.human_dspear_stab"
+"param.attack_sound_stance1"=2562
+"param.attack_anim_stance2"="seq.human_dspear_slash"
+"param.attack_sound_stance2"=2556
+"param.attack_anim_stance3"="seq.human_dspear_lunge"
+"param.attack_sound_stance3"=2555
+"param.attack_anim_stance4"="seq.human_dspear_stab"
+"param.attack_sound_stance4"=2562
+"param.bas_readyanim"="seq.human_staffready"
+"param.defend_anim"="seq.human_dspear_block"
 "param.equipment_sound"=2247
 "param.attackrate"=6
 
@@ -31624,6 +31650,15 @@ inherit = "obj.hw16_cutscene_knife"
 weaponCategory="StabSword"
 tradeable = false
 [item.params]
+"param.attack_anim_stance1"="seq.human_sword_stab"
+"param.attack_sound_stance1"=2549
+"param.attack_anim_stance2"="seq.human_sword_stab"
+"param.attack_sound_stance2"=2549
+"param.attack_anim_stance3"="seq.human_sword_slash"
+"param.attack_sound_stance3"=2548
+"param.attack_anim_stance4"="seq.human_sword_stab"
+"param.attack_sound_stance4"=2549
+"param.defend_anim"="seq.human_sword_def"
 "param.equipment_sound"=2244
 
 
@@ -31705,6 +31740,15 @@ inherit = "obj.mistmyst_cutscene_knife"
 weaponCategory="StabSword"
 tradeable = false
 [item.params]
+"param.attack_anim_stance1"="seq.human_sword_stab"
+"param.attack_sound_stance1"=2549
+"param.attack_anim_stance2"="seq.human_sword_stab"
+"param.attack_sound_stance2"=2549
+"param.attack_anim_stance3"="seq.human_sword_slash"
+"param.attack_sound_stance3"=2548
+"param.attack_anim_stance4"="seq.human_sword_stab"
+"param.attack_sound_stance4"=2549
+"param.defend_anim"="seq.human_sword_def"
 "param.equipment_sound"=2244
 
 
@@ -33674,6 +33718,13 @@ inherit = "obj.hallowed_hammer"
 weaponCategory="Blunt"
 tradeable = false
 [item.params]
+"param.attack_anim_stance1"="seq.human_blunt_pound"
+"param.attack_sound_stance1"=2508
+"param.attack_anim_stance2"="seq.human_blunt_pound"
+"param.attack_sound_stance2"=2508
+"param.attack_anim_stance4"="seq.human_blunt_pound"
+"param.attack_sound_stance4"=2508
+"param.defend_anim"="seq.human_blunt_block"
 "param.equipment_sound"=2233
 
 
@@ -35044,6 +35095,14 @@ inherit = "obj.xmas22_nutcracker_staff01"
 weaponCategory="Blunt"
 tradeable = false
 [item.params]
+"param.attack_anim_stance1"="seq.human_staff_pummel"
+"param.attack_sound_stance1"=2555
+"param.attack_anim_stance2"="seq.human_staff_pummel"
+"param.attack_sound_stance2"=2555
+"param.attack_anim_stance4"="seq.human_staff_pummel"
+"param.attack_sound_stance4"=2555
+"param.bas_readyanim"="seq.human_staffready"
+"param.defend_anim"="seq.human_staff_block"
 "param.equipment_sound"=2247
 "param.destroy_note_desc"="You can get a replacement from Diango."
 
@@ -35063,6 +35122,14 @@ inherit = "obj.xmas22_nutcracker_staff02"
 weaponCategory="Blunt"
 tradeable = false
 [item.params]
+"param.attack_anim_stance1"="seq.human_staff_pummel"
+"param.attack_sound_stance1"=2555
+"param.attack_anim_stance2"="seq.human_staff_pummel"
+"param.attack_sound_stance2"=2555
+"param.attack_anim_stance4"="seq.human_staff_pummel"
+"param.attack_sound_stance4"=2555
+"param.bas_readyanim"="seq.human_staffready"
+"param.defend_anim"="seq.human_staff_block"
 "param.equipment_sound"=2247
 "param.destroy_note_desc"="You can get a replacement from Diango."
 
@@ -35297,6 +35364,13 @@ inherit = "obj.osb10_dragon_candle"
 weaponCategory="Blunt"
 tradeable = false
 [item.params]
+"param.attack_anim_stance1"="seq.human_blunt_pound"
+"param.attack_sound_stance1"=2508
+"param.attack_anim_stance2"="seq.human_blunt_pound"
+"param.attack_sound_stance2"=2508
+"param.attack_anim_stance4"="seq.human_blunt_pound"
+"param.attack_sound_stance4"=2508
+"param.defend_anim"="seq.human_blunt_block"
 "param.equipment_sound"=2248
 "param.destroy_note_desc"="You can get a replacement from Diango."
 
@@ -35888,6 +35962,13 @@ inherit = "obj.pride23_crossbow"
 weaponCategory="Blunt"
 tradeable = false
 [item.params]
+"param.attack_anim_stance1"="seq.human_blunt_pound"
+"param.attack_sound_stance1"=2508
+"param.attack_anim_stance2"="seq.human_blunt_pound"
+"param.attack_sound_stance2"=2508
+"param.attack_anim_stance4"="seq.human_blunt_pound"
+"param.attack_sound_stance4"=2508
+"param.defend_anim"="seq.human_blunt_block"
 "param.equipment_sound"=2244
 "param.destroy_note_desc"="You can get a replacement from Diango."
 "param.attackrate"=3
@@ -40894,6 +40975,13 @@ inherit = "obj.midsummer_fan"
 weaponCategory="Blunt"
 tradeable = false
 [item.params]
+"param.attack_anim_stance1"="seq.human_blunt_pound"
+"param.attack_sound_stance1"=2508
+"param.attack_anim_stance2"="seq.human_blunt_pound"
+"param.attack_sound_stance2"=2508
+"param.attack_anim_stance4"="seq.human_blunt_pound"
+"param.attack_sound_stance4"=2508
+"param.defend_anim"="seq.human_blunt_block"
 "param.destroy_note_desc"="You can get a replacement from Diango."
 
 
@@ -42015,6 +42103,13 @@ inherit = "obj.birthday_cake"
 weaponCategory="Blunt"
 tradeable = false
 [item.params]
+"param.attack_anim_stance1"="seq.human_blunt_pound"
+"param.attack_sound_stance1"=2508
+"param.attack_anim_stance2"="seq.human_blunt_pound"
+"param.attack_sound_stance2"=2508
+"param.attack_anim_stance4"="seq.human_blunt_pound"
+"param.attack_sound_stance4"=2508
+"param.defend_anim"="seq.human_blunt_block"
 "param.destroy_note_desc"="You can get a replacement from Diango."
 
 
@@ -43234,6 +43329,13 @@ inherit = "obj.osb8_banana_weapon"
 weaponCategory="Blunt"
 tradeable = false
 [item.params]
+"param.attack_anim_stance1"="seq.human_blunt_pound"
+"param.attack_sound_stance1"=2508
+"param.attack_anim_stance2"="seq.human_blunt_pound"
+"param.attack_sound_stance2"=2508
+"param.attack_anim_stance4"="seq.human_blunt_pound"
+"param.attack_sound_stance4"=2508
+"param.defend_anim"="seq.human_blunt_block"
 "param.destroy_note_desc"="You can get a replacement from Diango."
 
 
@@ -46122,6 +46224,13 @@ inherit = "obj.league_3_cardthrow"
 weaponCategory="Blunt"
 tradeable = false
 [item.params]
+"param.attack_anim_stance1"="seq.human_blunt_pound"
+"param.attack_sound_stance1"=2508
+"param.attack_anim_stance2"="seq.human_blunt_pound"
+"param.attack_sound_stance2"=2508
+"param.attack_anim_stance4"="seq.human_blunt_pound"
+"param.attack_sound_stance4"=2508
+"param.defend_anim"="seq.human_blunt_block"
 "param.destroy_note_desc"="You can get a replacement from Diango."
 "param.attackrate"=3
 
@@ -46213,6 +46322,13 @@ inherit = "obj.osb10_balloons"
 weaponCategory="Blunt"
 tradeable = false
 [item.params]
+"param.attack_anim_stance1"="seq.human_blunt_pound"
+"param.attack_sound_stance1"=2508
+"param.attack_anim_stance2"="seq.human_blunt_pound"
+"param.attack_sound_stance2"=2508
+"param.attack_anim_stance4"="seq.human_blunt_pound"
+"param.attack_sound_stance4"=2508
+"param.defend_anim"="seq.human_blunt_block"
 "param.destroy_note_desc"="You can get a replacement from Diango."
 
 
@@ -47546,6 +47662,13 @@ inherit = "obj.league_4_dragon_trophy"
 weaponCategory="Blunt"
 tradeable = false
 [item.params]
+"param.attack_anim_stance1"="seq.human_blunt_pound"
+"param.attack_sound_stance1"=2508
+"param.attack_anim_stance2"="seq.human_blunt_pound"
+"param.attack_sound_stance2"=2508
+"param.attack_anim_stance4"="seq.human_blunt_pound"
+"param.attack_sound_stance4"=2508
+"param.defend_anim"="seq.human_blunt_block"
 "param.destroy_note_desc"="You can reclaim this by speaking to the Leagues Tutor or from your League trophy case."
 
 
@@ -47555,6 +47678,13 @@ inherit = "obj.league_4_rune_trophy"
 weaponCategory="Blunt"
 tradeable = false
 [item.params]
+"param.attack_anim_stance1"="seq.human_blunt_pound"
+"param.attack_sound_stance1"=2508
+"param.attack_anim_stance2"="seq.human_blunt_pound"
+"param.attack_sound_stance2"=2508
+"param.attack_anim_stance4"="seq.human_blunt_pound"
+"param.attack_sound_stance4"=2508
+"param.defend_anim"="seq.human_blunt_block"
 "param.destroy_note_desc"="You can reclaim this by speaking to the Leagues Tutor or from your League trophy case."
 
 
@@ -47564,6 +47694,13 @@ inherit = "obj.league_4_adamant_trophy"
 weaponCategory="Blunt"
 tradeable = false
 [item.params]
+"param.attack_anim_stance1"="seq.human_blunt_pound"
+"param.attack_sound_stance1"=2508
+"param.attack_anim_stance2"="seq.human_blunt_pound"
+"param.attack_sound_stance2"=2508
+"param.attack_anim_stance4"="seq.human_blunt_pound"
+"param.attack_sound_stance4"=2508
+"param.defend_anim"="seq.human_blunt_block"
 "param.destroy_note_desc"="You can reclaim this by speaking to the Leagues Tutor or from your League trophy case."
 
 
@@ -47637,6 +47774,13 @@ inherit = "obj.league_executioner_weapon"
 weaponCategory="Thrown"
 tradeable = false
 [item.params]
+"param.attack_anim_stance1"="seq.human_stake2"
+"param.attack_sound_stance1"=2699
+"param.attack_anim_stance2"="seq.human_stake2"
+"param.attack_sound_stance2"=2699
+"param.attack_anim_stance4"="seq.human_stake2"
+"param.attack_sound_stance4"=2699
+"param.defend_anim"="seq.human_unarmedblock"
 "param.proj_type"="projanim.thrown"
 "param.proj_travel"="spotanim.morrigans_taxe_travel"
 "param.proj_launch"="spotanim.morrigans_taxe_launch"
@@ -50205,6 +50349,16 @@ id = "obj.doti_propsword"
 inherit = "obj.doti_propsword"
 weaponCategory="Blunt"
 tradeable = false
+[item.params]
+"param.attack_anim_stance1"="seq.human_sword_slash"
+"param.attack_sound_stance1"=2500
+"param.attack_anim_stance2"="seq.human_sword_slash"
+"param.attack_sound_stance2"=2500
+"param.attack_anim_stance3"="seq.human_sword_stab"
+"param.attack_sound_stance3"=2549
+"param.attack_anim_stance4"="seq.human_sword_slash"
+"param.attack_sound_stance4"=2500
+"param.defend_anim"="seq.human_sword_def"
 
 
 [[item]]
@@ -50564,6 +50718,14 @@ id = "obj.league_5_dragon_trophy"
 inherit = "obj.league_5_dragon_trophy"
 weaponCategory="Blunt"
 tradeable = false
+[item.params]
+"param.attack_anim_stance1"="seq.human_blunt_pound"
+"param.attack_sound_stance1"=2508
+"param.attack_anim_stance2"="seq.human_blunt_pound"
+"param.attack_sound_stance2"=2508
+"param.attack_anim_stance4"="seq.human_blunt_pound"
+"param.attack_sound_stance4"=2508
+"param.defend_anim"="seq.human_blunt_block"
 
 
 [[item]]
@@ -50874,6 +51036,13 @@ inherit = "obj.heavy_casket"
 weaponCategory="Blunt"
 tradeable = false
 [item.params]
+"param.attack_anim_stance1"="seq.human_blunt_pound"
+"param.attack_sound_stance1"=2508
+"param.attack_anim_stance2"="seq.human_blunt_pound"
+"param.attack_sound_stance2"=2508
+"param.attack_anim_stance4"="seq.human_blunt_pound"
+"param.attack_sound_stance4"=2508
+"param.defend_anim"="seq.human_blunt_block"
 "param.attackrate"=6
 
 
@@ -51115,6 +51284,14 @@ inherit = "obj.gauntlet_sceptre_hm"
 weaponCategory="Blunt"
 tradeable = false
 [item.params]
+"param.attack_anim_stance1"="seq.human_staff_pummel"
+"param.attack_sound_stance1"=2555
+"param.attack_anim_stance2"="seq.human_staff_pummel"
+"param.attack_sound_stance2"=2555
+"param.attack_anim_stance4"="seq.human_staff_pummel"
+"param.attack_sound_stance4"=2555
+"param.bas_readyanim"="seq.human_staffready"
+"param.defend_anim"="seq.human_staff_block"
 "param.attackrate"=5
 
 
@@ -51123,6 +51300,14 @@ id = "obj.severed_leg"
 inherit = "obj.severed_leg"
 weaponCategory="Blunt"
 tradeable = false
+[item.params]
+"param.attack_anim_stance1"="seq.human_blunt_pound"
+"param.attack_sound_stance1"=2508
+"param.attack_anim_stance2"="seq.human_blunt_pound"
+"param.attack_sound_stance2"=2508
+"param.attack_anim_stance4"="seq.human_blunt_pound"
+"param.attack_sound_stance4"=2508
+"param.defend_anim"="seq.human_blunt_block"
 
 
 [[item]]
@@ -51360,6 +51545,13 @@ inherit = "obj.br_atlatl_dart"
 weaponCategory="Bow"
 tradeable = false
 [item.params]
+"param.attack_anim_stance1"="seq.human_atlatl_attack_ranged_01"
+"param.attack_sound_stance1"=2699
+"param.attack_anim_stance2"="seq.human_atlatl_attack_ranged_01"
+"param.attack_sound_stance2"=2699
+"param.attack_anim_stance4"="seq.human_atlatl_attack_ranged_01"
+"param.attack_sound_stance4"=2699
+"param.defend_anim"="seq.human_unarmedblock"
 "param.proj_type"="projanim.arrow"
 "param.attack_range"=5
 
@@ -51791,6 +51983,15 @@ inherit = "obj.league5_relic_hunter_cane"
 weaponCategory="Spiked"
 tradeable = false
 [item.params]
+"param.attack_anim_stance1"="seq.human_blunt_pound"
+"param.attack_sound_stance1"=2508
+"param.attack_anim_stance2"="seq.human_blunt_pound"
+"param.attack_sound_stance2"=2508
+"param.attack_anim_stance3"="seq.human_blunt_spike"
+"param.attack_sound_stance3"=2509
+"param.attack_anim_stance4"="seq.human_blunt_pound"
+"param.attack_sound_stance4"=2508
+"param.defend_anim"="seq.human_blunt_block"
 "param.attackrate"=5
 
 
@@ -51942,6 +52143,14 @@ id = "obj.league_5_adamant_trophy"
 inherit = "obj.league_5_adamant_trophy"
 weaponCategory="Blunt"
 tradeable = false
+[item.params]
+"param.attack_anim_stance1"="seq.human_blunt_pound"
+"param.attack_sound_stance1"=2508
+"param.attack_anim_stance2"="seq.human_blunt_pound"
+"param.attack_sound_stance2"=2508
+"param.attack_anim_stance4"="seq.human_blunt_pound"
+"param.attack_sound_stance4"=2508
+"param.defend_anim"="seq.human_blunt_block"
 
 
 [[item]]
@@ -52238,6 +52447,14 @@ id = "obj.clueless_scroll"
 inherit = "obj.clueless_scroll"
 weaponCategory="Blunt"
 tradeable = false
+[item.params]
+"param.attack_anim_stance1"="seq.human_blunt_pound"
+"param.attack_sound_stance1"=2508
+"param.attack_anim_stance2"="seq.human_blunt_pound"
+"param.attack_sound_stance2"=2508
+"param.attack_anim_stance4"="seq.human_blunt_pound"
+"param.attack_sound_stance4"=2508
+"param.defend_anim"="seq.human_blunt_block"
 
 
 [[item]]
@@ -52367,6 +52584,14 @@ id = "obj.xmas17_sprite_net"
 inherit = "obj.xmas17_sprite_net"
 weaponCategory="Blunt"
 tradeable = false
+[item.params]
+"param.attack_anim_stance1"="seq.human_blunt_pound"
+"param.attack_sound_stance1"=2508
+"param.attack_anim_stance2"="seq.human_blunt_pound"
+"param.attack_sound_stance2"=2508
+"param.attack_anim_stance4"="seq.human_blunt_pound"
+"param.attack_sound_stance4"=2508
+"param.defend_anim"="seq.human_blunt_block"
 
 
 [[item]]
@@ -52689,6 +52914,13 @@ inherit = "obj.holy_water"
 weaponCategory="Thrown"
 tradeable = false
 [item.params]
+"param.attack_anim_stance1"="seq.human_stake2"
+"param.attack_sound_stance1"=2699
+"param.attack_anim_stance2"="seq.human_stake2"
+"param.attack_sound_stance2"=2699
+"param.attack_anim_stance4"="seq.human_stake2"
+"param.attack_sound_stance4"=2699
+"param.defend_anim"="seq.human_unarmedblock"
 "param.proj_type"="projanim.thrown"
 "param.proj_travel"="spotanim.rune_dart_travel"
 "param.attack_range"=4
@@ -52783,6 +53015,15 @@ inherit = "obj.wearable_saw"
 weaponCategory="SlashSword"
 tradeable = false
 [item.params]
+"param.attack_anim_stance1"="seq.human_sword_slash"
+"param.attack_sound_stance1"=2500
+"param.attack_anim_stance2"="seq.human_sword_slash"
+"param.attack_sound_stance2"=2500
+"param.attack_anim_stance3"="seq.human_sword_stab"
+"param.attack_sound_stance3"=2549
+"param.attack_anim_stance4"="seq.human_sword_slash"
+"param.attack_sound_stance4"=2500
+"param.defend_anim"="seq.human_sword_def"
 "param.attackrate"=5
 
 
@@ -52859,6 +53100,14 @@ id = "obj.league_5_rune_trophy"
 inherit = "obj.league_5_rune_trophy"
 weaponCategory="Blunt"
 tradeable = false
+[item.params]
+"param.attack_anim_stance1"="seq.human_blunt_pound"
+"param.attack_sound_stance1"=2508
+"param.attack_anim_stance2"="seq.human_blunt_pound"
+"param.attack_sound_stance2"=2508
+"param.attack_anim_stance4"="seq.human_blunt_pound"
+"param.attack_sound_stance4"=2508
+"param.defend_anim"="seq.human_blunt_block"
 
 
 [[item]]
@@ -53140,6 +53389,14 @@ inherit = "obj.gauntlet_sceptre"
 weaponCategory="Blunt"
 tradeable = false
 [item.params]
+"param.attack_anim_stance1"="seq.human_staff_pummel"
+"param.attack_sound_stance1"=2555
+"param.attack_anim_stance2"="seq.human_staff_pummel"
+"param.attack_sound_stance2"=2555
+"param.attack_anim_stance4"="seq.human_staff_pummel"
+"param.attack_sound_stance4"=2555
+"param.bas_readyanim"="seq.human_staffready"
+"param.defend_anim"="seq.human_staff_block"
 "param.attackrate"=5
 
 
@@ -53469,6 +53726,14 @@ id = "obj.large_spade"
 inherit = "obj.large_spade"
 weaponCategory="Blunt"
 tradeable = false
+[item.params]
+"param.attack_anim_stance1"="seq.human_blunt_pound"
+"param.attack_sound_stance1"=2508
+"param.attack_anim_stance2"="seq.human_blunt_pound"
+"param.attack_sound_stance2"=2508
+"param.attack_anim_stance4"="seq.human_blunt_pound"
+"param.attack_sound_stance4"=2508
+"param.defend_anim"="seq.human_blunt_block"
 
 
 [[item]]
@@ -53497,6 +53762,13 @@ inherit = "obj.imcando_hammer_broken"
 weaponCategory="Blunt"
 tradeable = false
 [item.params]
+"param.attack_anim_stance1"="seq.human_blunt_pound"
+"param.attack_sound_stance1"=2508
+"param.attack_anim_stance2"="seq.human_blunt_pound"
+"param.attack_sound_stance2"=2508
+"param.attack_anim_stance4"="seq.human_blunt_pound"
+"param.attack_sound_stance4"=2508
+"param.defend_anim"="seq.human_blunt_block"
 "param.attackrate"=6
 
 
@@ -53755,6 +54027,14 @@ id = "obj.golden_tench"
 inherit = "obj.golden_tench"
 weaponCategory="Blunt"
 tradeable = false
+[item.params]
+"param.attack_anim_stance1"="seq.human_blunt_pound"
+"param.attack_sound_stance1"=2508
+"param.attack_anim_stance2"="seq.human_blunt_pound"
+"param.attack_sound_stance2"=2508
+"param.attack_anim_stance4"="seq.human_blunt_pound"
+"param.attack_sound_stance4"=2508
+"param.defend_anim"="seq.human_blunt_block"
 
 
 [[item]]
@@ -54333,6 +54613,16 @@ tradeable = false
 id = "obj.league_4_torch"
 inherit = "obj.league_4_torch"
 weaponCategory="Spiked"
+[item.params]
+"param.attack_anim_stance1"="seq.human_blunt_pound"
+"param.attack_sound_stance1"=2508
+"param.attack_anim_stance2"="seq.human_blunt_pound"
+"param.attack_sound_stance2"=2508
+"param.attack_anim_stance3"="seq.human_blunt_spike"
+"param.attack_sound_stance3"=2509
+"param.attack_anim_stance4"="seq.human_blunt_pound"
+"param.attack_sound_stance4"=2508
+"param.defend_anim"="seq.human_blunt_block"
 
 
 [[item]]
