@@ -2412,7 +2412,6 @@ tradeable = false
 "param.additional_spell_autocast2"=3309
 "param.equipment_sound"=2246
 "param.attackrate"=5
-[item.params]
 "param.bas_walk_l"="seq.human_halberdwalk_l"
 "param.bas_walk_r"="seq.human_halberdwalk_r"
 "param.bas_running"="seq.human_halberdrunning"
@@ -2438,7 +2437,6 @@ tradeable = false
 "param.additional_spell_autocast2"=3309
 "param.equipment_sound"=2246
 "param.attackrate"=5
-[item.params]
 "param.bas_walk_l"="seq.human_halberdwalk_l"
 "param.bas_walk_r"="seq.human_halberdwalk_r"
 "param.bas_running"="seq.human_halberdrunning"
@@ -23729,7 +23727,6 @@ weaponCategory="StabSword"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2248
-[item.params]
 "param.attack_anim_stance1"="seq.human_sword_stab"
 "param.attack_sound_stance1"=2549
 "param.attack_anim_stance2"="seq.human_sword_stab"
@@ -24625,7 +24622,6 @@ weaponCategory="StabSword"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2248
-[item.params]
 "param.attack_anim_stance1"="seq.human_sword_stab"
 "param.attack_sound_stance1"=2549
 "param.attack_anim_stance2"="seq.human_sword_stab"
@@ -25427,7 +25423,6 @@ tradeable = false
 [item.params]
 "param.equipment_sound"=2248
 "param.attackrate"=5
-[item.params]
 "param.attack_anim_stance1"="seq.human_sword_slash"
 "param.attack_sound_stance1"=2500
 "param.attack_anim_stance2"="seq.human_sword_slash"
@@ -25711,7 +25706,6 @@ tradeable = false
 [item.params]
 "param.equipment_sound"=2248
 "param.attackrate"=5
-[item.params]
 "param.attack_anim_stance1"="seq.human_sword_slash"
 "param.attack_sound_stance1"=2500
 "param.attack_anim_stance2"="seq.human_sword_slash"
@@ -25763,7 +25757,6 @@ tradeable = false
 [item.params]
 "param.equipment_sound"=2248
 "param.attackrate"=5
-[item.params]
 "param.attack_anim_stance1"="seq.human_sword_slash"
 "param.attack_sound_stance1"=2500
 "param.attack_anim_stance2"="seq.human_sword_slash"
@@ -26762,7 +26755,6 @@ weaponCategory="StabSword"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2248
-[item.params]
 "param.attack_anim_stance1"="seq.human_sword_stab"
 "param.attack_sound_stance1"=2549
 "param.attack_anim_stance2"="seq.human_sword_stab"
@@ -26780,7 +26772,6 @@ weaponCategory="StabSword"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2248
-[item.params]
 "param.attack_anim_stance1"="seq.human_sword_stab"
 "param.attack_sound_stance1"=2549
 "param.attack_anim_stance2"="seq.human_sword_stab"
@@ -27660,7 +27651,6 @@ weaponCategory="StabSword"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2248
-[item.params]
 "param.attack_anim_stance1"="seq.human_sword_stab"
 "param.attack_sound_stance1"=2549
 "param.attack_anim_stance2"="seq.human_sword_stab"
@@ -27679,7 +27669,6 @@ tradeable = false
 [item.params]
 "param.equipment_sound"=2232
 "param.attackrate"=6
-[item.params]
 "param.attack_anim_stance1"="seq.human_axe_hack"
 "param.attack_sound_stance1"=2498
 "param.attack_anim_stance2"="seq.human_axe_hack"
@@ -27698,7 +27687,6 @@ tradeable = false
 [item.params]
 "param.equipment_sound"=2246
 "param.attackrate"=5
-[item.params]
 "param.attack_anim_stance1"="seq.human_blunt_pound"
 "param.attack_sound_stance1"=2508
 "param.attack_anim_stance2"="seq.human_blunt_pound"
@@ -27717,7 +27705,6 @@ tradeable = false
 [item.params]
 "param.equipment_sound"=2247
 "param.attackrate"=5
-[item.params]
 "param.bas_walk_l"="seq.human_halberdwalk_l"
 "param.bas_walk_r"="seq.human_halberdwalk_r"
 "param.bas_running"="seq.human_halberdrunning"
@@ -30043,7 +30030,6 @@ weaponCategory="TwoHandedSword"
 [item.params]
 "param.equipment_sound"=2248
 "param.attackrate"=5
-[item.params]
 "param.bas_walk_l"="seq.dh_sword_update_walk_left"
 "param.bas_walk_r"="seq.dh_sword_update_walk_right"
 "param.bas_running"="seq.dh_sword_update_run"
@@ -32583,7 +32569,6 @@ tradeable = false
 [item.params]
 "param.equipment_sound"=2248
 "param.destroy_note_desc"="You can get another from a starter pack."
-[item.params]
 "param.attack_anim_stance1"="seq.human_sword_slash"
 "param.attack_sound_stance1"=2500
 "param.attack_anim_stance2"="seq.human_sword_slash"
@@ -32925,7 +32910,6 @@ weaponCategory="Staff"
 [item.params]
 "param.equipment_sound"=2247
 "param.attackrate"=5
-[item.params]
 "param.bas_walk_l"="seq.human_halberdwalk_l"
 "param.bas_walk_r"="seq.human_halberdwalk_r"
 "param.bas_running"="seq.human_halberdrunning"
@@ -33393,7 +33377,6 @@ tradeable = false
 [item.params]
 "param.equipment_sound"=2248
 "param.attackrate"=5
-[item.params]
 "param.attack_anim_stance1"="seq.human_sword_slash"
 "param.attack_sound_stance1"=2500
 "param.attack_anim_stance2"="seq.human_sword_slash"
@@ -33737,7 +33720,6 @@ inherit = "obj.trailblazer_banner"
 weaponCategory="Banner"
 [item.params]
 "param.equipment_sound"=2247
-[item.params]
 "param.bas_walk_l"="seq.human_bannerwalk_l"
 "param.bas_walk_r"="seq.human_bannerwalk_r"
 "param.bas_running"="seq.human_bannerrunning"
@@ -34079,7 +34061,6 @@ weaponCategory="Blunt"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2246
-[item.params]
 "param.attack_anim_stance1"="seq.human_blunt_pound"
 "param.attack_sound_stance1"=2508
 "param.attack_anim_stance2"="seq.human_blunt_pound"
@@ -34097,7 +34078,6 @@ weaponCategory="Blunt"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2246
-[item.params]
 "param.attack_anim_stance1"="seq.human_blunt_pound"
 "param.attack_sound_stance1"=2508
 "param.attack_anim_stance2"="seq.human_blunt_pound"
@@ -34115,7 +34095,6 @@ weaponCategory="Banner"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2247
-[item.params]
 "param.bas_walk_l"="seq.human_bannerwalk_l"
 "param.bas_walk_r"="seq.human_bannerwalk_r"
 "param.bas_running"="seq.human_bannerrunning"
@@ -34922,7 +34901,6 @@ tradeable = false
 [item.params]
 "param.equipment_sound"=2246
 "param.attackrate"=5
-[item.params]
 "param.attack_anim_stance1"="seq.human_blunt_pound"
 "param.attack_sound_stance1"=2508
 "param.attack_anim_stance2"="seq.human_blunt_pound"
@@ -35460,7 +35438,6 @@ tradeable = false
 [item.params]
 "param.equipment_sound"=2248
 "param.destroy_note_desc"="You can get a replacement from Horvik."
-[item.params]
 "param.bas_walk_l"="seq.dh_sword_update_walk_left"
 "param.bas_walk_r"="seq.dh_sword_update_walk_right"
 "param.bas_running"="seq.dh_sword_update_run"
@@ -35923,7 +35900,6 @@ weaponCategory="Axe"
 [item.params]
 "param.equipment_sound"=2229
 "param.attackrate"=7
-[item.params]
 "param.attack_anim_stance1"="seq.human_axe_hack"
 "param.attack_sound_stance1"=2498
 "param.attack_anim_stance2"="seq.human_axe_hack"
@@ -35941,7 +35917,6 @@ weaponCategory="Axe"
 [item.params]
 "param.equipment_sound"=2229
 "param.attackrate"=7
-[item.params]
 "param.attack_anim_stance1"="seq.human_axe_hack"
 "param.attack_sound_stance1"=2498
 "param.attack_anim_stance2"="seq.human_axe_hack"
@@ -35959,7 +35934,6 @@ weaponCategory="Axe"
 [item.params]
 "param.equipment_sound"=2229
 "param.attackrate"=7
-[item.params]
 "param.attack_anim_stance1"="seq.human_axe_hack"
 "param.attack_sound_stance1"=2498
 "param.attack_anim_stance2"="seq.human_axe_hack"
@@ -35977,7 +35951,6 @@ weaponCategory="Axe"
 [item.params]
 "param.equipment_sound"=2229
 "param.attackrate"=5
-[item.params]
 "param.attack_anim_stance1"="seq.human_axe_hack"
 "param.attack_sound_stance1"=2498
 "param.attack_anim_stance2"="seq.human_axe_hack"
@@ -35995,7 +35968,6 @@ weaponCategory="Axe"
 [item.params]
 "param.equipment_sound"=2229
 "param.attackrate"=7
-[item.params]
 "param.attack_anim_stance1"="seq.human_axe_hack"
 "param.attack_sound_stance1"=2498
 "param.attack_anim_stance2"="seq.human_axe_hack"
@@ -36013,7 +35985,6 @@ weaponCategory="Axe"
 [item.params]
 "param.equipment_sound"=2229
 "param.attackrate"=7
-[item.params]
 "param.attack_anim_stance1"="seq.human_axe_hack"
 "param.attack_sound_stance1"=2498
 "param.attack_anim_stance2"="seq.human_axe_hack"
@@ -36031,7 +36002,6 @@ weaponCategory="Axe"
 [item.params]
 "param.equipment_sound"=2229
 "param.attackrate"=7
-[item.params]
 "param.attack_anim_stance1"="seq.human_axe_hack"
 "param.attack_sound_stance1"=2498
 "param.attack_anim_stance2"="seq.human_axe_hack"
@@ -36049,7 +36019,6 @@ weaponCategory="Axe"
 [item.params]
 "param.equipment_sound"=2229
 "param.attackrate"=7
-[item.params]
 "param.attack_anim_stance1"="seq.human_axe_hack"
 "param.attack_sound_stance1"=2498
 "param.attack_anim_stance2"="seq.human_axe_hack"
@@ -36068,7 +36037,6 @@ tradeable = false
 [item.params]
 "param.equipment_sound"=2229
 "param.attackrate"=7
-[item.params]
 "param.attack_anim_stance1"="seq.human_axe_hack"
 "param.attack_sound_stance1"=2498
 "param.attack_anim_stance2"="seq.human_axe_hack"
@@ -36087,7 +36055,6 @@ tradeable = false
 [item.params]
 "param.equipment_sound"=2229
 "param.attackrate"=7
-[item.params]
 "param.attack_anim_stance1"="seq.human_axe_hack"
 "param.attack_sound_stance1"=2498
 "param.attack_anim_stance2"="seq.human_axe_hack"
@@ -36105,7 +36072,6 @@ weaponCategory="Axe"
 [item.params]
 "param.equipment_sound"=2229
 "param.attackrate"=7
-[item.params]
 "param.attack_anim_stance1"="seq.human_axe_hack"
 "param.attack_sound_stance1"=2498
 "param.attack_anim_stance2"="seq.human_axe_hack"
@@ -36164,7 +36130,6 @@ tradeable = false
 "param.equipment_sound"=2244
 "param.attack_range"=7
 "param.statreq1_level"=50
-[item.params]
 "param.attack_anim_stance1"="seq.human_bow"
 "param.attack_sound_stance1"=2693
 "param.attack_anim_stance2"="seq.human_bow"
@@ -36338,7 +36303,6 @@ weaponCategory="SlashSword"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2248
-[item.params]
 "param.attack_anim_stance1"="seq.human_sword_slash"
 "param.attack_sound_stance1"=2500
 "param.attack_anim_stance2"="seq.human_sword_slash"
@@ -50308,7 +50272,6 @@ inherit = "obj.wild_cave_accursed_uncharged_recol"
 weaponCategory="Staff"
 [item.params]
 "param.attackrate"=5
-[item.params]
 "param.bas_walk_l"="seq.human_halberdwalk_l"
 "param.bas_walk_r"="seq.human_halberdwalk_r"
 "param.bas_running"="seq.human_halberdrunning"
@@ -50377,7 +50340,6 @@ weaponCategory="PoweredStaff"
 tradeable = false
 [item.params]
 "param.attack_range"=8
-[item.params]
 "param.bas_walk_l"="seq.human_halberdwalk_l"
 "param.bas_walk_r"="seq.human_halberdwalk_r"
 "param.bas_running"="seq.human_halberdrunning"
@@ -50402,7 +50364,6 @@ weaponCategory="Staff"
 tradeable = false
 [item.params]
 "param.attackrate"=5
-[item.params]
 "param.bas_walk_l"="seq.human_halberdwalk_l"
 "param.bas_walk_r"="seq.human_halberdwalk_r"
 "param.bas_running"="seq.human_halberdrunning"
@@ -50565,7 +50526,6 @@ weaponCategory="Axe"
 tradeable = false
 [item.params]
 "param.attackrate"=5
-[item.params]
 "param.equipment_sound"=2229
 "param.attack_anim_stance1"="seq.human_axe_hack"
 "param.attack_sound_stance1"=2498
@@ -50720,7 +50680,6 @@ tradeable = false
 [item.params]
 "param.attack_range"=8
 "param.attackrate"=5
-[item.params]
 "param.bas_walk_l"="seq.human_zamorakspear_walkleft"
 "param.bas_walk_r"="seq.human_zamorakspear_walkright"
 "param.bas_running"="seq.human_zamorakspear_run"
@@ -50809,7 +50768,6 @@ weaponCategory="Staff"
 [item.params]
 "param.attack_range"=10
 "param.attackrate"=5
-[item.params]
 "param.bas_walk_l"="seq.human_halberdwalk_l"
 "param.bas_walk_r"="seq.human_halberdwalk_r"
 "param.bas_running"="seq.human_halberdrunning"
@@ -50863,7 +50821,6 @@ weaponCategory="Axe"
 tradeable = false
 [item.params]
 "param.attackrate"=5
-[item.params]
 "param.equipment_sound"=2229
 "param.attack_anim_stance1"="seq.human_axe_hack"
 "param.attack_sound_stance1"=2498
@@ -50888,7 +50845,6 @@ inherit = "obj.wild_cave_sceptre_uncharged_recol"
 weaponCategory="Staff"
 [item.params]
 "param.attackrate"=5
-[item.params]
 "param.bas_walk_l"="seq.human_halberdwalk_l"
 "param.bas_walk_r"="seq.human_halberdwalk_r"
 "param.bas_running"="seq.human_halberdrunning"
@@ -50948,7 +50904,6 @@ inherit = "obj.deadman_blighted_volatile_staff"
 weaponCategory="Staff"
 [item.params]
 "param.attackrate"=5
-[item.params]
 "param.bas_walk_l"="seq.human_halberdwalk_l"
 "param.bas_walk_r"="seq.human_halberdwalk_r"
 "param.bas_running"="seq.human_halberdrunning"
@@ -51211,7 +51166,6 @@ weaponCategory="Pickaxe"
 tradeable = false
 [item.params]
 "param.attackrate"=5
-[item.params]
 "param.equipment_sound"=2229
 "param.attack_anim_stance1"="seq.human_blunt_pound"
 "param.attack_sound_stance1"=2498
@@ -51271,7 +51225,6 @@ inherit = "obj.merfolk_trident"
 weaponCategory="Spear"
 [item.params]
 "param.attackrate"=5
-[item.params]
 "param.bas_walk_l"="seq.human_halberdwalk_l"
 "param.bas_walk_r"="seq.human_halberdwalk_r"
 "param.bas_running"="seq.human_halberdrunning"
@@ -51390,7 +51343,6 @@ weaponCategory="Spiked"
 tradeable = false
 [item.params]
 "param.attackrate"=6
-[item.params]
 "param.equipment_sound"=2246
 "param.attack_anim_stance1"="seq.human_blunt_pound"
 "param.attack_sound_stance1"=2508
@@ -51448,7 +51400,6 @@ weaponCategory="Staff"
 tradeable = false
 [item.params]
 "param.attackrate"=5
-[item.params]
 "param.bas_walk_l"="seq.human_halberdwalk_l"
 "param.bas_walk_r"="seq.human_halberdwalk_r"
 "param.bas_running"="seq.human_halberdrunning"
@@ -51509,7 +51460,6 @@ weaponCategory="Pickaxe"
 tradeable = false
 [item.params]
 "param.attackrate"=5
-[item.params]
 "param.equipment_sound"=2229
 "param.attack_anim_stance1"="seq.human_blunt_pound"
 "param.attack_sound_stance1"=2498
@@ -51574,7 +51524,6 @@ weaponCategory="StabSword"
 tradeable = false
 [item.params]
 "param.attackrate"=5
-[item.params]
 "param.equipment_sound"=2248
 "param.attack_anim_stance1"="seq.human_sword_stab"
 "param.attack_sound_stance1"=2549
@@ -51593,7 +51542,6 @@ weaponCategory="SlashSword"
 tradeable = false
 [item.params]
 "param.attackrate"=5
-[item.params]
 "param.equipment_sound"=2248
 "param.attack_anim_stance1"="seq.human_sword_slash"
 "param.attack_sound_stance1"=2500
@@ -52598,7 +52546,6 @@ weaponCategory="Staff"
 tradeable = false
 [item.params]
 "param.attackrate"=5
-[item.params]
 "param.bas_walk_l"="seq.human_halberdwalk_l"
 "param.bas_walk_r"="seq.human_halberdwalk_r"
 "param.bas_running"="seq.human_halberdrunning"
@@ -52718,7 +52665,6 @@ weaponCategory="StabSword"
 tradeable = false
 [item.params]
 "param.attackrate"=5
-[item.params]
 "param.equipment_sound"=2248
 "param.attack_anim_stance1"="seq.human_sword_stab"
 "param.attack_sound_stance1"=2549
@@ -53014,7 +52960,6 @@ weaponCategory="Crossbow"
 [item.params]
 "param.proj_type"="projanim.bolt"
 "param.attack_range"=8
-[item.params]
 "param.bas_running"="seq.xbows_human_run"
 "param.equipment_sound"=2244
 "param.attack_anim_stance1"="seq.xbows_human_fire_and_reload_pvn"
@@ -53156,7 +53101,6 @@ weaponCategory="Axe"
 tradeable = false
 [item.params]
 "param.attackrate"=5
-[item.params]
 "param.equipment_sound"=2229
 "param.attack_anim_stance1"="seq.human_axe_hack"
 "param.attack_sound_stance1"=2498
@@ -53319,7 +53263,6 @@ weaponCategory="StabSword"
 tradeable = false
 [item.params]
 "param.attackrate"=5
-[item.params]
 "param.equipment_sound"=2248
 "param.attack_anim_stance1"="seq.human_sword_stab"
 "param.attack_sound_stance1"=2549
@@ -53373,7 +53316,6 @@ inherit = "obj.warped_sceptre_uncharged"
 weaponCategory="PoweredStaff"
 [item.params]
 "param.attack_range"=7
-[item.params]
 "param.bas_walk_l"="seq.human_halberdwalk_l"
 "param.bas_walk_r"="seq.human_halberdwalk_r"
 "param.bas_running"="seq.human_halberdrunning"
@@ -53460,7 +53402,6 @@ weaponCategory="PoweredStaff"
 [item.params]
 "param.attack_range"=8
 "param.attackrate"=5
-[item.params]
 "param.bas_walk_l"="seq.human_zamorakspear_walkleft"
 "param.bas_walk_r"="seq.human_zamorakspear_walkright"
 "param.bas_running"="seq.human_zamorakspear_run"
@@ -53583,7 +53524,6 @@ weaponCategory="Staff"
 tradeable = false
 [item.params]
 "param.attackrate"=5
-[item.params]
 "param.bas_walk_l"="seq.human_halberdwalk_l"
 "param.bas_walk_r"="seq.human_halberdwalk_r"
 "param.bas_running"="seq.human_halberdrunning"
@@ -53660,7 +53600,6 @@ weaponCategory="Staff"
 tradeable = false
 [item.params]
 "param.attackrate"=5
-[item.params]
 "param.bas_walk_l"="seq.human_halberdwalk_l"
 "param.bas_walk_r"="seq.human_halberdwalk_r"
 "param.bas_running"="seq.human_halberdrunning"
@@ -53711,7 +53650,6 @@ weaponCategory="PoweredStaff"
 tradeable = false
 [item.params]
 "param.attack_range"=7
-[item.params]
 "param.bas_walk_l"="seq.human_halberdwalk_l"
 "param.bas_walk_r"="seq.human_halberdwalk_r"
 "param.bas_running"="seq.human_halberdrunning"
@@ -53954,7 +53892,6 @@ weaponCategory="StabSword"
 tradeable = false
 [item.params]
 "param.attackrate"=5
-[item.params]
 "param.equipment_sound"=2248
 "param.attack_anim_stance1"="seq.human_sword_stab"
 "param.attack_sound_stance1"=2549
@@ -54297,7 +54234,6 @@ weaponCategory="Pickaxe"
 tradeable = false
 [item.params]
 "param.attackrate"=5
-[item.params]
 "param.equipment_sound"=2229
 "param.attack_anim_stance1"="seq.human_blunt_pound"
 "param.attack_sound_stance1"=2498
@@ -54333,7 +54269,6 @@ tradeable = false
 "param.proj_type"="projanim.arrow"
 "param.attack_range"=10
 "param.attackrate"=5
-[item.params]
 "param.equipment_sound"=2244
 "param.attack_anim_stance1"="seq.human_bow"
 "param.attack_sound_stance1"=2693
