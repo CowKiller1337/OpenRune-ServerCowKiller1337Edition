@@ -7,7 +7,6 @@ dependencies {
     implementation(projects.api.pluginCommons)
     implementation(projects.content.quest)
     implementation(projects.api.combat.combatFormulas)
-    testImplementation(libs.jackson.module.kotlin)
     testImplementation(projects.engine.map)
     testImplementation(projects.engine.routefinder)
     testImplementation(projects.engine.events)
