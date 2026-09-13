@@ -15,7 +15,7 @@ internal data class ZulrahPhase(
     }
 }
 
-/** Wiki action sequences with recorded fragments; reconstruction rules are in ROTATION_EVIDENCE.md. */
+/** Wiki action sequences with recorded fragments and provisional reconstructed timings and placements. */
 internal object ZulrahRotations {
     const val MAGIC = "spotanim.snakeboss_fireball"
     const val RANGED = "spotanim.snakeboss_orb"

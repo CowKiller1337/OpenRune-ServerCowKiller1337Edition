@@ -4,7 +4,7 @@ import org.rsmod.api.bosses.dsl.*
 import org.rsmod.api.bosses.spec.BossSpec
 
 internal object ZulrahSpec {
-    // Provisional impact geometry and timing; see EVIDENCE.md.
+    // Provisional impact geometry and timing, not fully verified OSRS parity.
     val tail = ZulrahTailAttack(impactDelay = 4, stunTicks = 5, damage = 20..30)
     val boss: BossSpec by lazy { rotating() }
 

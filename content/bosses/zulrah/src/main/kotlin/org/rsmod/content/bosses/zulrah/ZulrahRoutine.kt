@@ -1,8 +1,5 @@
 package org.rsmod.content.bosses.zulrah
 
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.fasterxml.jackson.module.kotlin.readValue
-
 internal data class ZulrahPoint(val x: Int = 0, val z: Int = 0)
 
 internal data class ZulrahRoutineEvent(
@@ -48,9 +45,6 @@ internal data class ZulrahRoutine(
     }
 
     companion object {
-        val recorded: ZulrahRoutine by lazy {
-            val stream = requireNotNull(ZulrahRoutine::class.java.getResourceAsStream("/zulrah/recorded-routine.json"))
-            stream.use { jacksonObjectMapper().readValue(it) }
-        }
+        val recorded: ZulrahRoutine by lazy { ZulrahRoutineData.create() }
     }
 }
